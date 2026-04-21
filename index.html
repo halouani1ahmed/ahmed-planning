@@ -155,12 +155,9 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
 <div class="page" id="pg-plan">
   <div class="hdr" style="background:var(--navy)"><h1>Planning semaine</h1><p>Vue semaine · cases libres pour tes imprévus</p></div>
   <div class="content">
-    <div class="wnav"><h3 id="plan-wk">Semaine 1</h3>
-      <div class="nb">
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="planWk(-1)">‹</button>
-        <button class="btn" style="background:var(--blu);color:var(--cours);padding:7px 12px;font-size:12px" onclick="planToday()">Auj.</button>
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="planWk(1)">›</button>
-      </div>
+    <div class="wnav">
+      <select id="plan-wk-sel" onchange="planWkN=parseInt(this.value);renderPlan()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
+      <button class="btn" style="background:var(--blu);color:var(--cours);padding:8px 14px;font-size:12px;flex-shrink:0" onclick="planToday()">Auj.</button>
     </div>
     <div id="plan-days"></div>
   </div>
@@ -179,12 +176,9 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       <div style="font-size:11px;color:var(--mut);margin-top:5px;text-align:right" id="sp-pct">0%</div>
     </div>
     <div id="sport-rule" style="background:var(--spl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:#065F46;line-height:1.6"></div>
-    <div class="wnav"><h3 id="sp-wk">Semaine 1</h3>
-      <div class="nb">
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="spWk(-1)">‹</button>
-        <button class="btn" style="background:var(--spl);color:var(--sport);padding:7px 12px;font-size:12px" onclick="spToday()">Auj.</button>
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="spWk(1)">›</button>
-      </div>
+    <div class="wnav">
+      <select id="sp-wk-sel" onchange="spWkN=parseInt(this.value);renderSport()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
+      <button class="btn" style="background:var(--spl);color:var(--sport);padding:8px 14px;font-size:12px;flex-shrink:0" onclick="spToday()">Auj.</button>
     </div>
     <div id="sport-sess"></div>
     <div class="card" style="margin-top:6px">
@@ -216,12 +210,9 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       💧 Lendemain : Boire dès le matin · Sport OK le soir<br>
       ❌ Pas de jeûne après un jour de sport
     </div>
-    <div class="wnav"><h3 id="j-wk">Semaine 1</h3>
-      <div class="nb">
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="jWk(-1)">‹</button>
-        <button class="btn" style="background:var(--fatl);color:var(--fast);padding:7px 12px;font-size:12px" onclick="jToday()">Auj.</button>
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="jWk(1)">›</button>
-      </div>
+    <div class="wnav">
+      <select id="j-wk-sel" onchange="jWkN=parseInt(this.value);renderJeune()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
+      <button class="btn" style="background:var(--fatl);color:var(--fast);padding:8px 14px;font-size:12px;flex-shrink:0" onclick="jToday()">Auj.</button>
     </div>
     <div id="jeune-sess"></div>
   </div>
@@ -282,12 +273,9 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
         </div>
       </div>
     </div>
-    <div class="wnav"><h3 id="f-wk">Semaine 1</h3>
-      <div class="nb">
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="fWk(-1)">‹</button>
-        <button class="btn" style="background:var(--coul);color:var(--cours);padding:7px 12px;font-size:12px" onclick="fToday()">Auj.</button>
-        <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="fWk(1)">›</button>
-      </div>
+    <div class="wnav">
+      <select id="f-wk-sel" onchange="fWkN=parseInt(this.value);renderForm()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
+      <button class="btn" style="background:var(--coul);color:var(--cours);padding:8px 14px;font-size:12px;flex-shrink:0" onclick="fToday()">Auj.</button>
     </div>
     <div id="form-sess"></div>
   </div>
@@ -333,6 +321,32 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   </div>
 </div>
 
+
+<!-- CORAN -->
+<div class="page" id="pg-coran">
+  <div class="hdr" style="background:#0D5C3A"><h1>📖 Coran</h1><p>3 Ahzab / jour · Suivi lecture + sourate</p></div>
+  <div class="content">
+    <div class="g2">
+      <div class="stat"><div class="stv" style="color:#0D5C3A" id="cor-tot">0</div><div class="stl">jours accomplis</div></div>
+      <div class="stat"><div class="stv" style="color:#0D5C3A" id="cor-str">0</div><div class="stl">streak actuel</div></div>
+    </div>
+    <div class="card"><div class="stitle">Progression (objectif quotidien)</div>
+      <div class="pbar" style="height:8px"><div class="pfill" id="cor-bar" style="width:0%;background:#0D5C3A"></div></div>
+      <div style="font-size:11px;color:var(--mut);margin-top:5px;text-align:right" id="cor-pct">0 jours</div>
+    </div>
+    <div style="background:#E8F5E9;border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:#1B5E20;line-height:1.6">
+      📖 Objectif : <strong>3 Ahzab par jour</strong> (quand tu peux, obligatoire chaque jour)<br>
+      1 Hizb = 2 pages · 1 Hizb = 2 Ahzab · 60 Hizb au total<br>
+      Note la sourate où tu t'es arrêté pour reprendre facilement
+    </div>
+    <div class="wnav">
+      <select id="cor-wk-sel" onchange="corWkN=parseInt(this.value);renderCoran()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
+      <button class="btn" style="background:#E8F5E9;color:#1B5E20;padding:8px 14px;font-size:12px;flex-shrink:0" onclick="corToday()">Auj.</button>
+    </div>
+    <div id="coran-sess"></div>
+  </div>
+</div>
+
 <nav class="tabbar">
   <button class="tab active" id="tab-home"  onclick="showTab('home')"><div class="tab-ic">🏠</div><span class="tab-lb">Accueil</span></button>
   <button class="tab" id="tab-plan"  onclick="showTab('plan')"><div class="tab-ic">📅</div><span class="tab-lb">Planning</span></button>
@@ -340,6 +354,7 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   <button class="tab" id="tab-jeune" onclick="showTab('jeune')"><div class="tab-ic">📿</div><span class="tab-lb">Jeûne</span></button>
   <button class="tab" id="tab-poids" onclick="showTab('poids')"><div class="tab-ic">⚖️</div><span class="tab-lb">Poids</span></button>
   <button class="tab" id="tab-form"  onclick="showTab('form')"><div class="tab-ic">📚</div><span class="tab-lb">Formation</span></button>
+  <button class="tab" id="tab-coran"    onclick="showTab('coran')"><div class="tab-ic">📖</div><span class="tab-lb">Coran</span></button>
   <button class="tab" id="tab-settings" onclick="showTab('settings')"><div class="tab-ic">⚙️</div><span class="tab-lb">Config</span></button>
 </nav>
 <div class="toast" id="toast"></div>
@@ -391,6 +406,7 @@ window.FB.listen('data',(data)=>{
   if(data.plan_notes)     window._PN=data.plan_notes;
   if(data.settings)       { window._SET=data.settings; LS.s('settings',data.settings); applySettings(); }
   if(data.custom_days)    window._CD=data.custom_days;
+  if(data.coran_sessions) window._CR=data.coran_sessions;
   setSyncUI('ok');
   updateHome();
 });
@@ -405,6 +421,7 @@ window.FB.listen('data',(data)=>{
   window._PN  = data.plan_notes     || {};
   window._SET = data.settings       || LS.g('settings',{fast:[0,3],sport:[1,4,5]});
   window._CD  = data.custom_days    || {};
+  window._CR  = data.coran_sessions  || LS.g('coran_sessions',{});
   LS.s('weight_cfg',window._WC);
   LS.s('settings',window._SET);
   // Init séances 20/04 et 21/04
@@ -493,7 +510,7 @@ function showTab(id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
-  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings};
+  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings,coran:renderCoran};
   if(fn[id])fn[id]();
   if(id==='home')updateHome();
 }
@@ -702,6 +719,7 @@ function updateHome(){
   document.getElementById('today-lb').textContent=`${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} · Sem ${wkNum(now)}`;
 
   document.getElementById('h-form').textContent=Object.values(D.getFS()).filter(s=>s.done).length;
+  const corDone=Object.values(window._CR||LS.g('coran_sessions',{})).filter(c=>c.done).length;
   document.getElementById('h-sport').textContent=Object.values(D.getSS()).filter(s=>s.done).length;
   const wh=D.getWH(),cfg=D.getWC();
   if(wh.length>0){
@@ -772,11 +790,19 @@ function addSlot(){
 }
 
 // ── PLANNING ──
+
+// ── Week select helper ──
+function fillWeekSelect(selId, currentWk){
+  const sel=document.getElementById(selId);
+  if(!sel)return;
+  if(sel.options.length===0){for(let i=1;i<=72;i++){const o=document.createElement('option');o.value=i;o.textContent='Semaine '+i;sel.appendChild(o);}}
+  sel.value=currentWk;
+}
 let planWkN=wkNum(new Date());
 function planWk(d){planWkN=Math.max(1,Math.min(72,planWkN+d));renderPlan();}
 function planToday(){planWkN=wkNum(new Date());renderPlan();}
 function renderPlan(){
-  document.getElementById('plan-wk').textContent=`Semaine ${planWkN}`;
+  fillWeekSelect('plan-wk-sel',planWkN);
   const ws=wkStart(planWkN);
   const pn=D.getPN();
   const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
@@ -827,7 +853,7 @@ let spWkN=wkNum(new Date());
 function spWk(d){spWkN=Math.max(1,Math.min(72,spWkN+d));renderSport();}
 function spToday(){spWkN=wkNum(new Date());renderSport();}
 function renderSport(){
-  document.getElementById('sp-wk').textContent=`Semaine ${spWkN}`;
+  fillWeekSelect('sp-wk-sel',spWkN);
   const allS=D.getSS();
   const total=Object.values(allS).filter(s=>s.done).length;
   const now=new Date();
@@ -903,7 +929,7 @@ let jWkN=wkNum(new Date());
 function jWk(d){jWkN=Math.max(1,Math.min(72,jWkN+d));renderJeune();}
 function jToday(){jWkN=wkNum(new Date());renderJeune();}
 function renderJeune(){
-  document.getElementById('j-wk').textContent=`Semaine ${jWkN}`;
+  fillWeekSelect('j-wk-sel',jWkN);
   const allJ=D.getJS(),fast=D.getFast(),rec=getRecDays();
   const total=Object.values(allJ).filter(j=>j.done).length;
   let streak=0;const now=new Date();
@@ -1109,7 +1135,7 @@ function getFormContent(wn,dow){
 }
 function renderForm(){
   const ph=fWkN<=12?1:fWkN<=24?2:fWkN<=60?3:4;
-  document.getElementById('f-wk').textContent=`Semaine ${fWkN}`;
+  fillWeekSelect('f-wk-sel',fWkN);
   document.getElementById('form-ph').textContent=PH[ph];
   const allS=D.getFS();
   const done=Object.values(allS).filter(s=>s.done).length,pct=Math.round(done/504*100);
@@ -1263,6 +1289,85 @@ function clearAll(){
     window.fbSave('plan_notes',{});window.fbSave('custom_days',{});
   }
   toast('Données effacées');updateHome();
+}
+
+
+// ── CORAN ──
+let corWkN = wkNum(new Date());
+function corToday(){corWkN=wkNum(new Date());renderCoran();}
+
+function renderCoran(){
+  fillWeekSelect('cor-wk-sel', corWkN);
+  const allC = window._CR || LS.g('coran_sessions',{});
+  const total = Object.values(allC).filter(c=>c.done).length;
+  // Streak
+  let streak=0;
+  const now=new Date();
+  for(let i=0;i<500;i++){
+    const d=new Date(now);d.setDate(now.getDate()-i);
+    const dk2=isoD(d);if(dk2>todayISO())continue;
+    if(allC[dk2]?.done)streak++;else break;
+  }
+  document.getElementById('cor-tot').textContent=total;
+  document.getElementById('cor-str').textContent=streak;
+  const pct=Math.min(100,Math.round(total/72*7/5*100));
+  document.getElementById('cor-bar').style.width=Math.min(100,Math.round(total/504*100))+'%';
+  document.getElementById('cor-pct').textContent=total+' jours · streak '+streak;
+
+  const ws=wkStart(corWkN);
+  let html='';
+  for(let d=0;d<7;d++){
+    const date=new Date(ws);date.setDate(date.getDate()+d);
+    const dk=isoD(date),isToday=dk===todayISO();
+    const sess=allC[dk]||{done:false,ahzab:'',sourate:'',note:''};
+    html+=`<div class="card" style="border:${isToday?'2px solid #0D5C3A':'none'};opacity:${!sess.done&&dk<todayISO()?.7:1}">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <div class="chk${sess.done?' on':''}" style="${sess.done?'background:#0D5C3A;border-color:#0D5C3A':''}" onclick="toggleCoran('${dk}')">
+          ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
+        </div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-size:14px;font-weight:700${isToday?';color:#0D5C3A':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
+            <span class="pill" style="background:#E8F5E9;color:#1B5E20">📖 3 Ahzab</span>
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Nombre d'Ahzab lus</div>
+            <select onchange="saveCoranField('${dk}','ahzab',this.value)" style="width:100%;padding:8px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:14px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none">
+              <option value="" ${!sess.ahzab?'selected':''}>Sélectionne...</option>
+              ${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${sess.ahzab==n?'selected':''}>${n} Hizb${n>1?'s':''} (${n*2} pages)</option>`).join('')}
+            </select>
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Sourate / Verset où tu t'es arrêté</div>
+            <input class="inp" value="${sess.sourate||''}" placeholder="ex: Al-Baqara v. 142, Sourate 2..." onchange="saveCoranField('${dk}','sourate',this.value)" style="font-size:13px;padding:9px 12px">
+          </div>
+          <div style="margin-top:8px">
+            <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Commentaire / Ayat marquant</div>
+            <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Note un verset qui t'a touché, une réflexion..." onchange="saveCoranField('${dk}','note',this.value)">${sess.note||''}</textarea>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('coran-sess').innerHTML=html;
+}
+
+async function toggleCoran(dk){
+  if(!window._CR)window._CR={};
+  if(!window._CR[dk])window._CR[dk]={done:false,ahzab:'',sourate:'',note:''};
+  window._CR[dk].done=!window._CR[dk].done;
+  LS.s('coran_sessions',window._CR);
+  if(window.fbSave)window.fbSave('coran_sessions',window._CR);
+  renderCoran();
+  toast(window._CR[dk].done?'3 Ahzab lus ✅ الحمد لله':'Décoché');
+}
+
+async function saveCoranField(dk,field,v){
+  if(!window._CR)window._CR={};
+  if(!window._CR[dk])window._CR[dk]={done:false,ahzab:'',sourate:'',note:''};
+  window._CR[dk][field]=v;
+  LS.s('coran_sessions',window._CR);
+  if(window.fbSave)window.fbSave('coran_sessions',window._CR);
 }
 
 // ── INIT ──
