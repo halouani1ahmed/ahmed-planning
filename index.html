@@ -13,12 +13,13 @@
   --navy:#1A3A5C;--blue:#2E75B6;--blu:#D0E4F5;
   --sport:#1E8449;--spl:#D5F5E3;
   --work:#CA6F1E;--wkl:#FAD7A0;
-  --fam:#6C3483;--faml:#E8DAEF;
+  --fam:#6C3483;
   --cours:#1A5276;--coul:#D6EAF8;
   --fast:#922B21;--fatl:#FADBD8;
   --rec:#7B6209;--recl:#FEF9E7;
-  --wgt:#4A235A;--wgtl:#E8DAEF;
-  --slp:#566573;--bg:#F2F3F7;--card:#fff;
+  --wgt:#4A235A;
+  --slp:#566573;
+  --bg:#F2F3F7;--card:#fff;
   --txt:#1a1a2e;--mut:#6b7280;--brd:rgba(0,0,0,0.08)
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -27,7 +28,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .content{padding:12px;padding-bottom:82px}
 .hdr{padding:52px 16px 14px;position:sticky;top:0;z-index:20}
 .hdr h1{font-size:22px;font-weight:700;color:#fff}
-.hdr p{font-size:11px;color:rgba(255,255,255,.6);margin-top:1px}
+.hdr p{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
 .card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .stat{background:var(--card);border-radius:11px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
@@ -46,6 +47,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .tab.active .tab-lb{color:var(--blue);font-weight:700}
 .chk{width:24px;height:24px;border-radius:50%;border:2px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .15s;margin-top:1px}
 .chk.on{background:var(--sport);border-color:var(--sport)}
+.chk.fast-on{background:var(--fast);border-color:var(--fast)}
 .inp{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:15px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none;-webkit-appearance:none}
 .inp:focus{border-color:var(--blue)}
 .tx{width:100%;padding:9px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:13px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none;resize:none}
@@ -57,55 +59,56 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .wnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .wnav h3{font-size:16px;font-weight:700}
 .nb{display:flex;gap:6px}
-.tl{display:flex;gap:8px;padding:7px 0;border-bottom:.5px solid var(--brd)}
+.tl{display:flex;gap:8px;padding:7px 0;border-bottom:.5px solid var(--brd);align-items:flex-start}
 .tl:last-child{border-bottom:none}
-.tlt{width:46px;font-size:11px;color:var(--mut);font-weight:500;padding-top:2px;flex-shrink:0}
-.tld{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:4px}
-.tll{font-size:13px;font-weight:500;flex:1}
+.tlt{width:46px;font-size:11px;color:var(--mut);font-weight:500;padding-top:3px;flex-shrink:0}
+.tld{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.tll{font-size:13px;font-weight:500;flex:1;line-height:1.4}
 .chrono{font-size:46px;font-weight:700;text-align:center;letter-spacing:-2px;color:var(--navy);padding:12px 0 8px;font-variant-numeric:tabular-nums}
 .pbar{height:6px;background:var(--brd);border-radius:3px;overflow:hidden;margin-bottom:12px}
 .pfill{height:100%;border-radius:3px;transition:width 1s linear}
-.mcard{border-radius:14px;padding:16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .ring-w{position:relative;width:72px;height:72px;flex-shrink:0}
 .ring-svg{transform:rotate(-90deg)}
 .toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--navy);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:all .25s;z-index:300;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
-.sync-dot{width:8px;height:8px;border-radius:50%;background:#4CAF50;display:inline-block;margin-right:4px}
-.sync-dot.off{background:#f44336}
-.sync-dot.loading{background:#FF9800;animation:pulse .8s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.sdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;background:#4CAF50}
+.sdot.off{background:#f44336}
+.sdot.spin{background:#FF9800;animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.notif-bar{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13px}
+.day-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.day-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--brd);font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--mut);transition:all .15s}
+.day-btn.sel-fast{background:var(--fatl);color:var(--fast);border-color:var(--fast)}
+.day-btn.sel-sport{background:var(--spl);color:var(--sport);border-color:var(--sport)}
 select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:15px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none}
-.notif-banner{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13px}
-.notif-banner button{background:var(--blue);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap}
 </style>
 </head>
 <body>
 
-<!-- Notification banner -->
-<div id="notif-banner" class="notif-banner" style="display:none">
+<div id="notif-bar" class="notif-bar" style="display:none">
   <span style="font-size:20px">🔔</span>
-  <div style="flex:1"><strong>Activer les notifications</strong><br><span style="font-size:11px;opacity:.8">Reçois un rappel 15 min avant chaque activité</span></div>
-  <button onclick="requestNotif()">Activer</button>
-  <button onclick="document.getElementById('notif-banner').style.display='none'" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;padding:0 4px">✕</button>
+  <div style="flex:1"><strong>Activer les notifications</strong><br><span style="font-size:11px;opacity:.8">Rappel 15 min avant chaque activité</span></div>
+  <button onclick="askNotif()" style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer">Activer</button>
+  <button onclick="document.getElementById('notif-bar').style.display='none'" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-left:4px">✕</button>
 </div>
 
 <!-- HOME -->
 <div class="page active" id="pg-home">
   <div class="hdr" style="background:var(--navy)">
-    <div style="display:flex;align-items:center;justify-content:space-between">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between">
       <div><h1>Ahmed 👋</h1><p id="today-lb">...</p></div>
-      <div id="sync-status" style="font-size:11px;color:rgba(255,255,255,.7);text-align:right">
-        <span class="sync-dot loading" id="sync-dot"></span><span id="sync-txt">Connexion...</span>
+      <div style="text-align:right;font-size:11px;color:rgba(255,255,255,.7);padding-top:2px">
+        <span class="sdot spin" id="sdot"></span><span id="stxt">Connexion...</span>
       </div>
     </div>
   </div>
   <div class="content">
-    <div class="mcard" id="mcard" style="background:var(--navy)">
+    <div id="mcard" style="border-radius:14px;padding:16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;background:var(--navy)">
       <div>
         <div style="font-size:10px;color:rgba(255,255,255,.6);margin-bottom:2px">Maghreb · Montigny 78180</div>
         <div style="font-size:36px;font-weight:700;color:#fff;letter-spacing:-1px" id="magh-t">--h--</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:3px" id="magh-s">calcul...</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:3px" id="magh-s">...</div>
       </div>
       <div style="text-align:right">
         <div style="font-size:20px;font-weight:700;color:#fff" id="magh-cd">--:--</div>
@@ -123,14 +126,21 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div class="stitle" style="margin:0">Planning du jour</div>
-        <button onclick="toggleEdit()" style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600" id="edit-btn">✏️ Modifier</button>
+        <button onclick="toggleEdit()" id="edit-btn" style="font-size:11px;color:var(--blue);background:none;border:none;cursor:pointer;font-weight:600">✏️ Modifier</button>
       </div>
       <div id="today-sched"></div>
+      <div id="add-zone" style="display:none;margin-top:8px;border-top:.5px solid var(--brd);padding-top:8px">
+        <div style="display:flex;gap:6px;align-items:center">
+          <input type="time" id="new-t" style="width:86px;padding:7px 9px;border:1.5px solid var(--brd);border-radius:9px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--txt);outline:none;flex-shrink:0">
+          <input type="text" id="new-l" placeholder="Ajouter une activité..." style="flex:1;padding:7px 10px;border:1.5px solid var(--brd);border-radius:9px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--txt);outline:none">
+          <button onclick="addSlot()" style="background:var(--blue);color:#fff;border:none;border-radius:9px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer;flex-shrink:0">+</button>
+        </div>
+      </div>
     </div>
     <div class="card">
       <div class="stitle">Chronomètre formation</div>
       <div class="chrono" id="chrono-d">0:00:00</div>
-      <div style="text-align:center;font-size:11px;color:var(--mut);margin-bottom:8px" id="chrono-l">Objectif : 2h semaine · 3h weekend</div>
+      <div style="text-align:center;font-size:11px;color:var(--mut);margin-bottom:8px" id="chrono-l">Objectif du jour</div>
       <div class="pbar"><div class="pfill" id="chrono-b" style="width:0%;background:var(--blue)"></div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
         <button class="btn" style="background:var(--sport);color:#fff" onclick="cStart()">▶ Démarrer</button>
@@ -143,7 +153,7 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
 
 <!-- PLANNING -->
 <div class="page" id="pg-plan">
-  <div class="hdr" style="background:var(--navy)"><h1>Planning semaine</h1><p>Modifiable — note tes imprévus</p></div>
+  <div class="hdr" style="background:var(--navy)"><h1>Planning semaine</h1><p>Vue semaine · cases libres pour tes imprévus</p></div>
   <div class="content">
     <div class="wnav"><h3 id="plan-wk">Semaine 1</h3>
       <div class="nb">
@@ -158,19 +168,17 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
 
 <!-- SPORT -->
 <div class="page" id="pg-sport">
-  <div class="hdr" style="background:var(--sport)"><h1>Sport</h1><p>3 séances/sem · Mer+Sam+Dim</p></div>
+  <div class="hdr" style="background:var(--sport)"><h1>Sport</h1><p id="sport-hdr-p">Mar + Ven + Sam · 1h marche + 1h muscu</p></div>
   <div class="content">
     <div class="g2">
       <div class="stat"><div class="stv" style="color:var(--sport)" id="sp-tot">0</div><div class="stl">/ 216 séances</div></div>
       <div class="stat"><div class="stv" style="color:var(--sport)" id="sp-mo">0</div><div class="stl">ce mois</div></div>
     </div>
-    <div class="card"><div class="stitle">Progression</div>
+    <div class="card"><div class="stitle">Progression 18 mois</div>
       <div class="pbar" style="height:8px"><div class="pfill" id="sp-bar" style="width:0%;background:var(--sport)"></div></div>
       <div style="font-size:11px;color:var(--mut);margin-top:5px;text-align:right" id="sp-pct">0%</div>
     </div>
-    <div style="background:var(--spl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:#065F46">
-      <strong>Règle :</strong> 📿 Lun/Jeu = jeûne (pas sport) · 💧 Mar/Ven = récup (pas sport) · 🏋️ Mer/Sam/Dim = sport OK
-    </div>
+    <div id="sport-rule" style="background:var(--spl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:#065F46;line-height:1.6"></div>
     <div class="wnav"><h3 id="sp-wk">Semaine 1</h3>
       <div class="nb">
         <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:7px 12px;font-size:13px" onclick="spWk(-1)">‹</button>
@@ -179,13 +187,13 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       </div>
     </div>
     <div id="sport-sess"></div>
-    <div class="card" style="margin-top:4px">
+    <div class="card" style="margin-top:6px">
       <div class="stitle">Ajouter séance manuelle</div>
       <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="sp-date"></div>
       <div class="fl"><div class="fl-lb">Durée</div>
-        <select id="sp-dur"><option>2h10 (1h10 marche + 1h muscu)</option><option>1h10 marche seulement</option><option>1h muscu seulement</option><option>30min</option></select>
+        <select id="sp-dur"><option>2h (1h marche + 1h muscu)</option><option>1h marche seulement</option><option>1h muscu seulement</option><option>30min</option><option>Autre</option></select>
       </div>
-      <div class="fl"><div class="fl-lb">Notes</div><textarea class="tx" id="sp-note" style="min-height:56px" placeholder="5×10 squat, 4×8 développé..."></textarea></div>
+      <div class="fl"><div class="fl-lb">Exercices / notes</div><textarea class="tx" id="sp-note" style="min-height:56px" placeholder="5×10 squat, 4×8 développé..."></textarea></div>
       <button class="btn bfull" style="background:var(--sport);color:#fff" onclick="addSportM()">Ajouter</button>
     </div>
   </div>
@@ -193,7 +201,7 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
 
 <!-- JEÛNE -->
 <div class="page" id="pg-jeune">
-  <div class="hdr" style="background:var(--fast)"><h1>Tracker jeûne</h1><p>Lun + Jeu · SANS eau · Fajr → Maghreb</p></div>
+  <div class="hdr" style="background:var(--fast)"><h1>Tracker jeûne</h1><p id="fast-hdr-p">Lun + Jeu · SANS eau · Fajr → Maghreb</p></div>
   <div class="content">
     <div class="g2">
       <div class="stat"><div class="stv" style="color:var(--fast)" id="j-tot">0</div><div class="stl">jeûnes accomplis</div></div>
@@ -203,10 +211,10 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       <div class="pbar" style="height:8px"><div class="pfill" id="j-bar" style="width:0%;background:var(--fast)"></div></div>
       <div style="font-size:11px;color:var(--mut);margin-top:5px;text-align:right" id="j-pct">0/144</div>
     </div>
-    <div style="background:var(--fatl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:var(--fast)">
+    <div style="background:var(--fatl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:var(--fast);line-height:1.6">
       📿 Jour J : SANS eau ni nourriture → Adhan Maghreb<br>
-      💧 Jour J+1 : Récupération — boire dès le matin, pas de sport<br>
-      🏋️ Jour J+2 : Sport possible — corps rechargé
+      💧 Lendemain : Boire dès le matin · Sport OK le soir<br>
+      ❌ Pas de jeûne après un jour de sport
     </div>
     <div class="wnav"><h3 id="j-wk">Semaine 1</h3>
       <div class="nb">
@@ -234,9 +242,9 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
     <div id="w-goal-disp"></div>
     <div class="card">
       <div class="stitle">Configuration</div>
-      <div class="fl"><div class="fl-lb">Taille (m)</div><input class="inp" type="number" id="w-h" placeholder="1.78" step="0.01"></div>
+      <div class="fl"><div class="fl-lb">Taille (m) ex: 1.78</div><input class="inp" type="number" id="w-h" placeholder="1.78" step="0.01" min="1.4" max="2.2"></div>
       <div class="fl"><div class="fl-lb">Objectif poids (kg)</div><input class="inp" type="number" id="w-g" placeholder="75" step="0.5"></div>
-      <button class="btn bfull" style="background:var(--wgt);color:#fff" onclick="saveCfg()">Enregistrer</button>
+      <button class="btn bfull" style="background:var(--wgt);color:#fff" onclick="saveCfg()">Enregistrer la configuration</button>
     </div>
     <div class="card">
       <div class="stitle">Ajouter pesée</div>
@@ -270,7 +278,7 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
         <div>
           <div style="font-size:20px;font-weight:700;color:var(--cours)" id="f-stats">0/504</div>
           <div style="font-size:12px;color:var(--mut)">séances terminées</div>
-          <div style="font-size:11px;color:var(--sport);margin-top:3px">✅ 20/04/2026 : 2h déjà faites</div>
+          <div style="font-size:11px;color:var(--sport);margin-top:3px">✅ 20/04 + 21/04 : 2h chacun</div>
         </div>
       </div>
     </div>
@@ -285,6 +293,46 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   </div>
 </div>
 
+<!-- PARAMÈTRES -->
+<div class="page" id="pg-settings">
+  <div class="hdr" style="background:#444"><h1>Paramètres</h1><p>Configure tes jours de jeûne et de sport</p></div>
+  <div class="content">
+
+    <div class="card">
+      <div class="stitle">Jours de jeûne 📿</div>
+      <div style="font-size:12px;color:var(--mut);margin-bottom:8px">Sélectionne les jours où tu jeûnes (SANS eau)</div>
+      <div class="day-toggle" id="fast-toggle"></div>
+      <div style="font-size:11px;color:var(--fast);margin-top:8px" id="fast-conflict"></div>
+    </div>
+
+    <div class="card">
+      <div class="stitle">Jours de sport 🏋️</div>
+      <div style="font-size:12px;color:var(--mut);margin-bottom:8px">Les jours sélectionnés ne doivent pas être suivis d'un jeûne</div>
+      <div class="day-toggle" id="sport-toggle"></div>
+      <div style="font-size:11px;color:var(--sport);margin-top:8px" id="sport-conflict"></div>
+    </div>
+
+    <div class="card">
+      <div class="stitle">Résumé semaine type</div>
+      <div id="week-summary"></div>
+    </div>
+
+    <button class="btn bfull" style="background:var(--navy);color:#fff" onclick="saveSettings()">💾 Enregistrer les paramètres</button>
+
+    <div class="card" style="margin-top:4px">
+      <div class="stitle">Notifications</div>
+      <div style="font-size:12px;color:var(--mut);margin-bottom:10px">Rappel 15 min avant chaque activité</div>
+      <button class="btn bfull" style="background:var(--blue);color:#fff" onclick="askNotif()">🔔 Activer les notifications</button>
+      <div style="font-size:11px;color:var(--mut);margin-top:6px" id="notif-status">Statut : inconnu</div>
+    </div>
+
+    <div class="card">
+      <div class="stitle">Données</div>
+      <button class="btn bfull" style="background:#f3f4f6;color:var(--fast)" onclick="if(confirm('Effacer toutes les données ?'))clearAll()">🗑️ Effacer toutes les données</button>
+    </div>
+  </div>
+</div>
+
 <nav class="tabbar">
   <button class="tab active" id="tab-home"  onclick="showTab('home')"><div class="tab-ic">🏠</div><span class="tab-lb">Accueil</span></button>
   <button class="tab" id="tab-plan"  onclick="showTab('plan')"><div class="tab-ic">📅</div><span class="tab-lb">Planning</span></button>
@@ -292,157 +340,135 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   <button class="tab" id="tab-jeune" onclick="showTab('jeune')"><div class="tab-ic">📿</div><span class="tab-lb">Jeûne</span></button>
   <button class="tab" id="tab-poids" onclick="showTab('poids')"><div class="tab-ic">⚖️</div><span class="tab-lb">Poids</span></button>
   <button class="tab" id="tab-form"  onclick="showTab('form')"><div class="tab-ic">📚</div><span class="tab-lb">Formation</span></button>
+  <button class="tab" id="tab-settings" onclick="showTab('settings')"><div class="tab-ic">⚙️</div><span class="tab-lb">Config</span></button>
 </nav>
 <div class="toast" id="toast"></div>
 
-<!-- Firebase SDK -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyCDWoh6V66mnNi8RWoHRtaKKIr5vfSeG1Y",
-  authDomain: "ahmed-planning.firebaseapp.com",
-  databaseURL: "https://ahmed-planning-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "ahmed-planning",
-  storageBucket: "ahmed-planning.firebasestorage.app",
-  messagingSenderId: "993453415723",
-  appId: "1:993453415723:web:a314f64d087c3490f1796e"
+const FB_CFG = {
+  apiKey:"AIzaSyCDWoh6V66mnNi8RWoHRtaKKIr5vfSeG1Y",
+  authDomain:"ahmed-planning.firebaseapp.com",
+  databaseURL:"https://ahmed-planning-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId:"ahmed-planning",
+  storageBucket:"ahmed-planning.firebasestorage.app",
+  messagingSenderId:"993453415723",
+  appId:"1:993453415723:web:a314f64d087c3490f1796e"
 };
+const app = initializeApp(FB_CFG);
+const db  = getDatabase(app);
 
-const app = initializeApp(firebaseConfig);
-const db = getDatabase(app);
-
-// ── Sync status ──
-function setSyncDot(state){
-  const dot=document.getElementById('sync-dot');
-  const txt=document.getElementById('sync-txt');
-  dot.className='sync-dot'+(state==='ok'?' ':state==='off'?' off':' loading');
-  txt.textContent=state==='ok'?'Synchronisé':state==='off'?'Hors ligne':'Sync...';
+function setSyncUI(s){
+  const d=document.getElementById('sdot'),t=document.getElementById('stxt');
+  d.className='sdot'+(s==='ok'?'':s==='off'?' off':' spin');
+  t.textContent=s==='ok'?'Synchronisé':s==='off'?'Hors ligne':'Sync...';
 }
 
-// ── Firebase helpers ──
-window.FB = {
-  async save(path, data){
-    try{
-      setSyncDot('loading');
-      await set(ref(db, path), data);
-      setSyncDot('ok');
-    } catch(e){ console.warn('FB save error',e); setSyncDot('off'); LS.s(path.replace(/\//g,'_'), data); }
+window.FB={
+  async save(path,data){
+    try{ setSyncUI('spin'); await set(ref(db,path),data); setSyncUI('ok'); }
+    catch(e){ setSyncUI('off'); LS.s(path.replace(/\//g,'_'),data); }
   },
-  async get(path, def){
-    try{
-      const snap = await get(ref(db, path));
-      return snap.exists() ? snap.val() : def;
-    } catch(e){ return LS.g(path.replace(/\//g,'_'), def); }
+  async get(path,def){
+    try{ const s=await get(ref(db,path)); return s.exists()?s.val():def; }
+    catch(e){ return LS.g(path.replace(/\//g,'_'),def); }
   },
-  listen(path, cb){
-    try{ onValue(ref(db, path), snap => cb(snap.exists() ? snap.val() : null)); }
-    catch(e){ console.warn('FB listen error',e); }
-  },
-  async update(path, data){
-    try{
-      setSyncDot('loading');
-      await update(ref(db, path), data);
-      setSyncDot('ok');
-    } catch(e){ setSyncDot('off'); }
+  listen(path,cb){
+    try{ onValue(ref(db,path),s=>cb(s.exists()?s.val():null)); }
+    catch(e){}
   }
 };
 
-// ── Listen to all data changes (sync between devices) ──
-FB.listen('data', async (data) => {
+window.FB.listen('data',(data)=>{
   if(!data) return;
-  if(data.form_sessions) window._formSessions = data.form_sessions;
-  if(data.sport_sessions) window._sportSessions = data.sport_sessions;
-  if(data.jeune_sessions) window._jeuneSessions = data.jeune_sessions;
-  if(data.weight_history) window._weightHistory = Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
-  if(data.weight_cfg) window._weightCfg = data.weight_cfg;
-  if(data.plan_notes) window._planNotes = data.plan_notes;
+  if(data.form_sessions)  window._FS=data.form_sessions;
+  if(data.sport_sessions) window._SS=data.sport_sessions;
+  if(data.jeune_sessions) window._JS=data.jeune_sessions;
+  if(data.weight_history) window._WH=Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
+  if(data.weight_cfg)     { window._WC=data.weight_cfg; LS.s('weight_cfg',data.weight_cfg); }
+  if(data.plan_notes)     window._PN=data.plan_notes;
+  if(data.settings)       { window._SET=data.settings; LS.s('settings',data.settings); applySettings(); }
+  if(data.custom_days)    window._CD=data.custom_days;
+  setSyncUI('ok');
   updateHome();
-  setSyncDot('ok');
 });
 
-// Init data from Firebase
 (async()=>{
-  const data = await FB.get('data', {});
-  window._formSessions  = data.form_sessions  || {};
-  window._sportSessions = data.sport_sessions || {};
-  window._jeuneSessions = data.jeune_sessions || {};
-  window._weightHistory = Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
-  window._weightCfg     = data.weight_cfg || {h:1.75, goal:null};
-  window._planNotes     = data.plan_notes || {};
-  // Init première séance
-  if(!window._formSessions['2026-04-20']){
-    window._formSessions['2026-04-20']={done:true,comment:'2h de formation — premier jour ! 20/04/2026',difficulty:''};
-    await FB.save('data/form_sessions', window._formSessions);
+  const data=await window.FB.get('data',{});
+  window._FS  = data.form_sessions  || {};
+  window._SS  = data.sport_sessions || {};
+  window._JS  = data.jeune_sessions || {};
+  window._WH  = Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
+  window._WC  = data.weight_cfg     || LS.g('weight_cfg',{h:1.75,goal:null});
+  window._PN  = data.plan_notes     || {};
+  window._SET = data.settings       || LS.g('settings',{fast:[0,3],sport:[1,4,5]});
+  window._CD  = data.custom_days    || {};
+  LS.s('weight_cfg',window._WC);
+  LS.s('settings',window._SET);
+  // Init séances 20/04 et 21/04
+  let changed=false;
+  if(!window._FS['2026-04-20']){window._FS['2026-04-20']={done:true,comment:'2h de formation ✅',difficulty:''};changed=true;}
+  if(!window._FS['2026-04-21']){window._FS['2026-04-21']={done:true,comment:'2h de formation ✅',difficulty:''};changed=true;}
+  if(!window._JS['2026-04-20']){window._JS['2026-04-20']={done:true,note:'Premier jeûne',rupture:'',duree:''};changed=true;}
+  if(changed){
+    await window.FB.save('data/form_sessions',window._FS);
+    await window.FB.save('data/jeune_sessions',window._JS);
   }
-  setSyncDot('ok');
+  setSyncUI('ok');
+  applySettings();
   updateHome();
 })();
 
-// ── Save helpers via Firebase ──
-window.saveFS = async (dk, updates) => {
-  if(!window._formSessions) window._formSessions={};
-  if(!window._formSessions[dk]) window._formSessions[dk]={done:false,comment:'',difficulty:''};
-  Object.assign(window._formSessions[dk], updates);
-  await FB.save('data/form_sessions', window._formSessions);
-};
-window.saveSS = async (dk, updates) => {
-  if(!window._sportSessions) window._sportSessions={};
-  if(!window._sportSessions[dk]) window._sportSessions[dk]={done:false,note:''};
-  Object.assign(window._sportSessions[dk], updates);
-  await FB.save('data/sport_sessions', window._sportSessions);
-};
-window.saveJS = async (dk, updates) => {
-  if(!window._jeuneSessions) window._jeuneSessions={};
-  if(!window._jeuneSessions[dk]) window._jeuneSessions[dk]={done:false,note:'',rupture:'',duree:''};
-  Object.assign(window._jeuneSessions[dk], updates);
-  await FB.save('data/jeune_sessions', window._jeuneSessions);
-};
-window.saveWH = async (hist) => {
-  window._weightHistory = hist;
-  await FB.save('data/weight_history', hist);
-  updateHome();
-};
-window.saveWC = async (cfg) => {
-  window._weightCfg = cfg;
-  await FB.save('data/weight_cfg', cfg);
-};
-window.savePN = async (dk, val) => {
-  if(!window._planNotes) window._planNotes={};
-  window._planNotes[dk]=val;
-  await FB.save('data/plan_notes', window._planNotes);
-};
-
+window.fbSave=async(path,data)=>{ await window.FB.save('data/'+path,data); };
 </script>
 
 <script>
-// ── Local storage fallback ──
 const LS={
   g:(k,d)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch{return d;}},
   s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
 };
 
-// ── Data accessors (use Firebase if available, fallback to localStorage) ──
+const START = new Date('2025-04-20');
+const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+const JOURS_SHORT = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const f2 = n => String(n).padStart(2,'0');
+
+// ── Getters ──
 const D = {
-  getFS:()=>window._formSessions||LS.g('form_sessions',{}),
-  getSS:()=>window._sportSessions||LS.g('sport_sessions',{}),
-  getJS:()=>window._jeuneSessions||LS.g('jeune_sessions',{}),
-  getWH:()=>window._weightHistory||LS.g('weight_history',[]),
-  getWC:()=>window._weightCfg||(()=>{const v=LS.g('weight_cfg',null);if(v)return v;return{h:1.75,goal:null};})(),
-  getPN:()=>window._planNotes||LS.g('plan_notes',{}),
+  getFS: () => window._FS || LS.g('form_sessions',{}),
+  getSS: () => window._SS || LS.g('sport_sessions',{}),
+  getJS: () => window._JS || LS.g('jeune_sessions',{}),
+  getWH: () => window._WH || LS.g('weight_history',[]),
+  getWC: () => window._WC || LS.g('weight_cfg',{h:1.75,goal:null}),
+  getPN: () => window._PN || LS.g('plan_notes',{}),
+  getSet:() => window._SET || LS.g('settings',{fast:[0,3],sport:[1,4,5]}),
+  getCD: () => window._CD || {},
+  getFast:() => new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).fast||[0,3]),
+  getSport:()=> new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).sport||[1,4,5]),
 };
 
-const START=new Date('2025-04-20');
-const JOURS=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-const FAST_D=new Set([0,3]),REC_D=new Set([1,4]),SPORT_D=new Set([2,5,6]);
-const f2=n=>String(n).padStart(2,'0');
+// Rec days = lendemain des jeûnes
+function getRecDays(){
+  const fd=D.getFast(), rec=new Set();
+  fd.forEach(d=>rec.add((d+1)%7));
+  return rec;
+}
+// Blocked for sport = veille des jeûnes
+function getSportBlocked(){
+  const fd=D.getFast(), bl=new Set();
+  fd.forEach(d=>bl.add((d+6)%7));
+  return bl;
+}
 
+// ── Date utils ──
 function wkNum(d){const a=new Date(d);a.setHours(0,0,0,0);const b=new Date(START);b.setHours(0,0,0,0);return Math.max(1,Math.min(72,Math.floor((a-b)/(7*864e5))+1));}
 function wkStart(wn){const d=new Date(START);d.setDate(d.getDate()+(wn-1)*7);return d;}
 function isoD(d){return d.toISOString().split('T')[0];}
 function todayISO(){return isoD(new Date());}
 
+// ── Maghreb ──
 function julDay(d){const a=Math.floor((14-d.getMonth()-1)/12),y=d.getFullYear()+4800-a,m=d.getMonth()+1+12*a-3;return d.getDate()+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;}
 function isDST(d){const y=d.getFullYear();const ms=new Date(y,2,31);ms.setDate(31-(ms.getDay()||7));const me=new Date(y,9,31);me.setDate(31-(me.getDay()||7));return d>=ms&&d<me;}
 function maghreb(date){
@@ -458,75 +484,95 @@ function maghreb(date){
   return{h:Math.floor(tot/60),m:tot%60,tot};
 }
 
+// ── Toast ──
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-// ══ NOTIFICATIONS ══
-let notifPermission='default';
-let scheduledNotifs={};
+// ── Tabs ──
+function showTab(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings};
+  if(fn[id])fn[id]();
+  if(id==='home')updateHome();
+}
 
-async function requestNotif(){
-  if(!('Notification' in window)){toast('Notifications non supportées');return;}
-  const perm=await Notification.requestPermission();
-  notifPermission=perm;
-  document.getElementById('notif-banner').style.display='none';
-  if(perm==='granted'){toast('Notifications activées ✅');scheduleAllNotifs();}
+// ── Apply settings globally ──
+function applySettings(){
+  const set=D.getSet();
+  const fastNames=set.fast.map(d=>JOURS_SHORT[d]).join('+');
+  const sportNames=set.sport.map(d=>JOURS_SHORT[d]).join('+');
+  const fEl=document.getElementById('fast-hdr-p');
+  if(fEl)fEl.textContent=`${fastNames} · SANS eau · Fajr → Maghreb`;
+  const sEl=document.getElementById('sport-hdr-p');
+  if(sEl)sEl.textContent=`${sportNames} · 1h marche + 1h muscu · soir après boulot`;
+  const rEl=document.getElementById('sport-rule');
+  if(rEl)rEl.innerHTML=`<strong>Règle :</strong><br>🏋️ <strong>${sportNames}</strong> = sport (soir 18h→20h)<br>📿 <strong>${fastNames}</strong> = jeûne<br>❌ Pas de jeûne le lendemain d'un sport`;
+}
+
+// ── NOTIFICATIONS ──
+let notifGranted = Notification?.permission === 'granted';
+let notifTimers = [];
+
+async function askNotif(){
+  if(!('Notification' in window)){toast('Non supporté sur ce navigateur');return;}
+  const p = await Notification.requestPermission();
+  notifGranted = p==='granted';
+  document.getElementById('notif-bar').style.display='none';
+  const ns=document.getElementById('notif-status');
+  if(ns)ns.textContent='Statut : '+(notifGranted?'✅ Activées':'❌ Refusées');
+  if(notifGranted){toast('Notifications activées ✅');scheduleNotifs();}
   else toast('Notifications refusées');
 }
 
-function sendNotif(title, body, delay=0){
-  if(notifPermission!=='granted') return;
-  if(delay<=0){new Notification(title,{body,icon:'https://cdn.jsdelivr.net/npm/emoji-datasource-apple@15.0.1/img/apple/64/1f4cb.png',badge:'',vibrate:[200,100,200]});}
-  else{setTimeout(()=>new Notification(title,{body,icon:'',vibrate:[200,100,200]}),delay*1000);}
+function sendNotif(title,body){
+  if(!notifGranted)return;
+  try{new Notification(title,{body,icon:'',vibrate:[200,100,200]});}catch(e){}
 }
 
-function scheduleAllNotifs(){
-  // Annuler anciens
-  Object.values(scheduledNotifs).forEach(id=>clearTimeout(id));
-  scheduledNotifs={};
-
-  const now=new Date();
-  const nowMin=now.getHours()*60+now.getMinutes();
-  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+function scheduleNotifs(){
+  notifTimers.forEach(clearTimeout);notifTimers=[];
+  if(!notifGranted)return;
+  const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   const dow=(today.getDay()+6)%7;
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  const isFast=fast.has(dow),isSport=sport.has(dow),isRec=rec.has(dow),isWE=dow>=5;
   const mg=maghreb(today);
-  const isFast=FAST_D.has(dow),isRec=REC_D.has(dow),isSport=SPORT_D.has(dow),isWE=dow>=5;
-  const modeEte=mg.tot>=21*60+30;
+  const nowMin=now.getHours()*60+now.getMinutes();
 
-  // Activités du jour avec heure de notification (15 min avant)
-  const activities=[];
-  if(!isWE){
-    if(isSport){activities.push({h:6,m:0,label:'Sport dans 15 min',body:'🚶 Marche 1h10 + 🏋️ Muscu 1h · Lever maintenant !'});}
-    if(isFast){
-      activities.push({h:8,m:30,label:'Réveil jeûne',body:'📿 Rappel jeûne — SANS eau ni nourriture jusqu\'au Maghreb'});
-      activities.push({h:mg.h,m:mg.m-15<0?0:mg.m-15,label:'Maghreb dans 15 min !',body:`🕌 Rupture du jeûne dans 15 min (${f2(mg.h)}h${f2(mg.m)}) — Prépare eau et datte`});
-    }
-    if(isRec){activities.push({h:8,m:30,label:'Jour de récupération',body:'💧 Bois dès maintenant — Récupération après jeûne · Pas de sport'});}
-    activities.push({h:20,m:45,label:'Formation dans 15 min',body:`📚 Formation ${modeEte&&isFast?'à jeun ':''}dans 15 min (21h00)`});
-    activities.push({h:23,m:15,label:'Coucher dans 15 min',body:'🌙 Il est 23h15 — Ferme la formation et prépare-toi à dormir'});
-  } else {
-    const sportH=dow===5?7:6,sportM=dow===5?15:15;
-    activities.push({h:sportH,m:sportM,label:'Sport dans 15 min',body:'🚶 Marche + Muscu · Chauffe-toi !'});
-    activities.push({h:9,m:45,label:'Formation dans 15 min',body:'📚 Formation 3h dans 15 min (10h00)'});
+  const acts=[];
+  if(isFast){
+    acts.push({min:mg.tot-15,title:'Maghreb dans 15 min 🕌',body:`Rupture du jeûne à ${f2(mg.h)}h${f2(mg.m)} — prépare eau et datte`});
   }
+  if(isSport){
+    acts.push({min:17*60+45,title:'Sport dans 15 min 🏋️',body:'1h marche + 1h muscu à partir de 18h00'});
+  }
+  const formH=isWE?9*60+45:20*60+45;
+  const formDur=isWE?'3h':'2h'+(isSport?' (jour sport : 1h)':'');
+  acts.push({min:formH,title:'Formation dans 15 min 📚',body:`Objectif ${formDur} · Lance ton chronomètre`});
+  acts.push({min:23*60+15,title:'Coucher dans 15 min 🌙',body:'Il est 23h15 — ferme la formation et prépare-toi à dormir'});
 
-  activities.forEach(act=>{
-    const actMin=act.h*60+act.m;
-    const diffSec=(actMin-nowMin)*60-now.getSeconds();
-    if(diffSec>0){
-      const id=setTimeout(()=>sendNotif(act.label,act.body),diffSec*1000);
-      scheduledNotifs[`${act.h}:${act.m}`]=id;
+  acts.forEach(a=>{
+    const diff=(a.min-nowMin)*60-now.getSeconds();
+    if(diff>0){
+      const id=setTimeout(()=>sendNotif(a.title,a.body),diff*1000);
+      notifTimers.push(id);
     }
   });
 }
 
-function checkNotifPermission(){
+function checkNotif(){
   if(!('Notification' in window))return;
-  notifPermission=Notification.permission;
-  if(notifPermission==='default'){document.getElementById('notif-banner').style.display='flex';}
-  else if(notifPermission==='granted'){scheduleAllNotifs();}
+  const p=Notification.permission;
+  notifGranted=p==='granted';
+  const ns=document.getElementById('notif-status');
+  if(ns)ns.textContent='Statut : '+(p==='granted'?'✅ Activées':p==='denied'?'❌ Refusées':'⏳ Non demandées');
+  if(p==='default')document.getElementById('notif-bar').style.display='flex';
+  if(p==='granted')scheduleNotifs();
 }
 
-// ══ CHRONO ══
+// ── CHRONO ──
 let cEl=0,cRun=false,cIv=null,cT0=null;
 function cStart(){if(cRun)return;cRun=true;cT0=Date.now()-cEl*1000;cIv=setInterval(updC,1000);}
 function cPause(){cRun=false;clearInterval(cIv);}
@@ -535,24 +581,105 @@ function updC(){
   if(cRun)cEl=Math.floor((Date.now()-cT0)/1000);
   const h=Math.floor(cEl/3600),m=Math.floor((cEl%3600)/60),s=cEl%60;
   document.getElementById('chrono-d').textContent=`${h}:${f2(m)}:${f2(s)}`;
-  const isWE=[0,6].includes(new Date().getDay()),tgt=isWE?10800:7200,pct=Math.min(100,Math.round(cEl/tgt*100));
-  const bar=document.getElementById('chrono-b');bar.style.width=pct+'%';bar.style.background=pct>=100?'var(--sport)':'var(--blue)';
-  document.getElementById('chrono-l').textContent=`${isWE?'Weekend 3h':'Semaine 2h'} · ${pct}%`;
-  // Notif si formation terminée
-  if(pct>=100&&cRun){sendNotif('Formation terminée ! 🎉','Tu as atteint ton objectif de formation du jour ✅');cPause();}
+  const dow=(new Date().getDay()+6)%7;
+  const sport=D.getSport(),isWE=dow>=5,isSport=sport.has(dow);
+  const tgt=isWE?10800:isSport?3600:7200;
+  const lbl=isWE?'3h weekend':isSport?'1h (jour sport)':'2h';
+  const pct=Math.min(100,Math.round(cEl/tgt*100));
+  const bar=document.getElementById('chrono-b');
+  bar.style.width=pct+'%';bar.style.background=pct>=100?'var(--sport)':'var(--blue)';
+  document.getElementById('chrono-l').textContent=`Objectif ${lbl} · ${pct}%`;
+  if(pct>=100&&cRun){sendNotif('Formation terminée 🎉','Objectif du jour atteint ✅');cPause();}
 }
 
-// ══ HOME ══
+// ── HOME ──
 let editMode=false;
-function toggleEdit(){editMode=!editMode;document.getElementById('edit-btn').textContent=editMode?'✅ Fermer':'✏️ Modifier';updateHome();}
-function showTab(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('pg-'+id).classList.add('active');
-  document.getElementById('tab-'+id).classList.add('active');
-  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm};
-  if(fn[id])fn[id]();
-  if(id==='home')updateHome();
+function toggleEdit(){
+  editMode=!editMode;
+  document.getElementById('edit-btn').textContent=editMode?'✅ Fermer':'✏️ Modifier';
+  document.getElementById('add-zone').style.display=editMode?'block':'none';
+  updateHome();
+}
+
+function getDaySchedule(dow,mg,isFast,isSport,isRec,modeEte){
+  const mS=`${f2(mg.h)}h${f2(mg.m)}`;
+  const r30=mg.m+30>=60?`${f2(mg.h+1)}h${f2(mg.m+30-60)}`:`${f2(mg.h)}h${f2(mg.m+30)}`;
+  let s=[];
+  const isWE=dow>=5;
+
+  if(!isWE){
+    if(isFast){
+      s=[
+        {t:'08:30',e:'⏰',l:'Réveil — SANS eau ni nourriture',c:'var(--fast)'},
+        {t:'09:30',e:'💼',l:'Renault — à jeun SANS eau',c:'var(--work)'},
+        {t:'17:30',e:'🏠',l:'Retour maison',c:'var(--fam)'},
+        {t:mS,    e:'🕌',l:`Adhan Maghreb ${mS} — RUPTURE`,c:'var(--fast)'},
+        {t:r30,   e:'🍽️',l:'Eau · Datte · Prière · Dîner',c:'var(--fam)'},
+      ];
+      if(modeEte){
+        s.push({t:'21:00',e:'📚',l:'Formation à jeun (21h)',c:'var(--cours)'});
+        s.push({t:mS,e:'🕌',l:`${mS} rupture → pause repas 30min`,c:'var(--fast)'});
+        s.push({t:r30,e:'📚',l:'Reprend formation (2h total)',c:'var(--cours)'});
+      } else {
+        s.push({t:'21:00',e:'📚',l:'Formation 2h (21h→23h)',c:'var(--cours)'});
+      }
+    } else if(isRec){
+      s=[
+        {t:'08:00',e:'⏰',l:'Réveil — BOIRE dès maintenant 💧',c:'var(--rec)'},
+        {t:'08:30',e:'🥤',l:'Petit-déjeuner + hydratation (récup jeûne)',c:'var(--rec)'},
+        {t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},
+        {t:'17:30',e:'🏠',l:'Retour maison',c:'var(--fam)'},
+      ];
+      if(isSport){
+        s.push({t:'18:00',e:'🚶',l:'Marche 1h — sport soir',c:'var(--sport)'});
+        s.push({t:'19:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'});
+        s.push({t:'20:00',e:'🚿',l:'Douche + récupération',c:'var(--slp)'});
+        s.push({t:'21:00',e:'📚',l:'Formation 1h (jour sport)',c:'var(--cours)'});
+      } else {
+        s.push({t:'21:00',e:'📚',l:'Formation 2h (21h→23h)',c:'var(--cours)'});
+      }
+    } else if(isSport){
+      s=[
+        {t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},
+        {t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},
+        {t:'17:30',e:'🏠',l:'Retour maison',c:'var(--fam)'},
+        {t:'18:00',e:'🚶',l:'Marche 1h — sport soir',c:'var(--sport)'},
+        {t:'19:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},
+        {t:'20:00',e:'🚿',l:'Douche + récupération',c:'var(--slp)'},
+        {t:'21:00',e:'📚',l:'Formation 1h (jour sport)',c:'var(--cours)'},
+      ];
+    } else {
+      s=[
+        {t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},
+        {t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},
+        {t:'17:30',e:'🏠',l:'Retour + repos',c:'var(--fam)'},
+        {t:'21:00',e:'📚',l:'Formation 2h (21h→23h)',c:'var(--cours)'},
+      ];
+    }
+    s.push({t:'23:30',e:'🌙',l:'Coucher',c:'var(--slp)'});
+  } else {
+    if(isSport){
+      s=[
+        {t:'09:00',e:'🚶',l:'Marche 1h — sport matin',c:'var(--sport)'},
+        {t:'10:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},
+        {t:'11:00',e:'🚿',l:'Douche + petit-déjeuner',c:'var(--slp)'},
+        {t:'12:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},
+        {t:'15:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},
+        {t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},
+        {t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'},
+      ];
+    } else {
+      s=[
+        {t:'09:00',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},
+        {t:'10:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},
+        {t:'13:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},
+        {t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},
+        {t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'},
+      ];
+    }
+    s.push({t:'23:30',e:'🌙',l:'Coucher',c:'var(--slp)'});
+  }
+  return s;
 }
 
 function updateHome(){
@@ -561,42 +688,90 @@ function updateHome(){
   document.getElementById('magh-t').textContent=`${f2(mg.h)}h${f2(mg.m)}`;
   const nowMin=now.getHours()*60+now.getMinutes(),diff=mg.tot-nowMin;
   document.getElementById('magh-cd').textContent=diff>0?`${f2(Math.floor(diff/60))}:${f2(diff%60)}`:'Passé';
-  const dow=(today.getDay()+6)%7,isFast=FAST_D.has(dow),isRec=REC_D.has(dow),isSport=SPORT_D.has(dow),modeEte=mg.tot>=21*60+30;
-  document.getElementById('mcard').style.background=isFast?'var(--fast)':isRec?'var(--rec)':'var(--navy)';
-  document.getElementById('magh-s').textContent=isFast?'📿 Jeûne SANS eau ni nourriture':isRec?'💧 Récupération — boire, manger, repos':isSport?'🏋️ Jour de sport':'Journée normale';
+  const dow=(today.getDay()+6)%7;
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  const isFast=fast.has(dow),isSport=sport.has(dow),isRec=rec.has(dow),modeEte=mg.tot>=21*60+30;
+  const mc=document.getElementById('mcard');
+  mc.style.background=isFast?'var(--fast)':isRec?'var(--rec)':'var(--navy)';
+  document.getElementById('magh-s').textContent=
+    isFast?'📿 Jeûne SANS eau ni nourriture → Maghreb':
+    isRec ?'💧 Récupération — boire dès le matin':
+    isSport?'🏋️ Sport ce soir 18h00':'Journée normale';
+
   const days=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],months=['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   document.getElementById('today-lb').textContent=`${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} · Sem ${wkNum(now)}`;
-  const fs=D.getFS(),ss=D.getSS();
-  document.getElementById('h-form').textContent=Object.values(fs).filter(s=>s.done).length;
-  document.getElementById('h-sport').textContent=Object.values(ss).filter(s=>s.done).length;
-  const wh=D.getWH(),cfg=D.getWC();
-  if(wh.length>0){const lw=wh[wh.length-1].w;document.getElementById('h-poids').textContent=lw.toFixed(1);document.getElementById('h-imc').textContent=cfg.h?(lw/(cfg.h*cfg.h)).toFixed(1):'--';}
 
-  const mS=`${f2(mg.h)}h${f2(mg.m)}`,r30=mg.m+30>=60?`${f2(mg.h+1)}h${f2(mg.m+30-60)}`:`${f2(mg.h)}h${f2(mg.m+30)}`;
-  let def=[];
-  if(dow<5){
-    if(isSport)def=[{t:'06:00',e:'⏰',l:'Réveil + tenue sport',c:'var(--slp)'},{t:'06:30',e:'🚶',l:'Marche 1h10',c:'var(--sport)'},{t:'07:40',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},{t:'08:40',e:'🚿',l:'Douche + trajet',c:'var(--slp)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour + repos 2h',c:'var(--fam)'}];
-    else if(isFast)def=[{t:'08:30',e:'⏰',l:'Réveil SANS eau — jeûne',c:'var(--fast)'},{t:'09:30',e:'💼',l:'Renault — à jeun SANS eau',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour + repos',c:'var(--fam)'},{t:mS,e:'🕌',l:`Adhan ${mS} — RUPTURE`,c:'var(--fast)'},{t:r30,e:'🍽️',l:'Eau · Datte · Prière · Dîner',c:'var(--fam)'}];
-    else if(isRec)def=[{t:'08:30',e:'⏰',l:'Réveil — BOIRE dès maintenant',c:'var(--rec)'},{t:'09:00',e:'🥤',l:'Petit-déjeuner + hydratation',c:'var(--rec)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour + repos',c:'var(--fam)'}];
-    else def=[{t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour + repos 2h',c:'var(--fam)'}];
-    if(isFast&&modeEte){def.push({t:'21:00',e:'📚',l:'Formation à jeun (21h)',c:'var(--cours)'});def.push({t:mS,e:'🕌',l:`Adhan ${mS} → pause repas 30min`,c:'var(--fast)'});def.push({t:r30,e:'📚',l:'Reprend formation (2h total)',c:'var(--cours)'}); }
-    else def.push({t:'21:00',e:'📚',l:'Formation 2h',c:'var(--cours)'});
-    def.push({t:'23:30',e:'🌙',l:'Coucher',c:'var(--slp)'});
-  } else {
-    const st=dow===5?'07:30':'06:30',mu=dow===5?'08:40':'07:40';
-    def=[{t:st,e:'🚶',l:'Marche 1h10',c:'var(--sport)'},{t:mu,e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},{t:'10:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},{t:'13:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},{t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},{t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'},{t:'23:30',e:'🌙',l:'Coucher',c:'var(--slp)'}];
+  document.getElementById('h-form').textContent=Object.values(D.getFS()).filter(s=>s.done).length;
+  document.getElementById('h-sport').textContent=Object.values(D.getSS()).filter(s=>s.done).length;
+  const wh=D.getWH(),cfg=D.getWC();
+  if(wh.length>0){
+    const lw=wh[wh.length-1].w;
+    document.getElementById('h-poids').textContent=lw.toFixed(1);
+    document.getElementById('h-imc').textContent=cfg&&cfg.h?(lw/(cfg.h*cfg.h)).toFixed(1):'--';
   }
-  const stored=LS.g('custom_day_'+todayISO(),null);
-  const sched=stored||def;
+
+  const dk=todayISO();
+  const cd=D.getCD();
+  const defSched=getDaySchedule(dow,mg,isFast,isSport,isRec,modeEte);
+  const sched=cd[dk]||defSched;
+
   document.getElementById('today-sched').innerHTML=sched.map((item,i)=>{
     const [ih]=item.t.split(/[h:]/).map(Number),past=ih<now.getHours();
-    if(editMode)return`<div class="tl"><div class="tlt">${item.t}</div><div class="tld" style="background:${item.c}"></div><div style="flex:1"><input value="${item.l}" onchange="editItem(${i},'${todayISO()}',this.value,${JSON.stringify(sched).replace(/"/g,"'")})" style="font-size:12px;width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:7px;font-family:inherit;background:var(--bg);color:var(--txt);outline:none"></div></div>`;
-    return`<div class="tl"><div class="tlt">${item.t}</div><div class="tld" style="background:${past?'var(--brd)':item.c}"></div><div class="tll" style="${past?'color:var(--mut);text-decoration:line-through':''}">${item.e} ${item.l}</div></div>`;
+    if(editMode){
+      return`<div class="tl">
+        <div class="tlt">${item.t}</div>
+        <div class="tld" style="background:${item.c}"></div>
+        <div style="flex:1">
+          <input value="${item.l.replace(/"/g,'&quot;')}"
+            onchange="editSlot('${dk}',${i},this.value)"
+            style="font-size:12px;width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:7px;font-family:inherit;background:var(--bg);color:var(--txt);outline:none">
+        </div>
+        <button onclick="deleteSlot('${dk}',${i})" style="background:none;border:none;color:var(--mut);font-size:16px;cursor:pointer;padding:2px 6px;flex-shrink:0">✕</button>
+      </div>`;
+    }
+    return`<div class="tl">
+      <div class="tlt">${item.t}</div>
+      <div class="tld" style="background:${past?'var(--brd)':item.c}"></div>
+      <div class="tll" style="${past?'color:var(--mut);text-decoration:line-through':''}">${item.e} ${item.l}</div>
+    </div>`;
   }).join('');
 }
-function editItem(idx,dk,val,arr){arr[idx].l=val;LS.s('custom_day_'+dk,arr);}
 
-// ══ PLANNING ══
+function getOrInitSched(dk){
+  const cd=D.getCD();
+  if(cd[dk])return cd[dk];
+  const now=new Date(dk),dow=(now.getDay()+6)%7;
+  const mg=maghreb(now);
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  return getDaySchedule(dow,mg,fast.has(dow),sport.has(dow),rec.has(dow),mg.tot>=21*60+30);
+}
+
+async function editSlot(dk,idx,val){
+  const s=getOrInitSched(dk);s[idx].l=val;
+  if(!window._CD)window._CD={};window._CD[dk]=s;
+  if(window.fbSave)window.fbSave('custom_days',window._CD);
+}
+
+async function deleteSlot(dk,idx){
+  const s=getOrInitSched(dk);s.splice(idx,1);
+  if(!window._CD)window._CD={};window._CD[dk]=s;
+  if(window.fbSave)window.fbSave('custom_days',window._CD);
+  updateHome();
+}
+
+function addSlot(){
+  const t=document.getElementById('new-t').value,l=document.getElementById('new-l').value.trim();
+  if(!t||!l){toast('Indique une heure et une activité');return;}
+  const dk=todayISO(),s=getOrInitSched(dk);
+  s.push({t:t.replace(':','h'),e:'📌',l,c:'var(--blue)'});
+  s.sort((a,b)=>a.t.localeCompare(b.t));
+  if(!window._CD)window._CD={};window._CD[dk]=s;
+  if(window.fbSave)window.fbSave('custom_days',window._CD);
+  document.getElementById('new-t').value='';document.getElementById('new-l').value='';
+  updateHome();toast('Activité ajoutée ✅');
+}
+
+// ── PLANNING ──
 let planWkN=wkNum(new Date());
 function planWk(d){planWkN=Math.max(1,Math.min(72,planWkN+d));renderPlan();}
 function planToday(){planWkN=wkNum(new Date());renderPlan();}
@@ -604,23 +779,31 @@ function renderPlan(){
   document.getElementById('plan-wk').textContent=`Semaine ${planWkN}`;
   const ws=wkStart(planWkN);
   const pn=D.getPN();
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
-    const dk=isoD(date),isFast=FAST_D.has(d),isRec=REC_D.has(d),isSport=SPORT_D.has(d),isToday=dk===todayISO();
+    const dk=isoD(date),isToday=dk===todayISO();
+    const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d);
     const mg=maghreb(date);
-    const fDone=D.getFS()[dk]?.done||false,spDone=D.getSS()[dk]?.done||false,jDone=isFast?(D.getJS()[dk]?.done||false):null;
+    const fDone=D.getFS()[dk]?.done||false,spDone=D.getSS()[dk]?.done||false;
+    const jDone=isFast?(D.getJS()[dk]?.done||false):null;
     const note=pn[dk]||'';
     let typeLabel='📚 Formation',typeBg='var(--coul)',typeC='var(--cours)';
     if(isFast){typeLabel='📿 Jeûne';typeBg='var(--fatl)';typeC='var(--fast)';}
+    else if(isRec&&isSport){typeLabel='💧+🏋️ Récup+Sport';typeBg='var(--spl)';typeC='var(--sport)';}
     else if(isRec){typeLabel='💧 Récupération';typeBg='var(--recl)';typeC='var(--rec)';}
-    else if(isSport){typeLabel='🏋️ Sport';typeBg='var(--spl)';typeC='var(--sport)';}
+    else if(isSport){typeLabel='🏋️ Sport soir';typeBg='var(--spl)';typeC='var(--sport)';}
+
+    const formDur=d>=5?'3h':isSport?'1h':'2h';
+
     html+=`<div class="card" style="border:${isToday?'2px solid var(--blue)':'none'}">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
         <div>
-          <div style="font-size:15px;font-weight:700${isToday?';color:var(--blue)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
+          <div style="font-size:15px;font-weight:700${isToday?';color:var(--blue)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ← Aujourd\'hui':''}</div>
           <span class="pill" style="background:${typeBg};color:${typeC};margin-top:4px">${typeLabel}</span>
           ${isFast?`<div style="font-size:11px;color:var(--fast);font-weight:600;margin-top:3px">🕌 Maghreb : ${f2(mg.h)}h${f2(mg.m)}</div>`:''}
+          <div style="font-size:11px;color:var(--cours);margin-top:2px">📚 Formation ${formDur}</div>
         </div>
         <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:90px">
           ${isFast?`<span class="badge" style="background:${jDone?'var(--fast)':'var(--fatl)'};color:${jDone?'#fff':'var(--fast)'}">📿${jDone?'✓':'?'}</span>`:''}
@@ -628,14 +811,18 @@ function renderPlan(){
           <span class="badge" style="background:${fDone?'var(--cours)':'var(--coul)'};color:${fDone?'#fff':'var(--cours)'}">📚${fDone?'✓':'?'}</span>
         </div>
       </div>
-      <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Imprévu / Note</div>
-      <textarea class="tx" style="min-height:44px;font-size:12px" placeholder="Note un imprévu..." onchange="if(window.savePN)window.savePN('${dk}',this.value)">${note}</textarea>
+      <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Note / Imprévu</div>
+      <textarea class="tx" style="min-height:44px;font-size:12px" placeholder="Imprévu, rendez-vous, changement..." onchange="savePlanNote('${dk}',this.value)">${note}</textarea>
     </div>`;
   }
   document.getElementById('plan-days').innerHTML=html;
 }
+async function savePlanNote(dk,v){
+  if(!window._PN)window._PN={};window._PN[dk]=v;
+  if(window.fbSave)window.fbSave('plan_notes',window._PN);
+}
 
-// ══ SPORT ══
+// ── SPORT ──
 let spWkN=wkNum(new Date());
 function spWk(d){spWkN=Math.max(1,Math.min(72,spWkN+d));renderSport();}
 function spToday(){spWkN=wkNum(new Date());renderSport();}
@@ -648,27 +835,38 @@ function renderSport(){
   const pct=Math.round(total/216*100);
   document.getElementById('sp-tot').textContent=total;document.getElementById('sp-mo').textContent=mo;
   document.getElementById('sp-bar').style.width=pct+'%';document.getElementById('sp-pct').textContent=`${total}/216 · ${pct}%`;
+
   const ws=wkStart(spWkN);
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays(),bl=getSportBlocked();
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
-    const dk=isoD(date),isFast=FAST_D.has(d),isRec=REC_D.has(d),canSport=SPORT_D.has(d),isToday=dk===todayISO();
+    const dk=isoD(date),isToday=dk===todayISO();
+    const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d),isBlocked=bl.has(d)&&!sport.has(d);
     const sess=allS[dk]||{done:false,note:''};
-    let badge='🏋️ Sport OK',bBg='var(--spl)',bC='var(--sport)';
+    const canSport=isSport;
+
+    let badge,bBg,bC;
     if(isFast){badge='📿 Jeûne';bBg='var(--fatl)';bC='var(--fast)';}
+    else if(isSport){badge='🏋️ Sport soir';bBg='var(--spl)';bC='var(--sport)';}
     else if(isRec){badge='💧 Récupération';bBg='var(--recl)';bC='var(--rec)';}
-    html+=`<div class="card" style="opacity:${!canSport?.55:1};border:${isToday?'2px solid var(--blue)':'none'}">
+    else if(isBlocked){badge='⚠️ Veille jeûne';bBg='var(--fatl)';bC='var(--fast)';}
+    else{badge='Repos';bBg='#f3f4f6';bC='var(--mut)';}
+
+    html+=`<div class="card" style="opacity:${!canSport?.5:1};border:${isToday?'2px solid var(--blue)':'none'}">
       <div style="display:flex;gap:10px;align-items:flex-start">
         ${canSport?`<div class="chk${sess.done?' on':''}" onclick="toggleSport('${dk}')">
           ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
-        </div>`:`<div style="width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;margin-top:1px">${isFast?'📿':'💧'}</div>`}
+        </div>`:`<div style="width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px">${isFast?'📿':isRec?'💧':'—'}</div>`}
         <div style="flex:1">
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div style="font-size:14px;font-weight:700;${sess.done?'text-decoration:line-through;color:var(--mut)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
             <span class="pill" style="background:${bBg};color:${bC};font-size:10px">${badge}</span>
           </div>
-          ${canSport?`<div style="font-size:11px;color:var(--mut);margin-top:2px">1h10 marche + 1h muscu = 2h10</div>
-          <textarea class="tx" style="margin-top:6px;font-size:12px;min-height:50px" placeholder="Exercices, ressenti..." onchange="spNote('${dk}',this.value)">${sess.note||''}</textarea>`:`<div style="font-size:11px;color:${bC};margin-top:2px">${isRec?'Boire + manger + repos':'Pas de sport — journée jeûne'}</div>`}
+          ${canSport?`
+          <div style="font-size:11px;color:var(--mut);margin-top:2px">18h00 → 1h marche + 1h muscu = 2h</div>
+          <textarea class="tx" style="margin-top:6px;font-size:12px;min-height:52px" placeholder="Exercices, ressenti, poids utilisés..." onchange="spNote('${dk}',this.value)">${sess.note||''}</textarea>`
+          :`<div style="font-size:11px;color:${bC};margin-top:2px">${isFast?'Jeûne SANS eau — pas de sport':isRec?'Récupération · Sport possible le soir si c\'est ton jour':isBlocked?'Veille de jeûne — repos':'Jour de repos'}</div>`}
         </div>
       </div>
     </div>`;
@@ -677,47 +875,77 @@ function renderSport(){
   if(!document.getElementById('sp-date').value)document.getElementById('sp-date').value=todayISO();
 }
 async function toggleSport(dk){
-  const s=D.getSS();if(!s[dk])s[dk]={done:false,note:''};s[dk].done=!s[dk].done;
-  if(window.saveSS)await window.saveSS(dk,{done:s[dk].done});
-  renderSport();updateHome();toast(s[dk].done?'Séance sport ✅':'Décochée');
+  if(!window._SS)window._SS={};
+  if(!window._SS[dk])window._SS[dk]={done:false,note:''};
+  window._SS[dk].done=!window._SS[dk].done;
+  if(window.fbSave)window.fbSave('sport_sessions',window._SS);
+  renderSport();updateHome();
+  toast(window._SS[dk].done?'Séance sport ✅':'Décochée');
 }
-async function spNote(dk,v){if(window.saveSS)await window.saveSS(dk,{note:v});}
+async function spNote(dk,v){
+  if(!window._SS)window._SS={};
+  if(!window._SS[dk])window._SS[dk]={done:false,note:''};
+  window._SS[dk].note=v;
+  if(window.fbSave)window.fbSave('sport_sessions',window._SS);
+}
 async function addSportM(){
   const date=document.getElementById('sp-date').value,dur=document.getElementById('sp-dur').value,note=document.getElementById('sp-note').value.trim();
   if(!date){toast('Choisis une date');return;}
-  if(window.saveSS)await window.saveSS(date,{done:true,note:`${dur}${note?' · '+note:''}`,manual:true});
-  document.getElementById('sp-note').value='';renderSport();updateHome();toast('Séance ajoutée ✅');
+  if(!window._SS)window._SS={};
+  window._SS[date]={done:true,note:`${dur}${note?' · '+note:''}`,manual:true};
+  if(window.fbSave)window.fbSave('sport_sessions',window._SS);
+  document.getElementById('sp-note').value='';
+  renderSport();updateHome();toast('Séance ajoutée ✅');
 }
 
-// ══ JEÛNE ══
+// ── JEÛNE ──
 let jWkN=wkNum(new Date());
 function jWk(d){jWkN=Math.max(1,Math.min(72,jWkN+d));renderJeune();}
 function jToday(){jWkN=wkNum(new Date());renderJeune();}
 function renderJeune(){
   document.getElementById('j-wk').textContent=`Semaine ${jWkN}`;
-  const allJ=D.getJS();
+  const allJ=D.getJS(),fast=D.getFast(),rec=getRecDays();
   const total=Object.values(allJ).filter(j=>j.done).length;
   let streak=0;const now=new Date();
-  for(let i=0;i<200;i++){const d=new Date(now);d.setDate(now.getDate()-i);const dow=(d.getDay()+6)%7;if(!FAST_D.has(dow))continue;const dk2=isoD(d);if(dk2>todayISO())continue;if(allJ[dk2]?.done)streak++;else break;}
-  const tp=72*2,pct=Math.round(total/tp*100);
+  for(let i=0;i<300;i++){
+    const d=new Date(now);d.setDate(now.getDate()-i);
+    const dow=(d.getDay()+6)%7;if(!fast.has(dow))continue;
+    const dk2=isoD(d);if(dk2>todayISO())continue;
+    if(allJ[dk2]?.done)streak++;else break;
+  }
+  const tp=72*fast.size,pct=Math.round(total/tp*100);
   document.getElementById('j-tot').textContent=total;document.getElementById('j-str').textContent=streak;
   document.getElementById('j-bar').style.width=pct+'%';document.getElementById('j-pct').textContent=`${total}/${tp} · ${pct}%`;
+
   const ws=wkStart(jWkN);
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
-    const dk=isoD(date),isFast=FAST_D.has(d),isRec=REC_D.has(d),isToday=dk===todayISO();
+    const dk=isoD(date),isToday=dk===todayISO();
+    const isFast=fast.has(d),isRec=rec.has(d);
     const mg=maghreb(date),mStr=`${f2(mg.h)}h${f2(mg.m)}`,modeEte=mg.tot>=21*60+30;
     const sess=allJ[dk]||{done:false,note:'',rupture:'',duree:''};
-    if(!isFast&&!isRec){html+=`<div class="card" style="opacity:.4"><div style="font-size:13px;font-weight:600">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}</div><div style="font-size:11px;color:var(--mut)">Pas de jeûne</div></div>`;continue;}
-    if(isRec){html+=`<div class="card" style="background:var(--recl);border:${isToday?'2px solid var(--rec)':'none'}">
-      <div style="font-size:14px;font-weight:700;color:var(--rec)">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1} 💧 Récupération</div>
-      <div style="font-size:12px;color:var(--rec);margin-top:4px;line-height:1.6">✅ Boire dès le réveil · ✅ Petit-déj complet · ✅ Manger normalement · ❌ Pas de sport</div>
-      <textarea class="tx" style="margin-top:8px;font-size:12px;min-height:40px;background:#fff" placeholder="Notes..." onchange="if(window.saveJS)window.saveJS('${dk}',{note:this.value})">${sess.note||''}</textarea>
-    </div>`;continue;}
+
+    if(!isFast&&!isRec){
+      html+=`<div class="card" style="opacity:.35">
+        <div style="font-size:13px;font-weight:600">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}</div>
+        <div style="font-size:11px;color:var(--mut)">Pas de jeûne ce jour</div>
+      </div>`;
+      continue;
+    }
+    if(isRec){
+      html+=`<div class="card" style="background:var(--recl);border:${isToday?'2px solid var(--rec)':'none'}">
+        <div style="font-size:14px;font-weight:700;color:var(--rec)">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1} 💧 Récupération</div>
+        <div style="font-size:12px;color:var(--rec);margin-top:5px;line-height:1.7">
+          ✅ Boire dès le réveil<br>✅ Petit-déjeuner complet<br>✅ Manger normalement toute la journée<br>🏋️ Sport possible le soir
+        </div>
+        <textarea class="tx" style="margin-top:8px;font-size:12px;min-height:40px;background:#fff" placeholder="Notes récupération..." onchange="saveJnote('${dk}',this.value)">${sess.note||''}</textarea>
+      </div>`;
+      continue;
+    }
     html+=`<div class="card" style="border:${isToday?'2px solid var(--fast)':'none'}">
       <div style="display:flex;gap:10px;align-items:flex-start">
-        <div class="chk${sess.done?' on':''}" style="${sess.done?'background:var(--fast);border-color:var(--fast)':''}" onclick="toggleJeune('${dk}')">
+        <div class="chk${sess.done?' fast-on':''}" onclick="toggleJeune('${dk}')">
           ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
         </div>
         <div style="flex:1">
@@ -725,16 +953,22 @@ function renderJeune(){
             <div style="font-size:14px;font-weight:700${isToday?';color:var(--fast)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
             <span class="pill" style="background:var(--fatl);color:var(--fast)">📿 Jeûne</span>
           </div>
-          <div style="font-size:12px;color:var(--fast);font-weight:600;margin-top:4px">🕌 Maghreb : ${mStr} ${modeEte?'☀️ Mode été':'🌙 Mode hiver'}</div>
-          <div style="font-size:11px;color:var(--mut);margin-top:1px">SANS eau · SANS nourriture · Fajr → Adhan</div>
-          <div style="font-size:11px;color:var(--cours);margin-top:3px;background:var(--coul);padding:5px 8px;border-radius:7px">
-            ${modeEte?`📚 Formation 21h (jeun) → ${mStr} rupture → reprise`:'📚 Formation après rupture : 21h → 23h'}
+          <div style="font-size:12px;color:var(--fast);font-weight:600;margin-top:4px">🕌 Maghreb : ${mStr} ${modeEte?'☀️ été':'🌙 hiver'}</div>
+          <div style="font-size:11px;color:var(--mut);margin-top:1px">SANS eau · SANS nourriture · de Fajr → Adhan</div>
+          <div style="font-size:11px;color:var(--cours);margin-top:4px;background:var(--coul);padding:5px 8px;border-radius:7px">
+            ${modeEte?`📚 Formation 21h (à jeun) → ${mStr} rupture → pause 30min → reprise`:`📚 Formation après rupture : 21h → 23h`}
           </div>
           <div style="display:flex;gap:8px;margin-top:10px">
-            <div style="flex:1"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Rupture réelle</div><input class="inp" type="time" value="${sess.rupture||''}" onchange="if(window.saveJS)window.saveJS('${dk}',{rupture:this.value})" style="font-size:13px;padding:7px 10px"></div>
-            <div style="flex:1"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Durée totale</div><input class="inp" value="${sess.duree||''}" placeholder="ex: 14h" onchange="if(window.saveJS)window.saveJS('${dk}',{duree:this.value})" style="font-size:13px;padding:7px 10px"></div>
+            <div style="flex:1">
+              <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Heure rupture réelle</div>
+              <input class="inp" type="time" value="${sess.rupture||''}" onchange="saveJrupture('${dk}',this.value)" style="font-size:13px;padding:7px 10px">
+            </div>
+            <div style="flex:1">
+              <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Durée totale</div>
+              <input class="inp" value="${sess.duree||''}" placeholder="ex: 14h30" onchange="saveJduree('${dk}',this.value)" style="font-size:13px;padding:7px 10px">
+            </div>
           </div>
-          <textarea class="tx" style="margin-top:7px;font-size:12px;min-height:44px" placeholder="Ressenti, difficulté..." onchange="if(window.saveJS)window.saveJS('${dk}',{note:this.value})">${sess.note||''}</textarea>
+          <textarea class="tx" style="margin-top:7px;font-size:12px;min-height:44px" placeholder="Ressenti, difficulté, énergie..." onchange="saveJnote('${dk}',this.value)">${sess.note||''}</textarea>
         </div>
       </div>
     </div>`;
@@ -742,67 +976,91 @@ function renderJeune(){
   document.getElementById('jeune-sess').innerHTML=html;
 }
 async function toggleJeune(dk){
-  const j=D.getJS();if(!j[dk])j[dk]={done:false,note:'',rupture:'',duree:''};j[dk].done=!j[dk].done;
-  if(window.saveJS)await window.saveJS(dk,{done:j[dk].done});
-  renderJeune();toast(j[dk].done?'Jeûne accompli ✅':'Décoché');
+  if(!window._JS)window._JS={};
+  if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};
+  window._JS[dk].done=!window._JS[dk].done;
+  if(window.fbSave)window.fbSave('jeune_sessions',window._JS);
+  renderJeune();toast(window._JS[dk].done?'Jeûne accompli ✅':'Décoché');
 }
+async function saveJnote(dk,v){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].note=v;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);}
+async function saveJrupture(dk,v){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].rupture=v;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);}
+async function saveJduree(dk,v){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].duree=v;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);}
 
-// ══ POIDS ══
+// ── POIDS ──
 function renderPoids(){
-  const cfg=D.getWC(),hist=D.getWH();
-  document.getElementById('w-h').value=cfg.h||'';document.getElementById('w-g').value=cfg.goal||'';
+  const cfg=D.getWC()||{h:1.75,goal:null};
+  const hist=D.getWH();
+  document.getElementById('w-h').value=cfg.h||'';
+  document.getElementById('w-g').value=cfg.goal||'';
   if(!document.getElementById('w-date').value)document.getElementById('w-date').value=todayISO();
+
   const gEl=document.getElementById('w-goal-disp');
-  if(cfg.goal&&hist.length>0){const last=hist[hist.length-1],diff=last.w-cfg.goal;gEl.innerHTML=`<div class="card" style="background:${diff<=0?'var(--spl)':'var(--fatl)'}"><div style="font-size:13px;font-weight:700;color:${diff<=0?'var(--sport)':'var(--fast)'}">${diff<=0?'🎯 Objectif atteint !':'🎯 Objectif : '+cfg.goal+' kg'}</div><div style="font-size:12px;color:var(--mut);margin-top:2px">${diff<=0?'Bravo !':'Il reste '+diff.toFixed(1)+' kg'}</div></div>`;}
-  else gEl.innerHTML='';
+  if(cfg.goal&&hist.length>0){
+    const last=hist[hist.length-1],diff=last.w-cfg.goal;
+    gEl.innerHTML=`<div class="card" style="background:${diff<=0?'var(--spl)':'var(--fatl)'}">
+      <div style="font-size:13px;font-weight:700;color:${diff<=0?'var(--sport)':'var(--fast)'}">${diff<=0?'🎯 Objectif atteint !':'🎯 Objectif : '+cfg.goal+' kg'}</div>
+      <div style="font-size:12px;color:var(--mut);margin-top:2px">${diff<=0?'Bravo !':'Encore '+Math.abs(diff).toFixed(1)+' kg à perdre'}</div>
+    </div>`;
+  } else gEl.innerHTML='';
+
   if(hist.length>0){
     const last=hist[hist.length-1],first=hist[0];
     const imc=cfg.h?(last.w/(cfg.h*cfg.h)).toFixed(1):'--';
     const delta=last.w-first.w,ld=hist.length>1?last.w-hist[hist.length-2].w:null;
     document.getElementById('w-cur').textContent=last.w.toFixed(1);
-    const imcEl=document.getElementById('w-imc');imcEl.textContent=imc;
-    const iv=parseFloat(imc);imcEl.style.color=isNaN(iv)?'var(--fam)':iv<18.5?'var(--blue)':iv<25?'var(--sport)':iv<30?'var(--work)':'var(--fast)';
-    const dtEl=document.getElementById('w-dt');dtEl.textContent=(delta>=0?'+':'')+delta.toFixed(1)+' kg';dtEl.style.color=delta<0?'var(--sport)':'var(--fast)';
-    if(ld!==null){const ldEl=document.getElementById('w-ld');ldEl.textContent=(ld>=0?'+':'')+ld.toFixed(1)+' kg';ldEl.style.color=ld<0?'var(--sport)':'var(--fast)';}
+    const ie=document.getElementById('w-imc');ie.textContent=imc;
+    const iv=parseFloat(imc);ie.style.color=isNaN(iv)?'var(--fam)':iv<18.5?'var(--blue)':iv<25?'var(--sport)':iv<30?'var(--work)':'var(--fast)';
+    const de=document.getElementById('w-dt');de.textContent=(delta>=0?'+':'')+delta.toFixed(1)+' kg';de.style.color=delta<0?'var(--sport)':'var(--fast)';
+    if(ld!==null){const le=document.getElementById('w-ld');le.textContent=(ld>=0?'+':'')+ld.toFixed(1)+' kg';le.style.color=ld<0?'var(--sport)':'var(--fast)';}
     if(hist.length>=2)drawChart(hist,cfg.goal);
   }
-  const wh=document.getElementById('w-hist');
-  wh.innerHTML=hist.length===0
-    ?'<div class="card"><div style="padding:12px;text-align:center;color:var(--mut);font-size:13px">Aucune pesée — ajoute ta première ci-dessus<br><br>📅 Chaque mercredi 06h00, à jeun, avant sport</div></div>'
-    :`<div class="card"><div class="stitle">Historique (${hist.length} pesées)</div>`+[...hist].reverse().slice(0,30).map(e=>{const cfg2=D.getWC();const imc2=cfg2.h?(e.w/(cfg2.h*cfg2.h)).toFixed(1):'—';return`<div class="row"><div><div style="font-size:15px;font-weight:700">${e.w.toFixed(1)} kg</div><div style="font-size:11px;color:var(--mut)">${e.date} · IMC ${imc2}${e.comment?' · '+e.comment:''}</div></div><button onclick="delW('${e.id}')" style="background:none;border:none;color:var(--mut);font-size:17px;cursor:pointer;padding:4px 8px">✕</button></div>`;}).join('')+'</div>';
+
+  document.getElementById('w-hist').innerHTML=hist.length===0
+    ?'<div class="card"><div style="padding:14px;text-align:center;color:var(--mut);font-size:13px">Aucune pesée — entre ta taille d\'abord<br>puis ajoute ta première pesée ci-dessus 👆<br><br>📅 Pesée chaque mercredi 06h00, à jeun, avant sport</div></div>'
+    :`<div class="card"><div class="stitle">Historique (${hist.length} pesées)</div>`
+    +[...hist].reverse().slice(0,30).map(e=>{
+      const c=D.getWC()||{h:1.75};
+      const imc2=c.h?(e.w/(c.h*c.h)).toFixed(1):'—';
+      return`<div class="row">
+        <div>
+          <div style="font-size:15px;font-weight:700">${e.w.toFixed(1)} kg</div>
+          <div style="font-size:11px;color:var(--mut)">${e.date} · IMC ${imc2}${e.comment?' · '+e.comment:''}</div>
+        </div>
+        <button onclick="delW('${e.id}')" style="background:none;border:none;color:var(--mut);font-size:17px;cursor:pointer;padding:4px 8px">✕</button>
+      </div>`;
+    }).join('')+'</div>';
 }
+
 function drawChart(hist,goal){
   const canvas=document.getElementById('w-chart');canvas.style.display='block';
   const W=canvas.offsetWidth||360;canvas.width=W;canvas.height=140;
   const ctx=canvas.getContext('2d'),H=140,pad={t:10,r:10,b:24,l:38};
   const data=hist.slice(-16);const vals=data.map(d=>d.w);
-  let minV=Math.min(...vals)-0.5,maxV=Math.max(...vals)+0.5;
-  if(goal){minV=Math.min(minV,goal-0.5);maxV=Math.max(maxV,goal+0.5);}
+  let minV=Math.min(...vals)-.5,maxV=Math.max(...vals)+.5;
+  if(goal){minV=Math.min(minV,goal-.5);maxV=Math.max(maxV,goal+.5);}
   const xS=(W-pad.l-pad.r)/(data.length-1||1),yS=(H-pad.t-pad.b)/(maxV-minV||1);
   const px=i=>pad.l+i*xS,py=v=>H-pad.b-(v-minV)*yS;
   ctx.clearRect(0,0,W,H);
   ctx.strokeStyle='rgba(0,0,0,0.05)';ctx.lineWidth=.5;
-  for(let v=Math.floor(minV);v<=maxV;v+=0.5){ctx.beginPath();ctx.moveTo(pad.l,py(v));ctx.lineTo(W-pad.r,py(v));ctx.stroke();}
-  if(goal){ctx.strokeStyle='rgba(74,35,90,0.35)';ctx.setLineDash([4,4]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,py(goal));ctx.lineTo(W-pad.r,py(goal));ctx.stroke();ctx.setLineDash([]);}
-  ctx.strokeStyle='#2E75B6';ctx.lineWidth=2;ctx.beginPath();data.forEach((d,i)=>{i===0?ctx.moveTo(px(i),py(d.w)):ctx.lineTo(px(i),py(d.w));});ctx.stroke();
+  for(let v=Math.floor(minV);v<=maxV;v+=.5){ctx.beginPath();ctx.moveTo(pad.l,py(v));ctx.lineTo(W-pad.r,py(v));ctx.stroke();}
+  if(goal){ctx.strokeStyle='rgba(74,35,90,.35)';ctx.setLineDash([4,4]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,py(goal));ctx.lineTo(W-pad.r,py(goal));ctx.stroke();ctx.setLineDash([]);}
+  ctx.strokeStyle='#2E75B6';ctx.lineWidth=2;ctx.beginPath();
+  data.forEach((d,i)=>{i===0?ctx.moveTo(px(i),py(d.w)):ctx.lineTo(px(i),py(d.w));});ctx.stroke();
   data.forEach((d,i)=>{ctx.fillStyle='#2E75B6';ctx.beginPath();ctx.arc(px(i),py(d.w),3.5,0,Math.PI*2);ctx.fill();});
   ctx.fillStyle='rgba(107,114,128,1)';ctx.font='10px -apple-system';ctx.textAlign='right';
   for(let v=Math.ceil(minV);v<=maxV;v++){ctx.fillText(v,pad.l-3,py(v)+3);}
 }
-async function saveCfg(){
+
+function saveCfg(){
   const h=parseFloat(document.getElementById('w-h').value);
   const g=parseFloat(document.getElementById('w-g').value);
   if(!h||h<1.4||h>2.2){toast('Taille invalide (ex: 1.78)');return;}
   const cfg={h,goal:g||null};
-  // Mettre à jour immédiatement en local + localStorage
-  window._weightCfg=cfg;
-  LS.s('weight_cfg',cfg);
-  if(window.saveWC)window.saveWC(cfg);
-  toast('Configuration sauvegardée ✅');
-  renderPoids();
-  updateHome();
+  window._WC=cfg;LS.s('weight_cfg',cfg);
+  if(window.fbSave)window.fbSave('weight_cfg',cfg);
+  toast('Configuration sauvegardée ✅');renderPoids();updateHome();
 }
-async function saveW(){
+function saveW(){
   const date=document.getElementById('w-date').value;
   const w=parseFloat(document.getElementById('w-val').value);
   const com=document.getElementById('w-com').value.trim();
@@ -812,37 +1070,42 @@ async function saveW(){
   const[y,m,d]=date.split('-');
   hist.push({id:Date.now().toString(),date:`${d}/${m}/${y}`,iso:date,w,comment:com});
   hist.sort((a,b)=>(a.iso||'').localeCompare(b.iso||''));
-  // Mettre à jour immédiatement en local
-  window._weightHistory=hist;
-  LS.s('weight_history',hist);
-  if(window.saveWH)window.saveWH(hist);
-  document.getElementById('w-val').value='';
-  document.getElementById('w-com').value='';
-  toast('Pesée enregistrée ✅');
-  renderPoids();
-  updateHome();
+  window._WH=hist;LS.s('weight_history',hist);
+  if(window.fbSave)window.fbSave('weight_history',hist);
+  document.getElementById('w-val').value='';document.getElementById('w-com').value='';
+  toast('Pesée enregistrée ✅');renderPoids();updateHome();
 }
-async function delW(id){
+function delW(id){
   const hist=D.getWH().filter(e=>e.id!==id);
-  if(window.saveWH)await window.saveWH(hist);renderPoids();
+  window._WH=hist;LS.s('weight_history',hist);
+  if(window.fbSave)window.fbSave('weight_history',hist);
+  renderPoids();
 }
 
-// ══ FORMATION ══
+// ── FORMATION ──
 let fWkN=wkNum(new Date());
 function fWk(d){fWkN=Math.max(1,Math.min(72,fWkN+d));renderForm();}
 function fToday(){fWkN=wkNum(new Date());renderForm();}
 const PH={1:'Phase 1 — Python & SQL',2:'Phase 2 — BI & Certifications',3:'Phase 3 — Diplôme',4:'Phase 4 — SC Data'};
-function getFS(wn,dow){
+function getFormContent(wn,dow){
   const ph=wn<=12?1:wn<=24?2:wn<=60?3:4;
   if(ph===1){
     const t=['Python','Python','Pandas','Pandas','SQL','SQL','SQL','SQL','Stats','Stats','Stats','Révision'][Math.min(wn-1,11)];
-    const r={0:['Variables types','DataFrames','Filtres groupby','NumPy','SELECT FROM WHERE','INNER JOIN','Window ROW_NUMBER','BigQuery','sqlite3','Corrélation','Tests stat','Révision Python'],1:['Boucles for/while','Nettoyage fillna','merge join','Dates resample','COUNT SUM AVG','LEFT RIGHT JOIN','Window LAG LEAD','BigQuery avancé','pd.read_sql','Régression lin.','Outliers IQR','HackerRank Py'],2:['Fonctions def','Matplotlib Seaborn','pivot apply','EDA','GROUP BY HAVING','CTEs WITH...AS','CASE WHEN','Kaggle SQL','Stats descriptives','Régression mult.','Séries tempo.','HackerRank SQL'],3:['Listes dicts','Data Cleaning','Projet EDA','Notebook GitHub','Sous-requêtes','Optimisation','Mock SQL','Mock 20 req.','Histogrammes','Régression log.','Encodage var.','Portfolio'],4:['Mini-projet KPI','Projet SC','Révision Pandas','Bilan Pandas','SQLZoo','HackerRank SQL','Révision SQL','Bilan SQL','Train/Test','Projet stats','Prévision','LinkedIn CV'],5:['GitHub README','Notebook EDA','Seaborn avancé','Projet EDA','Olist Brazil','Projet Olist','Flying Doctor','Pipeline SQL','EDA complet','EDA+Stats','Portfolio final','Bilan Phase 1'],6:['Révision','Révision groupby','NumPy','Bilan Pandas','Révision SQL','Révision JOIN','Révision window','Bilan SQL','Notebook GitHub','Projet prédictif','README docs','Coursera']};
-    return{tool:t,content:(r[dow]||[])[Math.min(wn-1,11)]||'—',duree:dow>=5?'3h':'2h'};
+    const r={
+      0:['Variables types conditions','DataFrames Series','Filtres groupby','NumPy arrays','SELECT FROM WHERE','INNER JOIN','Window ROW_NUMBER','BigQuery cloud','sqlite3 SQLAlchemy','Corrélation Pearson','Tests stat','Révision Python'],
+      1:['Boucles for/while','Nettoyage fillna dropna','merge join concat','Dates resample','COUNT SUM AVG','LEFT RIGHT JOIN','Window LAG LEAD','BigQuery avancé','pd.read_sql','Régression linéaire','Outliers IQR Z-score','HackerRank Python'],
+      2:['Fonctions def return','Matplotlib Seaborn','pivot apply lambda','EDA exploratoire','GROUP BY HAVING','CTEs WITH...AS','CASE WHEN','Kaggle SQL avancé','Stats descriptives','Régression multiple','Séries temporelles','HackerRank SQL'],
+      3:['Listes dictionnaires','Kaggle Data Cleaning','Projet EDA SC','Notebook GitHub','Sous-requêtes','Optimisation INDEX','Mock SQL','Mock 20 requêtes','Histogrammes','Régression logistique','Encodage variables','Portfolio GitHub'],
+      4:['Mini-projet KPI logistique','Projet Supply Chain','Révision Pandas','Bilan Pandas+NumPy','Exercices SQLZoo','HackerRank SQL','Révision SQL','Bilan SQL','Train/Test split','Projet stats auto','Prévision délais','LinkedIn+CV'],
+      5:['GitHub README','Notebook EDA','Seaborn avancé','Projet EDA complet','Olist Brazil','Projet Olist','Flying Doctor SQL','Pipeline SQL','EDA complet','EDA+Stats','Portfolio final','Bilan Phase 1'],
+      6:['Révision bases','Révision groupby','NumPy vectoriel','Bilan Pandas','Révision SQL basics','Révision JOIN','Révision window','Bilan SQL complet','Notebook GitHub','Projet prédictif','Documenter README','S\'inscrire Coursera']
+    };
+    return{tool:t,content:(r[dow]||[])[Math.min(wn-1,11)]||'—'};
   }
-  if(ph===2){const rw=wn-12;return{tool:rw<=4?'Power BI':rw<=6?'Excel/VBA':'Google DA',content:'Cours vidéo + exercices',duree:dow>=5?'3h':'2h'};}
-  const mods={3:['Stats ML','NLP','Cloud','Viz','SQL avancé','ML avancé','Stage terrain','Stage avancé','Stage emploi'],4:['Forecasting','Diagnostic auto','Emploi','Certif PL-300']};
+  if(ph===2){const rw=wn-12;return{tool:rw<=4?'Power BI':rw<=6?'Excel/VBA':'Google DA',content:'Cours vidéo + exercices pratiques'};}
+  const mods={3:['Stats ML','NLP','Cloud','Viz avancée','SQL avancé','ML avancé','Stage terrain','Stage avancé','Stage emploi'],4:['Forecasting stocks','Diagnostic auto','Emploi réseau','Certif PL-300']};
   const arr=mods[ph]||[];const idx=ph===3?Math.floor((wn-25)/4):Math.floor((wn-61)/3);
-  return{tool:arr[Math.min(idx,arr.length-1)]||'Formation',content:'Cours + exercices',duree:dow>=5?'3h':'2h'};
+  return{tool:arr[Math.min(idx,arr.length-1)]||'Formation',content:'Cours + exercices pratiques'};
 }
 function renderForm(){
   const ph=fWkN<=12?1:fWkN<=24?2:fWkN<=60?3:4;
@@ -852,13 +1115,18 @@ function renderForm(){
   const done=Object.values(allS).filter(s=>s.done).length,pct=Math.round(done/504*100);
   document.getElementById('f-stats').textContent=`${done}/504`;document.getElementById('f-pct').textContent=pct+'%';
   document.getElementById('ring-f').style.strokeDashoffset=188.5-(188.5*pct/100);
+
   const ws=wkStart(fWkN);
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
-    const dk=isoD(date),isFast=FAST_D.has(d),isRec=REC_D.has(d),isSport=SPORT_D.has(d),isToday=dk===todayISO();
+    const dk=isoD(date),isToday=dk===todayISO();
+    const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d);
+    const isWE=d>=5;
     const sess=allS[dk]||{done:false,comment:'',difficulty:''};
-    const{tool,content,duree}=getFS(fWkN,d);
+    const{tool,content}=getFormContent(fWkN,d);
+    const duree=isWE?'3h':isSport?'1h':'2h';
     const suf=isSport?' 🏋️':isFast?' 📿':isRec?' 💧':'';
     const pBg=isSport?'var(--spl)':isFast?'var(--fatl)':isRec?'var(--recl)':'var(--coul)';
     const pC=isSport?'var(--sport)':isFast?'var(--fast)':isRec?'var(--rec)':'var(--cours)';
@@ -874,10 +1142,14 @@ function renderForm(){
           </div>
           <div style="font-size:12px;font-weight:600;color:var(--cours);margin-top:2px">${tool}</div>
           <div style="font-size:11px;color:var(--mut);margin-top:1px">${content}</div>
-          <div style="margin-top:8px"><div style="font-size:11px;color:var(--mut);margin-bottom:3px">Ce que j'ai appris</div>
-          <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Résumé..." onchange="saveFC('${dk}','comment',this.value)">${sess.comment||''}</textarea></div>
-          <div style="margin-top:6px"><div style="font-size:11px;color:var(--mut);margin-bottom:3px">Difficulté / Question</div>
-          <textarea class="tx" style="font-size:12px;min-height:36px" placeholder="Blocage..." onchange="saveFC('${dk}','difficulty',this.value)">${sess.difficulty||''}</textarea></div>
+          <div style="margin-top:8px">
+            <div style="font-size:11px;color:var(--mut);margin-bottom:3px">Ce que j'ai appris / retenu</div>
+            <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Résumé de la séance..." onchange="saveFC('${dk}','comment',this.value)">${sess.comment||''}</textarea>
+          </div>
+          <div style="margin-top:6px">
+            <div style="font-size:11px;color:var(--mut);margin-bottom:3px">Difficulté / Question à revoir</div>
+            <textarea class="tx" style="font-size:12px;min-height:36px" placeholder="Blocage, notion à retravailler..." onchange="saveFC('${dk}','difficulty',this.value)">${sess.difficulty||''}</textarea>
+          </div>
         </div>
       </div>
     </div>`;
@@ -885,17 +1157,123 @@ function renderForm(){
   document.getElementById('form-sess').innerHTML=html;
 }
 async function toggleForm(dk){
-  const s=D.getFS();if(!s[dk])s[dk]={done:false,comment:'',difficulty:''};s[dk].done=!s[dk].done;
-  if(window.saveFS)await window.saveFS(dk,{done:s[dk].done});
-  renderForm();updateHome();toast(s[dk].done?'Séance ✅':'Décochée');
+  if(!window._FS)window._FS={};
+  if(!window._FS[dk])window._FS[dk]={done:false,comment:'',difficulty:''};
+  window._FS[dk].done=!window._FS[dk].done;
+  if(window.fbSave)window.fbSave('form_sessions',window._FS);
+  renderForm();updateHome();toast(window._FS[dk].done?'Séance formation ✅':'Décochée');
 }
-async function saveFC(dk,field,v){if(window.saveFS)await window.saveFS(dk,{[field]:v});}
+async function saveFC(dk,field,v){
+  if(!window._FS)window._FS={};
+  if(!window._FS[dk])window._FS[dk]={done:false,comment:'',difficulty:''};
+  window._FS[dk][field]=v;
+  if(window.fbSave)window.fbSave('form_sessions',window._FS);
+}
+
+// ── PARAMÈTRES ──
+let tmpFast=new Set(),tmpSport=new Set();
+function renderSettings(){
+  checkNotif();
+  const set=D.getSet();
+  tmpFast=new Set(set.fast||[0,3]);
+  tmpSport=new Set(set.sport||[1,4,5]);
+  renderDayToggles();
+  renderWeekSummary();
+}
+
+function renderDayToggles(){
+  const ft=document.getElementById('fast-toggle'),st=document.getElementById('sport-toggle');
+  ft.innerHTML='';st.innerHTML='';
+  JOURS_SHORT.forEach((j,i)=>{
+    const fb=document.createElement('button');
+    fb.className='day-btn'+(tmpFast.has(i)?' sel-fast':'');
+    fb.textContent=j;
+    fb.onclick=()=>toggleFastDay(i);
+    ft.appendChild(fb);
+    const sb=document.createElement('button');
+    sb.className='day-btn'+(tmpSport.has(i)?' sel-sport':'');
+    sb.textContent=j;
+    sb.onclick=()=>toggleSportDay(i);
+    st.appendChild(sb);
+  });
+  checkConflicts();
+}
+
+function toggleFastDay(i){
+  if(tmpFast.has(i))tmpFast.delete(i);else tmpFast.add(i);
+  renderDayToggles();renderWeekSummary();
+}
+function toggleSportDay(i){
+  if(tmpSport.has(i))tmpSport.delete(i);else tmpSport.add(i);
+  renderDayToggles();renderWeekSummary();
+}
+
+function checkConflicts(){
+  const fc=document.getElementById('fast-conflict'),sc=document.getElementById('sport-conflict');
+  // Sport le jour précédant un jeûne = conflit
+  const conflicts=[];
+  tmpSport.forEach(sd=>{const nextDay=(sd+1)%7;if(tmpFast.has(nextDay))conflicts.push(`${JOURS_SHORT[sd]}→${JOURS_SHORT[nextDay]}`);});
+  if(conflicts.length>0){
+    sc.textContent=`⚠️ Conflit : sport le ${conflicts.join(', ')} (lendemain = jeûne). Modifie l'un ou l'autre.`;
+    sc.style.color='var(--fast)';
+  } else sc.textContent='✅ Aucun conflit détecté';
+  fc.textContent='';
+}
+
+function renderWeekSummary(){
+  const el=document.getElementById('week-summary');
+  const rec=new Set();tmpFast.forEach(d=>rec.add((d+1)%7));
+  const bl=new Set();tmpFast.forEach(d=>bl.add((d+6)%7));
+  el.innerHTML=JOURS.map((j,i)=>{
+    let type,bg,c;
+    if(tmpFast.has(i)){type='📿 Jeûne SANS eau';bg='var(--fatl)';c='var(--fast)';}
+    else if(tmpSport.has(i)){type='🏋️ Sport + Formation '+(i>=5?'3h':'1h');bg='var(--spl)';c='var(--sport)';}
+    else if(rec.has(i)){type='💧 Récupération · Formation '+(i>=5?'3h':'2h');bg='var(--recl)';c='var(--rec)';}
+    else{type='📚 Formation '+(i>=5?'3h':'2h');bg='var(--coul)';c='var(--cours)';}
+    return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:.5px solid var(--brd)">
+      <div style="width:28px;font-size:12px;font-weight:700;color:var(--mut)">${JOURS_SHORT[i]}</div>
+      <span class="pill" style="background:${bg};color:${c};font-size:11px">${type}</span>
+    </div>`;
+  }).join('');
+}
+
+async function saveSettings(){
+  // Vérifier conflits sport→jeûne
+  const conflicts=[];
+  tmpSport.forEach(sd=>{const nd=(sd+1)%7;if(tmpFast.has(nd))conflicts.push(`${JOURS_SHORT[sd]}→${JOURS_SHORT[nd]}`);});
+  if(conflicts.length>0){
+    toast(`⚠️ Résous d'abord les conflits : ${conflicts.join(', ')}`);return;
+  }
+  const set={fast:[...tmpFast].sort(),sport:[...tmpSport].sort()};
+  window._SET=set;LS.s('settings',set);
+  if(window.fbSave)window.fbSave('settings',set);
+  applySettings();
+  toast('Paramètres sauvegardés ✅');
+  renderWeekSummary();
+  updateHome();
+}
+
+function clearAll(){
+  localStorage.clear();
+  window._FS={};window._SS={};window._JS={};window._WH=[];window._WC={h:1.75,goal:null};
+  window._PN={};window._SET={fast:[0,3],sport:[1,4,5]};window._CD={};
+  if(window.fbSave){
+    window.fbSave('form_sessions',{});window.fbSave('sport_sessions',{});
+    window.fbSave('jeune_sessions',{});window.fbSave('weight_history',[]);
+    window.fbSave('plan_notes',{});window.fbSave('custom_days',{});
+  }
+  toast('Données effacées');updateHome();
+}
 
 // ── INIT ──
-updateHome();
-checkNotifPermission();
-setInterval(updateHome,60000);
-setInterval(()=>{if(notifPermission==='granted')scheduleAllNotifs();},60*60*1000);
+function init(){
+  checkNotif();
+  updateHome();
+  applySettings();
+  setInterval(updateHome,60000);
+  setInterval(()=>{if(notifGranted)scheduleNotifs();},3600000);
+}
+init();
 </script>
 </body>
 </html>
