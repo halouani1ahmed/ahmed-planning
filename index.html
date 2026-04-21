@@ -429,7 +429,7 @@ const D = {
   getSS:()=>window._sportSessions||LS.g('sport_sessions',{}),
   getJS:()=>window._jeuneSessions||LS.g('jeune_sessions',{}),
   getWH:()=>window._weightHistory||LS.g('weight_history',[]),
-  getWC:()=>window._weightCfg||LS.g('weight_cfg',{h:1.75,goal:null}),
+  getWC:()=>window._weightCfg||(()=>{const v=LS.g('weight_cfg',null);if(v)return v;return{h:1.75,goal:null};})(),
   getPN:()=>window._planNotes||LS.g('plan_notes',{}),
 };
 
@@ -789,16 +789,38 @@ function drawChart(hist,goal){
   ctx.fillStyle='rgba(107,114,128,1)';ctx.font='10px -apple-system';ctx.textAlign='right';
   for(let v=Math.ceil(minV);v<=maxV;v++){ctx.fillText(v,pad.l-3,py(v)+3);}
 }
-async function saveCfg(){const h=parseFloat(document.getElementById('w-h').value),g=parseFloat(document.getElementById('w-g').value);if(!h||h<1.4||h>2.2){toast('Taille invalide');return;}const cfg={h,goal:g||null};if(window.saveWC)await window.saveWC(cfg);toast('Sauvegardé ✅');renderPoids();}
+async function saveCfg(){
+  const h=parseFloat(document.getElementById('w-h').value);
+  const g=parseFloat(document.getElementById('w-g').value);
+  if(!h||h<1.4||h>2.2){toast('Taille invalide (ex: 1.78)');return;}
+  const cfg={h,goal:g||null};
+  // Mettre à jour immédiatement en local + localStorage
+  window._weightCfg=cfg;
+  LS.s('weight_cfg',cfg);
+  if(window.saveWC)window.saveWC(cfg);
+  toast('Configuration sauvegardée ✅');
+  renderPoids();
+  updateHome();
+}
 async function saveW(){
-  const date=document.getElementById('w-date').value,w=parseFloat(document.getElementById('w-val').value),com=document.getElementById('w-com').value.trim();
-  if(!w||w<30||w>300){toast('Poids invalide');return;}if(!date){toast('Choisis une date');return;}
-  const hist=[...D.getWH()];const[y,m,d]=date.split('-');
+  const date=document.getElementById('w-date').value;
+  const w=parseFloat(document.getElementById('w-val').value);
+  const com=document.getElementById('w-com').value.trim();
+  if(!w||w<30||w>300){toast('Poids invalide');return;}
+  if(!date){toast('Choisis une date');return;}
+  const hist=[...D.getWH()];
+  const[y,m,d]=date.split('-');
   hist.push({id:Date.now().toString(),date:`${d}/${m}/${y}`,iso:date,w,comment:com});
   hist.sort((a,b)=>(a.iso||'').localeCompare(b.iso||''));
-  if(window.saveWH)await window.saveWH(hist);
-  document.getElementById('w-val').value='';document.getElementById('w-com').value='';
-  toast('Pesée enregistrée ✅');renderPoids();updateHome();
+  // Mettre à jour immédiatement en local
+  window._weightHistory=hist;
+  LS.s('weight_history',hist);
+  if(window.saveWH)window.saveWH(hist);
+  document.getElementById('w-val').value='';
+  document.getElementById('w-com').value='';
+  toast('Pesée enregistrée ✅');
+  renderPoids();
+  updateHome();
 }
 async function delW(id){
   const hist=D.getWH().filter(e=>e.id!==id);
