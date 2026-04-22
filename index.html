@@ -151,7 +151,7 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
           <div style="font-size:10px;color:rgba(255,255,255,.5)">avant rupture</div>
         </div>
       </div>
-      <div id="prayers-row" style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.15);padding-top:10px"></div>
+      <div id="prayers-row" style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.15);padding-top:10px;min-height:32px"></div>
     </div>
     <div class="g2">
       <div class="stat"><div class="stv" style="color:var(--cours)" id="h-form">0</div><div class="stl">séances formation</div></div>
@@ -161,10 +161,14 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       <div class="stat"><div class="stv" style="color:var(--wgt)" id="h-poids">--</div><div class="stl">poids (kg)</div></div>
       <div class="stat"><div class="stv" style="color:var(--fam)" id="h-imc">--</div><div class="stl">IMC</div></div>
     </div>
+    <div class="g2">
+      <div class="stat"><div class="stv" style="color:#E67E22" id="h-streak">0</div><div class="stl">streak parfait</div></div>
+      <div class="stat"><div class="stv" style="color:var(--quran)" id="h-coran">0</div><div class="stl">jours Coran</div></div>
+    </div>
     <!-- Progression du jour -->
     <div class="card" id="today-progress-card">
-      <div class="stitle">Progression aujourd'hui</div>
-      <div class="progress-row" id="today-progress-rings"></div>
+      <div class="stitle">Progression du jour</div>
+      <div class="progress-row" id="today-rings"></div>
     </div>
     <!-- Progress rings today -->
     <div class="card">
@@ -329,6 +333,184 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   </div>
 </div>
 
+<!-- NUTRI -->
+<div class="page" id="pg-nutri">
+  <div class="hdr" style="background:#B7410E"><h1>Nutrition</h1><p>Kcal par repas - Proteines - Glucides - Lipides</p></div>
+  <div class="content">
+    <div id="nutri-summary"></div>
+    <div class="card"><div class="stitle">Objectifs du jour</div><div id="nutri-goal-display"></div></div>
+    <div class="card">
+      <div class="stitle">Ajouter un aliment</div>
+      <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="nutri-date"></div>
+      <div class="fl"><div class="fl-lb">Repas</div>
+        <select id="nutri-meal">
+          <option value="Sahour">Sahour (avant Fajr)</option>
+          <option value="Iftar">Iftar (rupture)</option>
+          <option value="Petit-dejeuner">Petit-dejeuner</option>
+          <option value="Dejeuner">Dejeuner</option>
+          <option value="Diner">Diner</option>
+          <option value="Collation">Collation</option>
+          <option value="Post-sport">Post-sport</option>
+        </select>
+      </div>
+      <div class="fl"><div class="fl-lb">Recherche aliment</div>
+        <input class="inp" type="text" id="nutri-search" placeholder="poulet, riz, pain, dattes..." oninput="searchFood(this.value)" autocomplete="off">
+        <div id="nutri-results" style="margin-top:6px"></div>
+      </div>
+      <div id="nutri-selected-zone" style="display:none">
+        <div style="background:var(--spl);border-radius:10px;padding:10px 12px;margin-bottom:10px">
+          <div style="font-size:13px;font-weight:700;color:var(--sport)" id="nutri-sel-name"></div>
+          <div style="font-size:11px;color:var(--mut);margin-top:2px" id="nutri-sel-info"></div>
+        </div>
+        <div class="fl"><div class="fl-lb">Quantite (grammes)</div>
+          <input class="inp" type="number" id="nutri-qty" placeholder="100" min="1" oninput="updateNutriPreview()">
+          <div id="nutri-preview" style="margin-top:6px;font-size:13px;color:var(--cours);font-weight:600"></div>
+        </div>
+        <button class="btn bfull" style="background:#B7410E;color:#fff" onclick="addFoodEntry()">Ajouter a mon repas</button>
+      </div>
+      <div style="border-top:.5px solid var(--brd);margin-top:10px;padding-top:10px">
+        <div class="stitle">Ajouter manuellement</div>
+        <div class="fl"><div class="fl-lb">Nom</div><input class="inp" id="nutri-custom-name" placeholder="ex: Chourba maison..."></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+          <div><div class="fl-lb">Kcal/100g</div><input class="inp" type="number" id="nutri-custom-kcal" placeholder="250"></div>
+          <div><div class="fl-lb">Quantite (g)</div><input class="inp" type="number" id="nutri-custom-qty" placeholder="300"></div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
+          <div><div class="fl-lb">Prot g/100g</div><input class="inp" type="number" id="nutri-custom-p" placeholder="20"></div>
+          <div><div class="fl-lb">Gluc g/100g</div><input class="inp" type="number" id="nutri-custom-g" placeholder="30"></div>
+          <div><div class="fl-lb">Lip g/100g</div><input class="inp" type="number" id="nutri-custom-l" placeholder="10"></div>
+        </div>
+        <button class="btn bfull" style="background:var(--navy);color:#fff" onclick="addCustomFood()">Ajouter aliment manuel</button>
+      </div>
+    </div>
+    <div id="nutri-journal"></div>
+    <div class="card">
+      <div class="stitle">Objectifs nutritionnels</div>
+      <div class="fl"><div class="fl-lb">Objectif</div>
+        <select id="nutri-goal-type" onchange="saveNutriConfig()">
+          <option value="deficit">Perte de poids (deficit -500 kcal)</option>
+          <option value="maintain">Maintien du poids</option>
+          <option value="muscle">Prise de muscle (surplus +300 kcal)</option>
+        </select>
+      </div>
+      <div class="fl"><div class="fl-lb">Niveau activite</div>
+        <select id="nutri-activity" onchange="saveNutriConfig()">
+          <option value="1.375">Legerement actif (1-2 sport/sem)</option>
+          <option value="1.55">Moderement actif (3 sport/sem)</option>
+          <option value="1.725">Tres actif (5+ sport/sem)</option>
+        </select>
+      </div>
+      <div style="background:var(--spl);border-radius:10px;padding:10px 12px;margin-top:4px">
+        <div style="font-size:13px;font-weight:700;color:var(--sport)" id="nutri-tdee-display">Configure ton poids et ta taille dans Poids</div>
+        <div style="font-size:11px;color:var(--mut);margin-top:2px" id="nutri-macro-display">Prot - Gluc - Lip apparaitront ici</div>
+      </div>
+    </div>
+    <div class="card"><div class="stitle">Historique 7 jours</div><div id="nutri-history"></div></div>
+  </div>
+</div>
+
+<!-- TASBIH -->
+<div class="page" id="pg-tasbih">
+  <div class="hdr" style="background:#0D5C3A"><h1>Tasbih</h1><p>33 x 3 = 99</p></div>
+  <div class="content" style="display:flex;flex-direction:column;align-items:center;padding-top:20px">
+    <div style="font-size:28px;font-weight:700;color:#0D5C3A;margin-bottom:4px;direction:rtl" id="tasbih-main-label">&#x633;&#x628;&#x62D;&#x627;&#x646; &#x627;&#x644;&#x644;&#x647;</div>
+    <div style="font-size:14px;color:var(--mut);margin-bottom:24px" id="tasbih-main-fr">SubhanAllah</div>
+    <button id="tasbih-main-btn" onclick="tasbihTap()" style="width:160px;height:160px;border-radius:50%;background:#0D5C3A;color:#fff;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 6px 20px rgba(0,0,0,.2);transition:transform .1s">
+      <div style="font-size:52px;font-weight:700;font-variant-numeric:tabular-nums" id="tasbih-main-count">0</div>
+      <div style="font-size:13px;opacity:.8">Appuie</div>
+    </button>
+    <div style="margin-top:20px;font-size:18px;font-weight:600;color:#0D5C3A" id="tasbih-main-cycle">0 / 33</div>
+    <div style="margin-top:6px;font-size:13px;color:var(--mut)" id="tasbih-main-total">Total : 0</div>
+    <div style="display:flex;gap:12px;margin-top:24px">
+      <button class="btn" style="background:#E8F5E9;color:#0D5C3A" onclick="tasbihReset()">Reset</button>
+      <button class="btn" style="background:#f3f4f6;color:var(--txt)" onclick="tasbihSkip()">Skip 33</button>
+    </div>
+    <div style="width:100%;margin-top:28px">
+      <div class="stitle">Cycles completes</div>
+      <div class="g3" style="margin-top:8px">
+        <div class="stat" style="text-align:center">
+          <div style="font-size:11px;color:var(--mut);direction:rtl">&#x633;&#x628;&#x62D;&#x627;&#x646; &#x627;&#x644;&#x644;&#x647;</div>
+          <div style="font-size:22px;font-weight:700;color:#0D5C3A" id="cyc1">0</div>
+        </div>
+        <div class="stat" style="text-align:center">
+          <div style="font-size:11px;color:var(--mut);direction:rtl">&#x627;&#x644;&#x62D;&#x645;&#x62F; &#x644;&#x644;&#x647;</div>
+          <div style="font-size:22px;font-weight:700;color:#0D5C3A" id="cyc2">0</div>
+        </div>
+        <div class="stat" style="text-align:center">
+          <div style="font-size:11px;color:var(--mut);direction:rtl">&#x627;&#x644;&#x644;&#x647; &#x623;&#x643;&#x628;&#x631;</div>
+          <div style="font-size:22px;font-weight:700;color:#0D5C3A" id="cyc3">0</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLASHCARDS -->
+<div class="page" id="pg-flash">
+  <div class="hdr" style="background:var(--cours)"><h1>Flashcards</h1><p>Python - SQL - Power BI</p></div>
+  <div class="content">
+    <div class="g2">
+      <div class="stat"><div class="stv" style="color:var(--sport)" id="fl-ok">0</div><div class="stl">connues</div></div>
+      <div class="stat"><div class="stv" style="color:var(--fast)" id="fl-ko">0</div><div class="stl">a revoir</div></div>
+    </div>
+    <div id="flash-filters" style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap"></div>
+    <div id="flash-card-zone"></div>
+    <div class="card" style="margin-top:8px">
+      <div class="stitle">Ajouter une carte</div>
+      <div class="fl"><div class="fl-lb">Matiere</div>
+        <select id="fl-subj"><option>Python</option><option>SQL</option><option>Power BI</option><option>Stats</option><option>ML</option></select>
+      </div>
+      <div class="fl"><div class="fl-lb">Question</div><textarea class="tx" id="fl-q" style="min-height:60px" placeholder="ex: Difference entre LIST et TUPLE ?"></textarea></div>
+      <div class="fl"><div class="fl-lb">Reponse</div><textarea class="tx" id="fl-a" style="min-height:60px" placeholder="ex: LIST est mutable, TUPLE est immutable"></textarea></div>
+      <button class="btn bfull" style="background:var(--cours);color:#fff" onclick="addFlashcard()">Ajouter</button>
+    </div>
+  </div>
+</div>
+
+<!-- CANDIDATURES -->
+<div class="page" id="pg-jobs">
+  <div class="hdr" style="background:var(--work)"><h1>Candidatures</h1><p>Suivi des offres Data Analyst</p></div>
+  <div class="content">
+    <div class="g3">
+      <div class="stat"><div class="stv" style="color:var(--blue)" id="job-total">0</div><div class="stl">envoyees</div></div>
+      <div class="stat"><div class="stv" style="color:var(--sport)" id="job-entretien">0</div><div class="stl">entretiens</div></div>
+      <div class="stat"><div class="stv" style="color:var(--fast)" id="job-refus">0</div><div class="stl">refus</div></div>
+    </div>
+    <div class="card">
+      <div class="stitle">Ajouter candidature</div>
+      <div class="fl"><div class="fl-lb">Entreprise</div><input class="inp" id="job-company" placeholder="ex: Renault Digital..."></div>
+      <div class="fl"><div class="fl-lb">Poste</div><input class="inp" id="job-title" placeholder="ex: Data Analyst Supply Chain"></div>
+      <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="job-date"></div>
+      <div class="fl"><div class="fl-lb">Statut</div>
+        <select id="job-status">
+          <option value="envoye">Envoyee</option>
+          <option value="entretien">Entretien</option>
+          <option value="offre">Offre recue</option>
+          <option value="refus">Refus</option>
+          <option value="attente">En attente</option>
+        </select>
+      </div>
+      <div class="fl"><div class="fl-lb">Notes</div><textarea class="tx" id="job-notes" style="min-height:54px" placeholder="Contact, lien, remarques..."></textarea></div>
+      <button class="btn bfull" style="background:var(--work);color:#fff" onclick="addJob()">Ajouter</button>
+    </div>
+    <div id="jobs-list"></div>
+  </div>
+</div>
+
+<!-- BADGES -->
+<div class="page" id="pg-badges">
+  <div class="hdr" style="background:#7B3F00"><h1>Badges</h1><p>Tes recompenses de progression</p></div>
+  <div class="content">
+    <div class="card">
+      <div class="stitle">Streak Global</div>
+      <div style="font-size:40px;font-weight:700;color:#E67E22;text-align:center;padding:10px 0" id="streak-big">0</div>
+      <div style="text-align:center;font-size:12px;color:var(--mut)">jours parfaits consecutifs (Formation + Coran)</div>
+    </div>
+    <div id="badges-grid"></div>
+  </div>
+</div>
+
+
 <!-- PARAMÈTRES -->
 <div class="page" id="pg-settings">
   <div class="hdr" style="background:#444"><h1>Paramètres</h1><p>Configure tes jours de jeûne et de sport</p></div>
@@ -412,94 +594,95 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
 </nav>
 <div class="toast" id="toast"></div>
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const FB_CFG = {
-  apiKey:"AIzaSyCDWoh6V66mnNi8RWoHRtaKKIr5vfSeG1Y",
-  authDomain:"ahmed-planning.firebaseapp.com",
-  databaseURL:"https://ahmed-planning-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId:"ahmed-planning",
-  storageBucket:"ahmed-planning.firebasestorage.app",
-  messagingSenderId:"993453415723",
-  appId:"1:993453415723:web:a314f64d087c3490f1796e"
-};
-const app = initializeApp(FB_CFG);
-const db  = getDatabase(app);
+<script>
+// ── Firebase REST API (pas de module ES pour éviter les conflits de scope) ──
+var FB_URL = 'https://ahmed-planning-default-rtdb.europe-west1.firebasedatabase.app';
 
 function setSyncUI(s){
-  const d=document.getElementById('sdot'),t=document.getElementById('stxt');
+  var d=document.getElementById('sdot'), t=document.getElementById('stxt');
+  if(!d||!t) return;
   d.className='sdot'+(s==='ok'?'':s==='off'?' off':' spin');
-  t.textContent=s==='ok'?'Synchronisé':s==='off'?'Hors ligne':'Sync...';
+  t.textContent=s==='ok'?'Sync OK':s==='off'?'Hors ligne':'Sync...';
 }
 
-window.FB={
-  async save(path,data){
-    try{ setSyncUI('spin'); await set(ref(db,path),data); setSyncUI('ok'); }
-    catch(e){ setSyncUI('off'); LS.s(path.replace(/\//g,'_'),data); }
+window.FB = {
+  save: function(path, data) {
+    setSyncUI('spin');
+    return fetch(FB_URL+'/'+path+'.json', {
+      method:'PUT',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    }).then(function(){ setSyncUI('ok'); })
+      .catch(function(){ setSyncUI('off'); });
   },
-  async get(path,def){
-    try{ const s=await get(ref(db,path)); return s.exists()?s.val():def; }
-    catch(e){ return LS.g(path.replace(/\//g,'_'),def); }
+  get: function(path) {
+    return fetch(FB_URL+'/'+path+'.json')
+      .then(function(r){ return r.json(); })
+      .catch(function(){ return null; });
   },
-  listen(path,cb){
-    try{ onValue(ref(db,path),s=>cb(s.exists()?s.val():null)); }
-    catch(e){}
+  listen: function(path, cb) {
+    // Polling toutes les 30s (EventSource alternatif pour Realtime)
+    function poll(){
+      fetch(FB_URL+'/'+path+'.json')
+        .then(function(r){ return r.json(); })
+        .then(function(data){ cb(data); })
+        .catch(function(){});
+    }
+    poll();
+    setInterval(poll, 30000);
   }
 };
 
-window.FB.listen('data',(data)=>{
-  if(!data) return;
-  if(data.form_sessions)  window._FS=data.form_sessions;
-  if(data.sport_sessions) window._SS=data.sport_sessions;
-  if(data.jeune_sessions) window._JS=data.jeune_sessions;
-  if(data.weight_history) window._WH=Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
-  if(data.weight_cfg)     { window._WC=data.weight_cfg; LS.s('weight_cfg',data.weight_cfg); }
-  if(data.plan_notes)     window._PN=data.plan_notes;
-  if(data.settings)       { window._SET=data.settings; LS.s('settings',data.settings); applySettings(); }
-  if(data.custom_days)    window._CD=data.custom_days;
-  if(data.coran_sessions) window._CR=data.coran_sessions;
-  if(data.nutrition) window._NUTRI=data.nutrition;
-  if(data.nutri_cfg){window._NUTRI_CFG=data.nutri_cfg;}
-  if(data.flashcards) window._FL=data.flashcards;
-  if(data.jobs) window._JOBS=data.jobs;
-  setSyncUI('ok');
-  updateHome();
-});
+window.fbSave = function(path, data) {
+  return window.FB.save('data/'+path, data);
+};
 
-(async()=>{
-  const data=await window.FB.get('data',{});
-  window._FS  = data.form_sessions  || {};
-  window._SS  = data.sport_sessions || {};
-  window._JS  = data.jeune_sessions || {};
-  window._WH  = Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
-  window._WC  = data.weight_cfg     || LS.g('weight_cfg',{h:1.75,goal:null});
-  window._PN  = data.plan_notes     || {};
-  window._SET = data.settings       || LS.g('settings',{fast:[0,3],sport:[1,4,5]});
-  window._CD  = data.custom_days    || {};
-  window._CR  = data.coran_sessions  || LS.g('coran_sessions',{});
-  window._NUTRI = data.nutrition || {};
-  window._NUTRI_CFG = data.nutri_cfg || LS.g('nutri_cfg',{goal:'deficit',activity:'1.55'});
-  window._FL = data.flashcards || [];
-  window._JOBS = data.jobs || [];
-  LS.s('weight_cfg',window._WC);
-  LS.s('settings',window._SET);
-  // Init séances 20/04 et 21/04
-  let changed=false;
-  if(!window._FS['2026-04-20']){window._FS['2026-04-20']={done:true,comment:'2h de formation ✅',difficulty:''};changed=true;}
-  if(!window._FS['2026-04-21']){window._FS['2026-04-21']={done:true,comment:'2h de formation ✅',difficulty:''};changed=true;}
-  if(!window._JS['2026-04-20']){window._JS['2026-04-20']={done:true,note:'Premier jeûne',rupture:'',duree:''};changed=true;}
-  if(changed){
-    await window.FB.save('data/form_sessions',window._FS);
-    await window.FB.save('data/jeune_sessions',window._JS);
-  }
-  setSyncUI('ok');
-  applySettings();
-  updateHome();
-})();
-
-window.fbSave=async(path,data)=>{ await window.FB.save('data/'+path,data); };
+function fbLoadData() {
+  setSyncUI('spin');
+  window.FB.get('data').then(function(data) {
+    if(!data) data = {};
+    // Charger toutes les données
+    window._FS  = data.form_sessions  || {};
+    window._SS  = data.sport_sessions || {};
+    window._JS  = data.jeune_sessions || {};
+    window._WH  = Array.isArray(data.weight_history) ? data.weight_history : Object.values(data.weight_history||{});
+    window._WC  = data.weight_cfg     || LS.g('weight_cfg',{h:1.75,goal:null});
+    window._PN  = data.plan_notes     || {};
+    window._SET = data.settings       || LS.g('settings',{fast:[0,3],sport:[1,4,5]});
+    window._CD  = data.custom_days    || {};
+    window._CR  = data.coran_sessions || LS.g('coran_sessions',{});
+    window._NUTRI     = data.nutrition  || {};
+    window._NUTRI_CFG = data.nutri_cfg  || LS.g('nutri_cfg',{goal:'deficit',activity:'1.55'});
+    window._FL   = data.flashcards || [];
+    window._JOBS = data.jobs       || [];
+    // Sauvegarder en localStorage pour offline
+    try {
+      LS.s('weight_cfg',  window._WC);
+      LS.s('settings',    window._SET);
+      if(data.form_sessions)  LS.s('form_sessions',  data.form_sessions);
+      if(data.sport_sessions) LS.s('sport_sessions', data.sport_sessions);
+      if(data.jeune_sessions) LS.s('jeune_sessions', data.jeune_sessions);
+      if(data.coran_sessions) LS.s('coran_sessions', data.coran_sessions);
+    } catch(e){}
+    // Init séances de départ
+    var changed = false;
+    if(!window._FS['2026-04-20']){window._FS['2026-04-20']={done:true,comment:'2h de formation',difficulty:''};changed=true;}
+    if(!window._FS['2026-04-21']){window._FS['2026-04-21']={done:true,comment:'2h de formation',difficulty:''};changed=true;}
+    if(!window._JS['2026-04-20']){window._JS['2026-04-20']={done:true,note:'Premier jeune',rupture:'',duree:''};changed=true;}
+    if(changed){
+      window.FB.save('data/form_sessions',  window._FS);
+      window.FB.save('data/jeune_sessions', window._JS);
+    }
+    setSyncUI('ok');
+    // Re-render avec les vraies données
+    if(typeof applySettings==='function') applySettings();
+    if(typeof updateHome==='function')    updateHome();
+    if(typeof updateTodayRings==='function') updateTodayRings();
+  }).catch(function(e){
+    console.warn('Firebase load error:', e);
+    setSyncUI('off');
+  });
+}
 </script>
 
 <script>
@@ -523,6 +706,7 @@ const D = {
   getPN: () => window._PN || LS.g('plan_notes',{}),
   getSet:() => window._SET || LS.g('settings',{fast:[0,3],sport:[1,4,5]}),
   getCD: () => window._CD || {},
+  getCR:  () => window._CR || LS.g('coran_sessions',{}),
   getFast:() => new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).fast||[0,3]),
   getSport:()=> new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).sport||[1,4,5]),
 };
@@ -577,34 +761,24 @@ function allPrayers(date) {
   var eot  = 9.87*Math.sin(2*B) - 7.53*Math.cos(B) - 1.5*Math.sin(B);
   var solar = 12 - 2.0333/15 + tz - eot/60;   // transit solaire local
 
-  // heure angulaire pour angle h (en degrés)
   function ha(h_deg) {
-    var sinH  = Math.sin(h_deg * Math.PI / 180);
-    var sinLat = Math.sin(latr);
-    var cosLat = Math.cos(latr);
-    var sinDec = Math.sin(decl);
-    var cosDec = Math.cos(decl);
-    var c = (sinH - sinLat * sinDec) / (cosLat * cosDec);
-    c = Math.max(-1, Math.min(1, c));
-    return Math.acos(c) * 180 / Math.PI;
+    var c = (Math.sin(h_deg*Math.PI/180) - Math.sin(latr)*Math.sin(decl)) / (Math.cos(latr)*Math.cos(decl));
+    return Math.acos(Math.max(-1,Math.min(1,c))) * 180 / Math.PI;
   }
-
-  // Asr : méthode Shafi (ombre = longueur de l'objet)
-  function asrAngle() {
-    var x = 1 / Math.tan(Math.abs(latr - decl) + Math.atan(1));
-    return Math.atan(x) * 180 / Math.PI;
+  function haRad(alt_rad) {
+    var c = (Math.sin(alt_rad) - Math.sin(latr)*Math.sin(decl)) / (Math.cos(latr)*Math.cos(decl));
+    return Math.acos(Math.max(-1,Math.min(1,c))) * 180 / Math.PI;
   }
-
   function toHM(v) {
     var tot = Math.round(v * 60);
     return { h: Math.floor(tot/60), m: tot % 60, str: f2(Math.floor(tot/60)) + 'h' + f2(tot%60) };
   }
-
-  var fajr    = toHM(solar - ha(-15)   / 15);   // GMP : 15°
-  var dohr    = toHM(solar + 2/60);              // midi + 2 min
-  var asr     = toHM(solar + ha(asrAngle()) / 15);
-  var maghrib = toHM(solar + ha(-0.8333) / 15 + 2/60); // +2 min sécurité
-  var icha    = toHM(solar + ha(-13)   / 15);   // GMP : 13°
+  var asrAltRad = Math.atan(1.0 / (1 + Math.tan(Math.abs(latr - decl))));
+  var fajr    = toHM(solar - ha(-15)    / 15);
+  var dohr    = toHM(solar + 2/60);
+  var asr     = toHM(solar + haRad(asrAltRad) / 15);
+  var maghrib = toHM(solar + ha(-0.8333) / 15 + 2/60);
+  var icha    = toHM(solar + ha(-13)    / 15);
 
   return [
     { name: 'Fajr',    ...fajr },
@@ -855,9 +1029,11 @@ function updateHome(){
 
   document.getElementById('h-form').textContent=Object.values(D.getFS()).filter(s=>s.done).length;
   updateTodayRings();
-  updateTodayProgress();
   const corDone=Object.values(window._CR||LS.g('coran_sessions',{})).filter(c=>c.done).length;
   document.getElementById('h-sport').textContent=Object.values(D.getSS()).filter(s=>s.done).length;
+  document.getElementById('h-streak') && (document.getElementById('h-streak').textContent = calcStreak());
+  const corDoneN=Object.values(window._CR||{}).filter(c=>c.done).length;
+  document.getElementById('h-coran') && (document.getElementById('h-coran').textContent = corDoneN);
   const wh=D.getWH(),cfg=D.getWC();
   if(wh.length>0){
     const lw=wh[wh.length-1].w;
@@ -1766,7 +1942,7 @@ function updateTodayProgress(){
   rings += makeMiniRing(corPct, '#0D5C3A', '📖 Coran', corDone?'✅ Fait':'3 Ahzab');
   if(isPesee) rings += makeMiniRing(poidsPct, 'var(--wgt)', '⚖️ Pesée', lastPesee?lastPesee.w+'kg':'À faire');
 
-  const el = document.getElementById('today-progress-rings');
+  const el = document.getElementById('today-rings');
   if(el) el.innerHTML = rings;
 }
 
@@ -2340,14 +2516,19 @@ function renderBadges(){
 
 function init(){
   checkNotif();
+  applySettings();
+  // Rendu immédiat avec données localStorage (offline)
+  updateHome();
+  // Charger depuis Firebase
+  fbLoadData();
+  // Polling Firebase toutes les 30s déjà géré dans FB.listen
+  // Refresh affichage toutes les minutes (heure prières etc.)
+  setInterval(function(){ updateHome(); }, 60000);
+  setInterval(function(){ if(notifGranted) scheduleNotifs(); }, 3600000);
+  // Tasbih, flashcards, jobs
   renderTasbih();
   renderFlash();
   renderJobs();
-  updateTodayRings();
-  updateHome();
-  applySettings();
-  setInterval(updateHome,60000);
-  setInterval(()=>{if(notifGranted)scheduleNotifs();},3600000);
 }
 init();
 </script>
