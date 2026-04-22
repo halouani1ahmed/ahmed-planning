@@ -19,11 +19,22 @@
   --rec:#7B6209;--recl:#FEF9E7;
   --wgt:#4A235A;
   --slp:#566573;
+  --quran:#0D5C3A;--quranl:#E8F5E9;
   --bg:#F2F3F7;--card:#fff;
-  --txt:#1a1a2e;--mut:#6b7280;--brd:rgba(0,0,0,0.08)
+  --txt:#1a1a2e;--mut:#6b7280;--brd:rgba(0,0,0,0.08);
+  --dark-bg:#0f0f1a;--dark-card:#1a1a2e;--dark-txt:#e8e8f0;--dark-mut:#8888aa;--dark-brd:rgba(255,255,255,0.08)
 }
+body.dark{background:var(--dark-bg);color:var(--dark-txt)}
+body.dark .card,.dark .stat{background:var(--dark-card);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+body.dark .inp,.dark .tx,.dark select{background:#252538;color:var(--dark-txt);border-color:var(--dark-brd)}
+body.dark .stitle{color:var(--dark-mut)}
+body.dark .tabbar{background:rgba(26,26,46,.96);border-top-color:rgba(255,255,255,.1)}
+body.dark .tab-lb{color:var(--dark-mut)}
+body.dark .btn:not([style*="background:var"]){background:#252538;color:var(--dark-txt)}
+body.dark .hdr{filter:brightness(.9)}
+body.dark .pbar{background:rgba(255,255,255,.08)}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--txt);max-width:420px;margin:0 auto;-webkit-font-smoothing:antialiased}
+body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--txt);max-width:420px;margin:0 auto;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
 .page{display:none}.page.active{display:block}
 .content{padding:12px;padding-bottom:82px}
 .hdr{padding:52px 16px 14px;position:sticky;top:0;z-index:20}
@@ -31,6 +42,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .hdr p{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
 .card{background:var(--card);border-radius:14px;padding:14px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.07)}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px}
 .stat{background:var(--card);border-radius:11px;padding:12px;box-shadow:0 1px 3px rgba(0,0,0,.07)}
 .stv{font-size:22px;font-weight:700;line-height:1}
 .stl{font-size:11px;color:var(--mut);margin-top:3px}
@@ -39,15 +51,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .btn{display:flex;align-items:center;justify-content:center;border:none;border-radius:11px;font-size:14px;font-weight:600;cursor:pointer;padding:11px 16px;transition:opacity .1s}
 .btn:active{opacity:.7}
 .bfull{width:100%;margin-bottom:7px}
-.tabbar{position:fixed;bottom:0;left:0;right:0;max-width:420px;margin:0 auto;height:68px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(0,0,0,.1);display:flex;align-items:flex-start;padding-top:7px;z-index:100}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:2px 0}
-.tab-ic{font-size:20px;transition:transform .15s}
-.tab.active .tab-ic{transform:scale(1.2)}
-.tab-lb{font-size:9px;font-weight:500;color:var(--mut)}
+.tabbar{position:fixed;bottom:0;left:0;right:0;max-width:420px;margin:0 auto;height:68px;background:rgba(255,255,255,.96);backdrop-filter:blur(20px);border-top:.5px solid rgba(0,0,0,.1);display:flex;align-items:flex-start;padding-top:7px;z-index:100;overflow-x:auto}
+.tab{flex:0 0 auto;min-width:52px;display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:none;cursor:pointer;padding:2px 4px}
+.tab-ic{font-size:19px;transition:transform .15s}
+.tab.active .tab-ic{transform:scale(1.15)}
+.tab-lb{font-size:9px;font-weight:500;color:var(--mut);white-space:nowrap}
 .tab.active .tab-lb{color:var(--blue);font-weight:700}
 .chk{width:24px;height:24px;border-radius:50%;border:2px solid var(--brd);display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer;transition:all .15s;margin-top:1px}
 .chk.on{background:var(--sport);border-color:var(--sport)}
 .chk.fast-on{background:var(--fast);border-color:var(--fast)}
+.chk.quran-on{background:var(--quran);border-color:var(--quran)}
 .inp{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:15px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none;-webkit-appearance:none}
 .inp:focus{border-color:var(--blue)}
 .tx{width:100%;padding:9px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:13px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none;resize:none}
@@ -58,7 +71,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .row:last-child{border-bottom:none}
 .wnav{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .wnav h3{font-size:16px;font-weight:700}
-.nb{display:flex;gap:6px}
 .tl{display:flex;gap:8px;padding:7px 0;border-bottom:.5px solid var(--brd);align-items:flex-start}
 .tl:last-child{border-bottom:none}
 .tlt{width:46px;font-size:11px;color:var(--mut);font-weight:500;padding-top:3px;flex-shrink:0}
@@ -66,22 +78,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg
 .tll{font-size:13px;font-weight:500;flex:1;line-height:1.4}
 .chrono{font-size:46px;font-weight:700;text-align:center;letter-spacing:-2px;color:var(--navy);padding:12px 0 8px;font-variant-numeric:tabular-nums}
 .pbar{height:6px;background:var(--brd);border-radius:3px;overflow:hidden;margin-bottom:12px}
-.pfill{height:100%;border-radius:3px;transition:width 1s linear}
+.pfill{height:100%;border-radius:3px;transition:width .5s}
 .ring-w{position:relative;width:72px;height:72px;flex-shrink:0}
 .ring-svg{transform:rotate(-90deg)}
+.mini-ring-wrap{position:relative;width:58px;height:58px;flex-shrink:0}
+.mini-ring-wrap svg{transform:rotate(-90deg)}
+.mini-ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.progress-item{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1;min-width:55px}
+.progress-row{display:flex;gap:8px;flex-wrap:wrap}
 .toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%) translateY(8px);background:var(--navy);color:#fff;padding:8px 18px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:all .25s;z-index:300;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;font-size:10px;font-weight:700}
+.badge-item{display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 8px;border-radius:12px;min-width:72px;flex:1}
+.badge-icon{font-size:28px}
+.badge-name{font-size:10px;font-weight:600;text-align:center;line-height:1.2}
+.badge-locked{filter:grayscale(1);opacity:.35}
 .sdot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;background:#4CAF50}
 .sdot.off{background:#f44336}
 .sdot.spin{background:#FF9800;animation:pulse .8s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .notif-bar{background:var(--navy);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;font-size:13px}
-.day-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.day-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--brd);font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--mut);transition:all .15s}
+.day-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--brd);font-size:12px;font-weight:600;cursor:pointer;background:var(--bg);color:var(--mut)}
 .day-btn.sel-fast{background:var(--fatl);color:var(--fast);border-color:var(--fast)}
 .day-btn.sel-sport{background:var(--spl);color:var(--sport);border-color:var(--sport)}
+.day-toggle{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.pomodoro-display{font-size:52px;font-weight:700;text-align:center;letter-spacing:-2px;font-variant-numeric:tabular-nums;padding:10px 0 6px}
+.tasbih-btn{width:160px;height:160px;border-radius:50%;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto;transition:transform .1s,box-shadow .1s;box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.tasbih-btn:active{transform:scale(.95);box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.flash-card{border-radius:16px;padding:20px;margin-bottom:10px;min-height:120px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}
+.flash-card:active{transform:scale(.98)}
+.kandidat-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
 select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:15px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.15)}100%{transform:scale(1)}}
+.pop{animation:pop .2s ease}
 </style>
 </head>
 <body>
@@ -90,39 +118,72 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   <span style="font-size:20px">🔔</span>
   <div style="flex:1"><strong>Activer les notifications</strong><br><span style="font-size:11px;opacity:.8">Rappel 15 min avant chaque activité</span></div>
   <button onclick="askNotif()" style="background:var(--blue);color:#fff;border:none;border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer">Activer</button>
-  <button onclick="document.getElementById('notif-bar').style.display='none'" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-left:4px">✕</button>
+  <button onclick="this.parentElement.style.display='none'" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;margin-left:4px">✕</button>
 </div>
 
-<!-- HOME -->
+<!-- ══ HOME ══ -->
 <div class="page active" id="pg-home">
   <div class="hdr" style="background:var(--navy)">
     <div style="display:flex;align-items:flex-start;justify-content:space-between">
       <div><h1>Ahmed 👋</h1><p id="today-lb">...</p></div>
-      <div style="text-align:right;font-size:11px;color:rgba(255,255,255,.7);padding-top:2px">
-        <span class="sdot spin" id="sdot"></span><span id="stxt">Connexion...</span>
+      <div style="display:flex;align-items:center;gap:8px;padding-top:2px">
+        <button onclick="toggleDark()" id="dark-btn" style="background:none;border:none;cursor:pointer;font-size:18px;color:#fff">🌙</button>
+        <div style="text-align:right;font-size:11px;color:rgba(255,255,255,.7)"><span class="sdot spin" id="sdot"></span><span id="stxt">...</span></div>
       </div>
     </div>
   </div>
   <div class="content">
-    <div id="mcard" style="border-radius:14px;padding:16px;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;background:var(--navy)">
-      <div>
-        <div style="font-size:10px;color:rgba(255,255,255,.6);margin-bottom:2px">Maghreb · Montigny 78180</div>
-        <div style="font-size:36px;font-weight:700;color:#fff;letter-spacing:-1px" id="magh-t">--h--</div>
-        <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:3px" id="magh-s">...</div>
+    <!-- Maghreb + prières -->
+    <div id="mcard" style="border-radius:14px;padding:16px;margin-bottom:10px;background:var(--navy)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px">
+        <div>
+          <div style="font-size:10px;color:rgba(255,255,255,.6);margin-bottom:2px">Montigny 78180</div>
+          <div style="font-size:34px;font-weight:700;color:#fff;letter-spacing:-1px" id="magh-t">--h--</div>
+          <div style="font-size:11px;color:rgba(255,255,255,.65);margin-top:2px" id="magh-s">...</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:18px;font-weight:700;color:#fff" id="magh-cd">--:--</div>
+          <div style="font-size:10px;color:rgba(255,255,255,.5)">avant rupture</div>
+        </div>
       </div>
-      <div style="text-align:right">
-        <div style="font-size:20px;font-weight:700;color:#fff" id="magh-cd">--:--</div>
-        <div style="font-size:10px;color:rgba(255,255,255,.6)">avant rupture</div>
-      </div>
+      <!-- Horaires 5 prières -->
+      <div id="prayers-row" style="display:flex;justify-content:space-between;border-top:1px solid rgba(255,255,255,.15);padding-top:10px"></div>
     </div>
+
+    <!-- Météo -->
+    <div id="meteo-card" class="card" style="display:flex;align-items:center;gap:12px;padding:12px 14px">
+      <div style="font-size:32px" id="meteo-icon">🌤️</div>
+      <div style="flex:1">
+        <div style="font-size:14px;font-weight:600" id="meteo-txt">Chargement météo...</div>
+        <div style="font-size:11px;color:var(--mut)" id="meteo-sub">Montigny-le-Bretonneux</div>
+      </div>
+      <button onclick="loadMeteo()" style="background:none;border:none;cursor:pointer;font-size:16px;color:var(--mut)">↻</button>
+    </div>
+
+    <!-- Cours en cours -->
+    <div class="card" style="background:var(--coul);border-left:4px solid var(--cours)">
+      <div style="font-size:10px;font-weight:700;color:var(--cours);text-transform:uppercase;letter-spacing:.5px">Ce soir — Formation</div>
+      <div style="font-size:15px;font-weight:700;color:var(--cours);margin-top:3px" id="cours-tonight">...</div>
+      <div style="font-size:11px;color:var(--cours);opacity:.8;margin-top:2px" id="cours-detail">...</div>
+    </div>
+
+    <!-- Progress rings -->
+    <div class="card">
+      <div class="stitle">Progression aujourd'hui</div>
+      <div class="progress-row" id="today-rings"></div>
+    </div>
+
+    <!-- Stats -->
     <div class="g2">
       <div class="stat"><div class="stv" style="color:var(--cours)" id="h-form">0</div><div class="stl">séances formation</div></div>
       <div class="stat"><div class="stv" style="color:var(--sport)" id="h-sport">0</div><div class="stl">séances sport</div></div>
     </div>
     <div class="g2">
       <div class="stat"><div class="stv" style="color:var(--wgt)" id="h-poids">--</div><div class="stl">poids (kg)</div></div>
-      <div class="stat"><div class="stv" style="color:var(--fam)" id="h-imc">--</div><div class="stl">IMC</div></div>
+      <div class="stat"><div class="stv" style="color:var(--fast)" id="h-streak">0</div><div class="stl">🔥 streak parfait</div></div>
     </div>
+
+    <!-- Planning du jour -->
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
         <div class="stitle" style="margin:0">Planning du jour</div>
@@ -137,33 +198,55 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
         </div>
       </div>
     </div>
+
+    <!-- Chrono + Pomodoro -->
     <div class="card">
-      <div class="stitle">Chronomètre formation</div>
-      <div class="chrono" id="chrono-d">0:00:00</div>
-      <div style="text-align:center;font-size:11px;color:var(--mut);margin-bottom:8px" id="chrono-l">Objectif du jour</div>
-      <div class="pbar"><div class="pfill" id="chrono-b" style="width:0%;background:var(--blue)"></div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-        <button class="btn" style="background:var(--sport);color:#fff" onclick="cStart()">▶ Démarrer</button>
-        <button class="btn" style="background:#f3f4f6;color:var(--txt)" onclick="cPause()">⏸ Pause</button>
+      <div style="display:flex;gap:8px;margin-bottom:12px">
+        <button onclick="setTimerMode('chrono')" id="btn-chrono" class="btn" style="flex:1;background:var(--blue);color:#fff;padding:8px">⏱ Chrono</button>
+        <button onclick="setTimerMode('pomodoro')" id="btn-pomo" class="btn" style="flex:1;background:#f3f4f6;color:var(--txt);padding:8px">🍅 Pomodoro</button>
       </div>
-      <button class="btn bfull" style="background:#f3f4f6;color:var(--txt);margin-top:8px" onclick="cReset()">⏹ Reset</button>
+      <div id="chrono-zone">
+        <div class="chrono" id="chrono-d">0:00:00</div>
+        <div style="text-align:center;font-size:11px;color:var(--mut);margin-bottom:8px" id="chrono-l">Objectif du jour</div>
+        <div class="pbar"><div class="pfill" id="chrono-b" style="width:0%;background:var(--blue)"></div></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button class="btn" style="background:var(--sport);color:#fff" onclick="cStart()">▶ Démarrer</button>
+          <button class="btn" style="background:#f3f4f6;color:var(--txt)" onclick="cPause()">⏸ Pause</button>
+        </div>
+        <button class="btn bfull" style="background:#f3f4f6;color:var(--txt);margin-top:8px" onclick="cReset()">⏹ Reset</button>
+      </div>
+      <div id="pomo-zone" style="display:none">
+        <div style="text-align:center;font-size:12px;font-weight:600;margin-bottom:4px" id="pomo-phase">🎯 Travail — 25 min</div>
+        <div class="pomodoro-display" id="pomo-d" style="color:var(--cours)">25:00</div>
+        <div class="pbar"><div class="pfill" id="pomo-b" style="width:100%;background:var(--cours)"></div></div>
+        <div style="text-align:center;font-size:11px;color:var(--mut);margin-bottom:10px" id="pomo-count">Session 0 · 0 sessions complètes</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <button class="btn" style="background:var(--cours);color:#fff" onclick="pomoStart()">▶ Démarrer</button>
+          <button class="btn" style="background:#f3f4f6;color:var(--txt)" onclick="pomoReset()">↺ Reset</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- PLANNING -->
+<!-- ══ PLANNING ══ -->
 <div class="page" id="pg-plan">
-  <div class="hdr" style="background:var(--navy)"><h1>Planning semaine</h1><p>Vue semaine · cases libres pour tes imprévus</p></div>
+  <div class="hdr" style="background:var(--navy)"><h1>Planning semaine</h1><p>Note tes imprévus dans chaque case</p></div>
   <div class="content">
     <div class="wnav">
       <select id="plan-wk-sel" onchange="planWkN=parseInt(this.value);renderPlan()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
       <button class="btn" style="background:var(--blu);color:var(--cours);padding:8px 14px;font-size:12px;flex-shrink:0" onclick="planToday()">Auj.</button>
     </div>
+    <!-- Bilan semaine -->
+    <div class="card" id="bilan-semaine" style="display:none">
+      <div class="stitle">Bilan de la semaine</div>
+      <div id="bilan-content"></div>
+    </div>
     <div id="plan-days"></div>
   </div>
 </div>
 
-<!-- SPORT -->
+<!-- ══ SPORT ══ -->
 <div class="page" id="pg-sport">
   <div class="hdr" style="background:var(--sport)"><h1>Sport</h1><p id="sport-hdr-p">Mar + Ven + Sam · 1h marche + 1h muscu</p></div>
   <div class="content">
@@ -185,15 +268,15 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       <div class="stitle">Ajouter séance manuelle</div>
       <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="sp-date"></div>
       <div class="fl"><div class="fl-lb">Durée</div>
-        <select id="sp-dur"><option>2h (1h marche + 1h muscu)</option><option>1h marche seulement</option><option>1h muscu seulement</option><option>30min</option><option>Autre</option></select>
+        <select id="sp-dur"><option>2h (1h marche + 1h muscu)</option><option>1h marche</option><option>1h muscu</option><option>30min</option></select>
       </div>
-      <div class="fl"><div class="fl-lb">Exercices / notes</div><textarea class="tx" id="sp-note" style="min-height:56px" placeholder="5×10 squat, 4×8 développé..."></textarea></div>
+      <div class="fl"><div class="fl-lb">Notes</div><textarea class="tx" id="sp-note" style="min-height:56px" placeholder="Exercices, poids utilisés..."></textarea></div>
       <button class="btn bfull" style="background:var(--sport);color:#fff" onclick="addSportM()">Ajouter</button>
     </div>
   </div>
 </div>
 
-<!-- JEÛNE -->
+<!-- ══ JEÛNE ══ -->
 <div class="page" id="pg-jeune">
   <div class="hdr" style="background:var(--fast)"><h1>Tracker jeûne</h1><p id="fast-hdr-p">Lun + Jeu · SANS eau · Fajr → Maghreb</p></div>
   <div class="content">
@@ -208,7 +291,7 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
     <div style="background:var(--fatl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:var(--fast);line-height:1.6">
       📿 Jour J : SANS eau ni nourriture → Adhan Maghreb<br>
       💧 Lendemain : Boire dès le matin · Sport OK le soir<br>
-      ❌ Pas de jeûne après un jour de sport
+      ❌ Jamais de jeûne après un jour de sport
     </div>
     <div class="wnav">
       <select id="j-wk-sel" onchange="jWkN=parseInt(this.value);renderJeune()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
@@ -218,9 +301,75 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   </div>
 </div>
 
-<!-- POIDS -->
+<!-- ══ CORAN ══ -->
+<div class="page" id="pg-coran">
+  <div class="hdr" style="background:var(--quran)"><h1>📖 Coran</h1><p>3 Ahzab / jour · Suivi sourate + Hizb</p></div>
+  <div class="content">
+    <div class="g2">
+      <div class="stat"><div class="stv" style="color:var(--quran)" id="cor-tot">0</div><div class="stl">jours accomplis</div></div>
+      <div class="stat"><div class="stv" style="color:var(--quran)" id="cor-str">0</div><div class="stl">streak actuel</div></div>
+    </div>
+    <div class="card"><div class="stitle">Progression globale</div>
+      <div class="pbar" style="height:8px"><div class="pfill" id="cor-bar" style="width:0%;background:var(--quran)"></div></div>
+      <div style="font-size:11px;color:var(--mut);margin-top:5px;text-align:right" id="cor-pct">0 jours</div>
+    </div>
+    <div style="background:var(--quranl);border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:#1B5E20;line-height:1.6">
+      📖 Objectif : <strong>3 Ahzab / jour</strong> · 1 Ahzab = 1/120 du Coran<br>
+      Sélectionne la sourate + verset → calcul Hizb automatique
+    </div>
+
+    <!-- Tasbih mini dans coran -->
+    <div class="card">
+      <div class="stitle">Tasbih rapide</div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="tasbih-btn" onclick="tasbihTap()" style="width:70px;height:70px;border-radius:50%;background:var(--quran);border:none;cursor:pointer;font-size:24px;flex-shrink:0">🤲</button>
+        <div style="flex:1">
+          <div style="font-size:28px;font-weight:700;color:var(--quran)" id="tasbih-count">0</div>
+          <div style="font-size:11px;color:var(--mut)" id="tasbih-label">سبحان الله</div>
+          <div style="font-size:11px;color:var(--mut);margin-top:2px" id="tasbih-cycle">Cycle 1/3 — 0/33</div>
+        </div>
+        <button onclick="tasbihReset()" style="background:none;border:none;color:var(--mut);font-size:14px;cursor:pointer">↺ Reset</button>
+      </div>
+    </div>
+
+    <div class="wnav">
+      <select id="cor-wk-sel" onchange="corWkN=parseInt(this.value);renderCoran()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
+      <button class="btn" style="background:var(--quranl);color:var(--quran);padding:8px 14px;font-size:12px;flex-shrink:0" onclick="corToday()">Auj.</button>
+    </div>
+    <div id="coran-sess"></div>
+  </div>
+</div>
+
+<!-- ══ TASBIH PAGE ══ -->
+<div class="page" id="pg-tasbih">
+  <div class="hdr" style="background:var(--quran)"><h1>سبحان الله</h1><p>Compteur Tasbih · 33 × 3 = 99</p></div>
+  <div class="content" style="display:flex;flex-direction:column;align-items:center">
+    <div style="font-size:22px;font-weight:700;color:var(--quran);margin-bottom:4px;margin-top:8px" id="tasbih-main-label">سبحان الله</div>
+    <div style="font-size:13px;color:var(--mut);margin-bottom:20px" id="tasbih-main-fr">SubhanAllah</div>
+    <button class="tasbih-btn" id="tasbih-main-btn" onclick="tasbihTap()" style="background:var(--quran);color:#fff">
+      <div style="font-size:44px;font-weight:700" id="tasbih-main-count">0</div>
+      <div style="font-size:14px;opacity:.8">Appuie</div>
+    </button>
+    <div style="margin-top:16px;font-size:16px;font-weight:600;color:var(--quran)" id="tasbih-main-cycle">0 / 33 · Cycle 1</div>
+    <div style="margin-top:6px;font-size:13px;color:var(--mut)" id="tasbih-main-total">Total : 0</div>
+    <div style="display:flex;gap:10px;margin-top:20px">
+      <button class="btn" style="background:var(--quranl);color:var(--quran)" onclick="tasbihReset()">↺ Reset</button>
+      <button class="btn" style="background:#f3f4f6;color:var(--txt)" onclick="tasbihSkip()">⏭ Skip 33</button>
+    </div>
+    <div style="margin-top:24px;width:100%">
+      <div class="stitle">Cycles complétés</div>
+      <div class="g3" style="margin-top:8px">
+        <div class="stat" style="text-align:center"><div style="font-size:11px;color:var(--mut)">سبحان الله</div><div style="font-size:20px;font-weight:700;color:var(--quran)" id="cycle1-done">0</div></div>
+        <div class="stat" style="text-align:center"><div style="font-size:11px;color:var(--mut)">الحمد لله</div><div style="font-size:20px;font-weight:700;color:var(--quran)" id="cycle2-done">0</div></div>
+        <div class="stat" style="text-align:center"><div style="font-size:11px;color:var(--mut)">الله أكبر</div><div style="font-size:20px;font-weight:700;color:var(--quran)" id="cycle3-done">0</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ POIDS ══ -->
 <div class="page" id="pg-poids">
-  <div class="hdr" style="background:var(--wgt)"><h1>Suivi poids</h1><p>Pesée mercredi 06h00 · à jeun · avant sport</p></div>
+  <div class="hdr" style="background:var(--wgt)"><h1>Suivi poids</h1><p>Pesée mercredi 06h00 · à jeun</p></div>
   <div class="content">
     <div class="g2">
       <div class="stat"><div class="stv" style="color:var(--wgt)" id="w-cur">--</div><div class="stl">kg actuel</div></div>
@@ -231,25 +380,25 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
       <div class="stat"><div class="stv" id="w-ld" style="color:var(--blue)">--</div><div class="stl">vs sem. préc.</div></div>
     </div>
     <div id="w-goal-disp"></div>
+    <canvas id="w-chart" style="display:none;width:100%;height:140px;margin-bottom:10px;border-radius:12px"></canvas>
     <div class="card">
       <div class="stitle">Configuration</div>
-      <div class="fl"><div class="fl-lb">Taille (m) ex: 1.78</div><input class="inp" type="number" id="w-h" placeholder="1.78" step="0.01" min="1.4" max="2.2"></div>
+      <div class="fl"><div class="fl-lb">Taille (m)</div><input class="inp" type="number" id="w-h" placeholder="1.78" step="0.01"></div>
       <div class="fl"><div class="fl-lb">Objectif poids (kg)</div><input class="inp" type="number" id="w-g" placeholder="75" step="0.5"></div>
-      <button class="btn bfull" style="background:var(--wgt);color:#fff" onclick="saveCfg()">Enregistrer la configuration</button>
+      <button class="btn bfull" style="background:var(--wgt);color:#fff" onclick="saveCfg()">Enregistrer</button>
     </div>
     <div class="card">
       <div class="stitle">Ajouter pesée</div>
       <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="w-date"></div>
       <div class="fl"><div class="fl-lb">Poids (kg)</div><input class="inp" type="number" id="w-val" placeholder="80.5" step="0.1"></div>
-      <div class="fl"><div class="fl-lb">Commentaire</div><textarea class="tx" id="w-com" style="min-height:54px" placeholder="Contexte, ressenti..."></textarea></div>
+      <div class="fl"><div class="fl-lb">Commentaire</div><textarea class="tx" id="w-com" style="min-height:54px" placeholder="Ressenti, contexte..."></textarea></div>
       <button class="btn bfull" style="background:var(--wgt);color:#fff" onclick="saveW()">Enregistrer</button>
     </div>
-    <canvas id="w-chart" style="display:none;width:100%;height:140px;margin-bottom:10px"></canvas>
     <div id="w-hist"></div>
   </div>
 </div>
 
-<!-- FORMATION -->
+<!-- ══ FORMATION ══ -->
 <div class="page" id="pg-form">
   <div class="hdr" style="background:var(--cours)"><h1>Formation</h1><p id="form-ph">Phase 1 — Python & SQL</p></div>
   <div class="content">
@@ -269,9 +418,21 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
         <div>
           <div style="font-size:20px;font-weight:700;color:var(--cours)" id="f-stats">0/504</div>
           <div style="font-size:12px;color:var(--mut)">séances terminées</div>
-          <div style="font-size:11px;color:var(--sport);margin-top:3px">✅ 20/04 + 21/04 : 2h chacun</div>
+          <div style="font-size:11px;color:var(--sport);margin-top:3px">✅ 20/04 + 21/04 déjà faites</div>
         </div>
       </div>
+    </div>
+    <!-- Notes de cours -->
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div class="stitle" style="margin:0">Notes de cours rapides</div>
+        <select id="note-subject" style="font-size:12px;padding:4px 8px;width:auto;border-radius:8px">
+          <option>Python</option><option>SQL</option><option>Power BI</option><option>Stats</option><option>ML</option><option>Autre</option>
+        </select>
+      </div>
+      <textarea class="tx" id="course-note" style="min-height:60px" placeholder="Note rapide pendant ta formation..."></textarea>
+      <button class="btn bfull" style="background:var(--cours);color:#fff;margin-top:8px" onclick="saveNote()">Sauvegarder la note</button>
+      <div id="notes-list" style="margin-top:8px"></div>
     </div>
     <div class="wnav">
       <select id="f-wk-sel" onchange="fWkN=parseInt(this.value);renderForm()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
@@ -281,89 +442,124 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   </div>
 </div>
 
-<!-- PARAMÈTRES -->
-<div class="page" id="pg-settings">
-  <div class="hdr" style="background:#444"><h1>Paramètres</h1><p>Configure tes jours de jeûne et de sport</p></div>
+<!-- ══ FLASHCARDS ══ -->
+<div class="page" id="pg-flash">
+  <div class="hdr" style="background:var(--cours)"><h1>Flashcards</h1><p>Révise Python · SQL · Power BI</p></div>
   <div class="content">
+    <div class="g2">
+      <div class="stat"><div class="stv" style="color:var(--sport)" id="fl-ok">0</div><div class="stl">connues ✅</div></div>
+      <div class="stat"><div class="stv" style="color:var(--fast)" id="fl-ko">0</div><div class="stl">à revoir ❌</div></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap" id="flash-filters"></div>
+    <div id="flash-card-zone"></div>
+    <div class="card" style="margin-top:8px">
+      <div class="stitle">Ajouter une carte</div>
+      <div class="fl"><div class="fl-lb">Matière</div>
+        <select id="fl-subj"><option>Python</option><option>SQL</option><option>Power BI</option><option>Stats</option><option>ML</option></select>
+      </div>
+      <div class="fl"><div class="fl-lb">Question</div><textarea class="tx" id="fl-q" style="min-height:54px" placeholder="ex: Quelle est la différence entre LIST et TUPLE ?"></textarea></div>
+      <div class="fl"><div class="fl-lb">Réponse</div><textarea class="tx" id="fl-a" style="min-height:54px" placeholder="ex: LIST est mutable, TUPLE est immutable"></textarea></div>
+      <button class="btn bfull" style="background:var(--cours);color:#fff" onclick="addFlashcard()">Ajouter</button>
+    </div>
+  </div>
+</div>
 
+<!-- ══ CANDIDATURES ══ -->
+<div class="page" id="pg-jobs">
+  <div class="hdr" style="background:var(--work)"><h1>Candidatures</h1><p>Suivi des offres Data Analyst</p></div>
+  <div class="content">
+    <div class="g3">
+      <div class="stat"><div class="stv" style="color:var(--blue)" id="job-total">0</div><div class="stl">envoyées</div></div>
+      <div class="stat"><div class="stv" style="color:var(--sport)" id="job-entretien">0</div><div class="stl">entretiens</div></div>
+      <div class="stat"><div class="stv" style="color:var(--fast)" id="job-refus">0</div><div class="stl">refus</div></div>
+    </div>
+    <div class="card">
+      <div class="stitle">Ajouter candidature</div>
+      <div class="fl"><div class="fl-lb">Entreprise</div><input class="inp" id="job-company" placeholder="ex: Renault Digital, Capgemini..."></div>
+      <div class="fl"><div class="fl-lb">Poste</div><input class="inp" id="job-title" placeholder="ex: Data Analyst Supply Chain"></div>
+      <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="job-date"></div>
+      <div class="fl"><div class="fl-lb">Statut</div>
+        <select id="job-status"><option value="envoyé">📤 Envoyée</option><option value="entretien">🎤 Entretien</option><option value="offre">🎉 Offre reçue</option><option value="refus">❌ Refus</option><option value="attente">⏳ En attente</option></select>
+      </div>
+      <div class="fl"><div class="fl-lb">Notes</div><textarea class="tx" id="job-notes" style="min-height:54px" placeholder="Contact, lien offre, remarques..."></textarea></div>
+      <button class="btn bfull" style="background:var(--work);color:#fff" onclick="addJob()">Ajouter</button>
+    </div>
+    <div id="jobs-list"></div>
+  </div>
+</div>
+
+<!-- ══ BADGES ══ -->
+<div class="page" id="pg-badges">
+  <div class="hdr" style="background:#7B3F00"><h1>Badges</h1><p>Tes récompenses de progression</p></div>
+  <div class="content">
+    <div class="card">
+      <div class="stitle">Streak Global 🔥</div>
+      <div style="font-size:36px;font-weight:700;color:#E67E22;text-align:center;padding:8px 0" id="streak-global-big">0</div>
+      <div style="text-align:center;font-size:12px;color:var(--mut)">jours parfaits consécutifs<br><small>Formation + Coran (+ Jeûne si jour de jeûne)</small></div>
+    </div>
+    <div id="badges-grid"></div>
+  </div>
+</div>
+
+<!-- ══ PARAMÈTRES ══ -->
+<div class="page" id="pg-settings">
+  <div class="hdr" style="background:#444"><h1>Paramètres</h1><p>Configure ton planning</p></div>
+  <div class="content">
     <div class="card">
       <div class="stitle">Jours de jeûne 📿</div>
-      <div style="font-size:12px;color:var(--mut);margin-bottom:8px">Sélectionne les jours où tu jeûnes (SANS eau)</div>
+      <div style="font-size:12px;color:var(--mut);margin-bottom:8px">SANS eau ni nourriture jusqu'au Maghreb</div>
       <div class="day-toggle" id="fast-toggle"></div>
-      <div style="font-size:11px;color:var(--fast);margin-top:8px" id="fast-conflict"></div>
     </div>
-
     <div class="card">
       <div class="stitle">Jours de sport 🏋️</div>
-      <div style="font-size:12px;color:var(--mut);margin-bottom:8px">Les jours sélectionnés ne doivent pas être suivis d'un jeûne</div>
+      <div style="font-size:12px;color:var(--mut);margin-bottom:8px">Pas de jeûne le lendemain d'un sport</div>
       <div class="day-toggle" id="sport-toggle"></div>
-      <div style="font-size:11px;color:var(--sport);margin-top:8px" id="sport-conflict"></div>
+      <div style="font-size:11px;color:var(--fast);margin-top:8px" id="sport-conflict"></div>
     </div>
-
     <div class="card">
       <div class="stitle">Résumé semaine type</div>
       <div id="week-summary"></div>
     </div>
-
-    <button class="btn bfull" style="background:var(--navy);color:#fff" onclick="saveSettings()">💾 Enregistrer les paramètres</button>
-
-    <div class="card" style="margin-top:4px">
-      <div class="stitle">Notifications</div>
-      <div style="font-size:12px;color:var(--mut);margin-bottom:10px">Rappel 15 min avant chaque activité</div>
-      <button class="btn bfull" style="background:var(--blue);color:#fff" onclick="askNotif()">🔔 Activer les notifications</button>
-      <div style="font-size:11px;color:var(--mut);margin-top:6px" id="notif-status">Statut : inconnu</div>
-    </div>
-
+    <button class="btn bfull" style="background:var(--navy);color:#fff" onclick="saveSettings()">💾 Enregistrer</button>
     <div class="card">
-      <div class="stitle">Données</div>
-      <button class="btn bfull" style="background:#f3f4f6;color:var(--fast)" onclick="if(confirm('Effacer toutes les données ?'))clearAll()">🗑️ Effacer toutes les données</button>
+      <div class="stitle">Notifications</div>
+      <button class="btn bfull" style="background:var(--blue);color:#fff" onclick="askNotif()">🔔 Activer</button>
+      <div style="font-size:11px;color:var(--mut);margin-top:6px" id="notif-status">...</div>
     </div>
-  </div>
-</div>
-
-
-<!-- CORAN -->
-<div class="page" id="pg-coran">
-  <div class="hdr" style="background:#0D5C3A"><h1>📖 Coran</h1><p>3 Ahzab / jour · Suivi lecture + sourate</p></div>
-  <div class="content">
-    <div class="g2">
-      <div class="stat"><div class="stv" style="color:#0D5C3A" id="cor-tot">0</div><div class="stl">jours accomplis</div></div>
-      <div class="stat"><div class="stv" style="color:#0D5C3A" id="cor-str">0</div><div class="stl">streak actuel</div></div>
+    <div class="card">
+      <div class="stitle">Apparence</div>
+      <div style="display:flex;align-items:center;justify-content:space-between">
+        <span style="font-size:14px">Mode nuit automatique (après 21h)</span>
+        <input type="checkbox" id="auto-dark" onchange="LS.s('auto_dark',this.checked)" style="width:20px;height:20px;cursor:pointer">
+      </div>
     </div>
-    <div class="card"><div class="stitle">Progression (objectif quotidien)</div>
-      <div class="pbar" style="height:8px"><div class="pfill" id="cor-bar" style="width:0%;background:#0D5C3A"></div></div>
-      <div style="font-size:11px;color:var(--mut);margin-top:5px;text-align:right" id="cor-pct">0 jours</div>
+    <div class="card">
+      <button class="btn bfull" style="background:#f3f4f6;color:var(--fast)" onclick="if(confirm('Effacer toutes les données ?'))clearAll()">🗑️ Effacer données</button>
     </div>
-    <div style="background:#E8F5E9;border-radius:11px;padding:10px 13px;margin-bottom:10px;font-size:12px;color:#1B5E20;line-height:1.6">
-      📖 Objectif : <strong>3 Ahzab par jour</strong> (quand tu peux, obligatoire chaque jour)<br>
-      1 Hizb = 2 pages · 1 Hizb = 2 Ahzab · 60 Hizb au total<br>
-      Note la sourate où tu t'es arrêté pour reprendre facilement
-    </div>
-    <div class="wnav">
-      <select id="cor-wk-sel" onchange="corWkN=parseInt(this.value);renderCoran()" style="flex:1;margin-right:8px;font-weight:700;font-size:14px;padding:8px 12px;border-radius:11px;border:1.5px solid var(--brd);background:var(--card);color:var(--txt);outline:none"></select>
-      <button class="btn" style="background:#E8F5E9;color:#1B5E20;padding:8px 14px;font-size:12px;flex-shrink:0" onclick="corToday()">Auj.</button>
-    </div>
-    <div id="coran-sess"></div>
   </div>
 </div>
 
 <nav class="tabbar">
-  <button class="tab active" id="tab-home"  onclick="showTab('home')"><div class="tab-ic">🏠</div><span class="tab-lb">Accueil</span></button>
-  <button class="tab" id="tab-plan"  onclick="showTab('plan')"><div class="tab-ic">📅</div><span class="tab-lb">Planning</span></button>
-  <button class="tab" id="tab-sport" onclick="showTab('sport')"><div class="tab-ic">🏋️</div><span class="tab-lb">Sport</span></button>
-  <button class="tab" id="tab-jeune" onclick="showTab('jeune')"><div class="tab-ic">📿</div><span class="tab-lb">Jeûne</span></button>
-  <button class="tab" id="tab-poids" onclick="showTab('poids')"><div class="tab-ic">⚖️</div><span class="tab-lb">Poids</span></button>
-  <button class="tab" id="tab-form"  onclick="showTab('form')"><div class="tab-ic">📚</div><span class="tab-lb">Formation</span></button>
+  <button class="tab active" id="tab-home"     onclick="showTab('home')"><div class="tab-ic">🏠</div><span class="tab-lb">Accueil</span></button>
+  <button class="tab" id="tab-plan"     onclick="showTab('plan')"><div class="tab-ic">📅</div><span class="tab-lb">Planning</span></button>
+  <button class="tab" id="tab-sport"    onclick="showTab('sport')"><div class="tab-ic">🏋️</div><span class="tab-lb">Sport</span></button>
+  <button class="tab" id="tab-jeune"    onclick="showTab('jeune')"><div class="tab-ic">📿</div><span class="tab-lb">Jeûne</span></button>
   <button class="tab" id="tab-coran"    onclick="showTab('coran')"><div class="tab-ic">📖</div><span class="tab-lb">Coran</span></button>
+  <button class="tab" id="tab-tasbih"   onclick="showTab('tasbih')"><div class="tab-ic">🤲</div><span class="tab-lb">Tasbih</span></button>
+  <button class="tab" id="tab-poids"    onclick="showTab('poids')"><div class="tab-ic">⚖️</div><span class="tab-lb">Poids</span></button>
+  <button class="tab" id="tab-form"     onclick="showTab('form')"><div class="tab-ic">📚</div><span class="tab-lb">Formation</span></button>
+  <button class="tab" id="tab-flash"    onclick="showTab('flash')"><div class="tab-ic">🃏</div><span class="tab-lb">Flashcards</span></button>
+  <button class="tab" id="tab-jobs"     onclick="showTab('jobs')"><div class="tab-ic">💼</div><span class="tab-lb">Jobs</span></button>
+  <button class="tab" id="tab-badges"   onclick="showTab('badges')"><div class="tab-ic">🏆</div><span class="tab-lb">Badges</span></button>
   <button class="tab" id="tab-settings" onclick="showTab('settings')"><div class="tab-ic">⚙️</div><span class="tab-lb">Config</span></button>
 </nav>
 <div class="toast" id="toast"></div>
 
+<!-- Firebase -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-const FB_CFG = {
+const app = initializeApp({
   apiKey:"AIzaSyCDWoh6V66mnNi8RWoHRtaKKIr5vfSeG1Y",
   authDomain:"ahmed-planning.firebaseapp.com",
   databaseURL:"https://ahmed-planning-default-rtdb.europe-west1.firebasedatabase.app",
@@ -371,125 +567,101 @@ const FB_CFG = {
   storageBucket:"ahmed-planning.firebasestorage.app",
   messagingSenderId:"993453415723",
   appId:"1:993453415723:web:a314f64d087c3490f1796e"
-};
-const app = initializeApp(FB_CFG);
-const db  = getDatabase(app);
-
-function setSyncUI(s){
-  const d=document.getElementById('sdot'),t=document.getElementById('stxt');
-  d.className='sdot'+(s==='ok'?'':s==='off'?' off':' spin');
-  t.textContent=s==='ok'?'Synchronisé':s==='off'?'Hors ligne':'Sync...';
-}
-
-window.FB={
-  async save(path,data){
-    try{ setSyncUI('spin'); await set(ref(db,path),data); setSyncUI('ok'); }
-    catch(e){ setSyncUI('off'); LS.s(path.replace(/\//g,'_'),data); }
-  },
-  async get(path,def){
-    try{ const s=await get(ref(db,path)); return s.exists()?s.val():def; }
-    catch(e){ return LS.g(path.replace(/\//g,'_'),def); }
-  },
-  listen(path,cb){
-    try{ onValue(ref(db,path),s=>cb(s.exists()?s.val():null)); }
-    catch(e){}
-  }
-};
-
-window.FB.listen('data',(data)=>{
-  if(!data) return;
-  if(data.form_sessions)  window._FS=data.form_sessions;
-  if(data.sport_sessions) window._SS=data.sport_sessions;
-  if(data.jeune_sessions) window._JS=data.jeune_sessions;
-  if(data.weight_history) window._WH=Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
-  if(data.weight_cfg)     { window._WC=data.weight_cfg; LS.s('weight_cfg',data.weight_cfg); }
-  if(data.plan_notes)     window._PN=data.plan_notes;
-  if(data.settings)       { window._SET=data.settings; LS.s('settings',data.settings); applySettings(); }
-  if(data.custom_days)    window._CD=data.custom_days;
-  if(data.coran_sessions) window._CR=data.coran_sessions;
-  setSyncUI('ok');
-  updateHome();
 });
-
+const db = getDatabase(app);
+function setSyncUI(s){const d=document.getElementById('sdot'),t=document.getElementById('stxt');d.className='sdot'+(s==='ok'?'':s==='off'?' off':' spin');t.textContent=s==='ok'?'Sync ✅':s==='off'?'Hors ligne':'Sync...';}
+window.FB={
+  async save(p,v){try{setSyncUI('spin');await set(ref(db,p),v);setSyncUI('ok');}catch(e){setSyncUI('off');LS.s(p.replace(/\//g,'_'),v);}},
+  async get(p,d){try{const s=await get(ref(db,p));return s.exists()?s.val():d;}catch(e){return LS.g(p.replace(/\//g,'_'),d);}},
+  listen(p,cb){try{onValue(ref(db,p),s=>cb(s.exists()?s.val():null));}catch(e){}}
+};
+window.FB.listen('data',(data)=>{
+  if(!data)return;
+  const keys=['form_sessions','sport_sessions','jeune_sessions','weight_history','weight_cfg','plan_notes','settings','custom_days','coran_sessions','flashcards','jobs','course_notes'];
+  const wkeys=['_FS','_SS','_JS','_WH_raw','_WC','_PN','_SET','_CD','_CR','_FL','_JOBS','_NOTES'];
+  keys.forEach((k,i)=>{
+    if(data[k]!==undefined){
+      if(k==='weight_history')window._WH=Array.isArray(data[k])?data[k]:Object.values(data[k]||{});
+      else window[wkeys[i]]=data[k];
+    }
+  });
+  if(data.weight_cfg){window._WC=data.weight_cfg;LS.s('weight_cfg',data.weight_cfg);}
+  if(data.settings){window._SET=data.settings;LS.s('settings',data.settings);applySettings();}
+  setSyncUI('ok');updateHome();
+});
 (async()=>{
   const data=await window.FB.get('data',{});
-  window._FS  = data.form_sessions  || {};
-  window._SS  = data.sport_sessions || {};
-  window._JS  = data.jeune_sessions || {};
-  window._WH  = Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
-  window._WC  = data.weight_cfg     || LS.g('weight_cfg',{h:1.75,goal:null});
-  window._PN  = data.plan_notes     || {};
-  window._SET = data.settings       || LS.g('settings',{fast:[0,3],sport:[1,4,5]});
-  window._CD  = data.custom_days    || {};
-  window._CR  = data.coran_sessions  || LS.g('coran_sessions',{});
-  LS.s('weight_cfg',window._WC);
-  LS.s('settings',window._SET);
-  // Init séances 20/04 et 21/04
-  let changed=false;
-  if(!window._FS['2026-04-20']){window._FS['2026-04-20']={done:true,comment:'2h de formation ✅',difficulty:''};changed=true;}
-  if(!window._FS['2026-04-21']){window._FS['2026-04-21']={done:true,comment:'2h de formation ✅',difficulty:''};changed=true;}
-  if(!window._JS['2026-04-20']){window._JS['2026-04-20']={done:true,note:'Premier jeûne',rupture:'',duree:''};changed=true;}
-  if(changed){
-    await window.FB.save('data/form_sessions',window._FS);
-    await window.FB.save('data/jeune_sessions',window._JS);
-  }
-  setSyncUI('ok');
-  applySettings();
-  updateHome();
+  window._FS=data.form_sessions||{};
+  window._SS=data.sport_sessions||{};
+  window._JS=data.jeune_sessions||{};
+  window._WH=Array.isArray(data.weight_history)?data.weight_history:Object.values(data.weight_history||{});
+  window._WC=data.weight_cfg||LS.g('weight_cfg',{h:1.75,goal:null});
+  window._PN=data.plan_notes||{};
+  window._SET=data.settings||LS.g('settings',{fast:[0,3],sport:[1,4,5]});
+  window._CD=data.custom_days||{};
+  window._CR=data.coran_sessions||{};
+  window._FL=data.flashcards||[];
+  window._JOBS=data.jobs||[];
+  window._NOTES=data.course_notes||[];
+  LS.s('weight_cfg',window._WC);LS.s('settings',window._SET);
+  if(!window._FS['2026-04-20']){window._FS['2026-04-20']={done:true,comment:'2h de formation ✅ — premier jour !',difficulty:''};await window.FB.save('data/form_sessions',window._FS);}
+  if(!window._FS['2026-04-21']){window._FS['2026-04-21']={done:true,comment:'2h de formation ✅',difficulty:''};await window.FB.save('data/form_sessions',window._FS);}
+  if(!window._JS['2026-04-20']){window._JS['2026-04-20']={done:true,note:'Premier jeûne',rupture:'',duree:''};await window.FB.save('data/jeune_sessions',window._JS);}
+  setSyncUI('ok');applySettings();updateHome();
 })();
-
-window.fbSave=async(path,data)=>{ await window.FB.save('data/'+path,data); };
+window.fbSave=async(p,v)=>{await window.FB.save('data/'+p,v);};
 </script>
 
 <script>
-const LS={
-  g:(k,d)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch{return d;}},
-  s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}
+const LS={g:(k,d)=>{try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):d;}catch{return d;}},s:(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch{}}};
+const START=new Date('2025-04-20');
+const JOURS=['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+const JOURS_SHORT=['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+const f2=n=>String(n).padStart(2,'0');
+
+const D={
+  getFS:()=>window._FS||LS.g('form_sessions',{}),
+  getSS:()=>window._SS||LS.g('sport_sessions',{}),
+  getJS:()=>window._JS||LS.g('jeune_sessions',{}),
+  getWH:()=>window._WH||LS.g('weight_history',[]),
+  getWC:()=>window._WC||LS.g('weight_cfg',{h:1.75,goal:null}),
+  getPN:()=>window._PN||LS.g('plan_notes',{}),
+  getSet:()=>window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]}),
+  getCD:()=>window._CD||{},
+  getCR:()=>window._CR||{},
+  getFL:()=>window._FL||[],
+  getJobs:()=>window._JOBS||[],
+  getNotes:()=>window._NOTES||[],
+  getFast:()=>new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).fast||[0,3]),
+  getSport:()=>new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).sport||[1,4,5]),
 };
+function getRecDays(){const fd=D.getFast(),r=new Set();fd.forEach(d=>r.add((d+1)%7));return r;}
+function getSportBlocked(){const fd=D.getFast(),b=new Set();fd.forEach(d=>b.add((d+6)%7));return b;}
 
-const START = new Date('2025-04-20');
-const JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
-const JOURS_SHORT = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
-const f2 = n => String(n).padStart(2,'0');
-
-// ── Getters ──
-const D = {
-  getFS: () => window._FS || LS.g('form_sessions',{}),
-  getSS: () => window._SS || LS.g('sport_sessions',{}),
-  getJS: () => window._JS || LS.g('jeune_sessions',{}),
-  getWH: () => window._WH || LS.g('weight_history',[]),
-  getWC: () => window._WC || LS.g('weight_cfg',{h:1.75,goal:null}),
-  getPN: () => window._PN || LS.g('plan_notes',{}),
-  getSet:() => window._SET || LS.g('settings',{fast:[0,3],sport:[1,4,5]}),
-  getCD: () => window._CD || {},
-  getFast:() => new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).fast||[0,3]),
-  getSport:()=> new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).sport||[1,4,5]),
-};
-
-// Rec days = lendemain des jeûnes
-function getRecDays(){
-  const fd=D.getFast(), rec=new Set();
-  fd.forEach(d=>rec.add((d+1)%7));
-  return rec;
-}
-// Blocked for sport = veille des jeûnes
-function getSportBlocked(){
-  const fd=D.getFast(), bl=new Set();
-  fd.forEach(d=>bl.add((d+6)%7));
-  return bl;
-}
-
-// ── Date utils ──
 function wkNum(d){const a=new Date(d);a.setHours(0,0,0,0);const b=new Date(START);b.setHours(0,0,0,0);return Math.max(1,Math.min(72,Math.floor((a-b)/(7*864e5))+1));}
 function wkStart(wn){const d=new Date(START);d.setDate(d.getDate()+(wn-1)*7);return d;}
 function isoD(d){return d.toISOString().split('T')[0];}
 function todayISO(){return isoD(new Date());}
 
-// ── Maghreb ──
+// Maghreb
 function julDay(d){const a=Math.floor((14-d.getMonth()-1)/12),y=d.getFullYear()+4800-a,m=d.getMonth()+1+12*a-3;return d.getDate()+Math.floor((153*m+2)/5)+365*y+Math.floor(y/4)-Math.floor(y/100)+Math.floor(y/400)-32045;}
 function isDST(d){const y=d.getFullYear();const ms=new Date(y,2,31);ms.setDate(31-(ms.getDay()||7));const me=new Date(y,9,31);me.setDate(31-(me.getDay()||7));return d>=ms&&d<me;}
-function maghreb(date){
+function sunAngle(date,angle){
   const tz=isDST(date)?2:1,jd=julDay(date),n=jd-2451545;
+  const L=((280.46+0.9856474*n)%360+360)%360,g=(357.528+0.9856003*n)*Math.PI/180;
+  const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*Math.PI/180,e=(23.439-0.0000004*n)*Math.PI/180;
+  const decl=Math.asin(Math.sin(e)*Math.sin(lam)),latr=48.7667*Math.PI/180;
+  let ch=(Math.sin(angle*Math.PI/180)-Math.sin(latr)*Math.sin(decl))/(Math.cos(latr)*Math.cos(decl));
+  ch=Math.max(-1,Math.min(1,ch));
+  const ha=Math.acos(ch)*180/Math.PI,B=(360/365*(n-81))*Math.PI/180;
+  const eot=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B);
+  const solar=12-2.0333/15+tz-eot/60;
+  return solar;
+}
+function maghreb(date){
+  const tz=isDST(date)?2:1;
+  const solar=sunAngle(date,-0.8333);
+  const jd=julDay(date),n=jd-2451545;
   const L=((280.46+0.9856474*n)%360+360)%360,g=(357.528+0.9856003*n)*Math.PI/180;
   const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*Math.PI/180,e=(23.439-0.0000004*n)*Math.PI/180;
   const decl=Math.asin(Math.sin(e)*Math.sin(lam)),latr=48.7667*Math.PI/180;
@@ -497,99 +669,110 @@ function maghreb(date){
   ch=Math.max(-1,Math.min(1,ch));
   const ha=Math.acos(ch)*180/Math.PI,B=(360/365*(n-81))*Math.PI/180;
   const eot=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B);
-  const s=12-2.0333/15+tz-eot/60+ha/15,tot=Math.floor(s*60)+2;
+  const solar2=12-2.0333/15+tz-eot/60;
+  const s=solar2+ha/15,tot=Math.floor(s*60)+2;
   return{h:Math.floor(tot/60),m:tot%60,tot};
 }
 
-// ── Toast ──
+// 5 prières pour Montigny (méthode Grande Mosquée de Paris 15°/13°)
+function allPrayers(date){
+  const tz=isDST(date)?2:1,jd=julDay(date),n=jd-2451545;
+  const L=((280.46+0.9856474*n)%360+360)%360,g=(357.528+0.9856003*n)*Math.PI/180;
+  const lam=(L+1.915*Math.sin(g)+0.02*Math.sin(2*g))*Math.PI/180,e=(23.439-0.0000004*n)*Math.PI/180;
+  const decl=Math.asin(Math.sin(e)*Math.sin(lam)),latr=48.7667*Math.PI/180;
+  const B=(360/365*(n-81))*Math.PI/180,eot=9.87*Math.sin(2*B)-7.53*Math.cos(B)-1.5*Math.sin(B);
+  const solar=12-2.0333/15+tz-eot/60;
+  function ha(ang){let c=(Math.sin(ang*Math.PI/180)-Math.sin(latr)*Math.sin(decl))/(Math.cos(latr)*Math.cos(decl));c=Math.max(-1,Math.min(1,c));return Math.acos(c)*180/Math.PI;}
+  const fajr=solar-ha(-15)/15,dohr=solar,asr=solar+ha(Math.atan(1+Math.tan(Math.abs(latr-decl)))*180/Math.PI)/15;
+  const mgb=solar+ha(-0.8333)/15,isha=solar+ha(-13)/15;
+  const fmt=v=>{const tot=Math.floor(v*60)+2,h=Math.floor(tot/60);return`${f2(h)}h${f2(tot%60)}`;}
+  return[
+    {name:'Fajr',t:fmt(fajr)},
+    {name:'Dohr',t:fmt(dohr)},
+    {name:'Asr',t:fmt(asr)},
+    {name:'Maghreb',t:fmt(mgb)},
+    {name:'Icha',t:fmt(isha)},
+  ];
+}
+
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
-// ── Tabs ──
+// Dark mode
+function toggleDark(){const b=document.body;const isDark=b.classList.toggle('dark');LS.s('dark_mode',isDark);document.getElementById('dark-btn').textContent=isDark?'☀️':'🌙';}
+function checkDark(){
+  const ad=LS.g('auto_dark',true);const h=new Date().getHours();
+  const manual=LS.g('dark_mode',false);
+  const shouldDark=manual||(ad&&(h>=21||h<6));
+  document.body.classList.toggle('dark',shouldDark);
+  document.getElementById('dark-btn').textContent=shouldDark?'☀️':'🌙';
+  const cb=document.getElementById('auto-dark');if(cb)cb.checked=ad;
+}
+setInterval(checkDark,60000);
+
+// Météo (Open-Meteo, gratuit, pas de clé)
+async function loadMeteo(){
+  try{
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=48.77&longitude=2.03&current=temperature_2m,weathercode,windspeed_10m&timezone=Europe/Paris');
+    const d=await r.json();
+    const c=d.current;
+    const icons={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',61:'🌧️',71:'❄️',80:'🌦️',95:'⛈️'};
+    const descs={0:'Ciel dégagé',1:'Peu nuageux',2:'Partiellement nuageux',3:'Couvert',45:'Brouillard',51:'Bruine',61:'Pluie',71:'Neige',80:'Averses',95:'Orages'};
+    const code=c.weathercode,icon=icons[code]||'🌡️';
+    document.getElementById('meteo-icon').textContent=icon;
+    document.getElementById('meteo-txt').textContent=`${Math.round(c.temperature_2m)}°C · ${descs[code]||'Météo'} · Vent ${Math.round(c.windspeed_10m)} km/h`;
+    document.getElementById('meteo-sub').textContent=`Montigny-le-Bretonneux · ${new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}`;
+  }catch(e){document.getElementById('meteo-txt').textContent='Météo indisponible (activer le réseau)';}
+}
+
+// Tabs
 function showTab(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
-  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings,coran:renderCoran};
+  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings,coran:renderCoran,flash:renderFlash,jobs:renderJobs,badges:renderBadges,tasbih:renderTasbih};
   if(fn[id])fn[id]();
   if(id==='home')updateHome();
 }
 
-// ── Apply settings globally ──
-function applySettings(){
-  const set=D.getSet();
-  const fastNames=set.fast.map(d=>JOURS_SHORT[d]).join('+');
-  const sportNames=set.sport.map(d=>JOURS_SHORT[d]).join('+');
-  const fEl=document.getElementById('fast-hdr-p');
-  if(fEl)fEl.textContent=`${fastNames} · SANS eau · Fajr → Maghreb`;
-  const sEl=document.getElementById('sport-hdr-p');
-  if(sEl)sEl.textContent=`${sportNames} · 1h marche + 1h muscu · soir après boulot`;
-  const rEl=document.getElementById('sport-rule');
-  if(rEl)rEl.innerHTML=`<strong>Règle :</strong><br>🏋️ <strong>${sportNames}</strong> = sport (soir 18h→20h)<br>📿 <strong>${fastNames}</strong> = jeûne<br>❌ Pas de jeûne le lendemain d'un sport`;
+// Week select helper
+function fillWeekSelect(selId,cur){
+  const sel=document.getElementById(selId);if(!sel)return;
+  if(sel.options.length===0){for(let i=1;i<=72;i++){const o=document.createElement('option');o.value=i;o.textContent='Semaine '+i;sel.appendChild(o);}}
+  sel.value=cur;
 }
 
-// ── NOTIFICATIONS ──
-let notifGranted = Notification?.permission === 'granted';
-let notifTimers = [];
-
+// Notifications
+let notifGranted=Notification?.permission==='granted';
+let notifTimers=[];
 async function askNotif(){
-  if(!('Notification' in window)){toast('Non supporté sur ce navigateur');return;}
-  const p = await Notification.requestPermission();
-  notifGranted = p==='granted';
+  if(!('Notification' in window)){toast('Non supporté');return;}
+  const p=await Notification.requestPermission();
+  notifGranted=p==='granted';
   document.getElementById('notif-bar').style.display='none';
-  const ns=document.getElementById('notif-status');
-  if(ns)ns.textContent='Statut : '+(notifGranted?'✅ Activées':'❌ Refusées');
+  const ns=document.getElementById('notif-status');if(ns)ns.textContent='Statut : '+(notifGranted?'✅ Activées':'❌ Refusées');
   if(notifGranted){toast('Notifications activées ✅');scheduleNotifs();}
-  else toast('Notifications refusées');
 }
-
-function sendNotif(title,body){
-  if(!notifGranted)return;
-  try{new Notification(title,{body,icon:'',vibrate:[200,100,200]});}catch(e){}
-}
-
+function sendNotif(title,body){if(!notifGranted)return;try{new Notification(title,{body,vibrate:[200,100,200]});}catch(e){}}
 function scheduleNotifs(){
   notifTimers.forEach(clearTimeout);notifTimers=[];
   if(!notifGranted)return;
   const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
-  const dow=(today.getDay()+6)%7;
-  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
-  const isFast=fast.has(dow),isSport=sport.has(dow),isRec=rec.has(dow),isWE=dow>=5;
+  const dow=(today.getDay()+6)%7,fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  const isFast=fast.has(dow),isSport=sport.has(dow),isWE=dow>=5;
   const mg=maghreb(today);
   const nowMin=now.getHours()*60+now.getMinutes();
-
   const acts=[];
-  if(isFast){
-    acts.push({min:mg.tot-15,title:'Maghreb dans 15 min 🕌',body:`Rupture du jeûne à ${f2(mg.h)}h${f2(mg.m)} — prépare eau et datte`});
-  }
-  if(isSport){
-    acts.push({min:17*60+45,title:'Sport dans 15 min 🏋️',body:'1h marche + 1h muscu à partir de 18h00'});
-  }
-  const formH=isWE?9*60+45:20*60+45;
-  const formDur=isWE?'3h':'2h'+(isSport?' (jour sport : 1h)':'');
-  acts.push({min:formH,title:'Formation dans 15 min 📚',body:`Objectif ${formDur} · Lance ton chronomètre`});
-  acts.push({min:23*60+15,title:'Coucher dans 15 min 🌙',body:'Il est 23h15 — ferme la formation et prépare-toi à dormir'});
-
-  acts.forEach(a=>{
-    const diff=(a.min-nowMin)*60-now.getSeconds();
-    if(diff>0){
-      const id=setTimeout(()=>sendNotif(a.title,a.body),diff*1000);
-      notifTimers.push(id);
-    }
-  });
+  if(isFast)acts.push({min:mg.tot-15,title:'Maghreb dans 15 min 🕌',body:`Rupture à ${f2(mg.h)}h${f2(mg.m)} — prépare eau et datte`});
+  if(isSport)acts.push({min:17*60+45,title:'Sport dans 15 min 🏋️',body:'1h marche + 1h muscu à 18h00'});
+  const fH=isWE?9*60+45:20*60+45;
+  acts.push({min:fH,title:'Formation dans 15 min 📚',body:`Objectif ${isWE?'3h':isSport?'1h':'2h'}`});
+  acts.push({min:23*60+15,title:'Coucher dans 15 min 🌙',body:'Ferme la formation et prépare-toi à dormir'});
+  acts.forEach(a=>{const diff=(a.min-nowMin)*60-now.getSeconds();if(diff>0){const id=setTimeout(()=>sendNotif(a.title,a.body),diff*1000);notifTimers.push(id);}});
 }
+function checkNotif(){if(!('Notification' in window))return;notifGranted=Notification.permission==='granted';const ns=document.getElementById('notif-status');if(ns)ns.textContent='Statut : '+(Notification.permission==='granted'?'✅ Activées':Notification.permission==='denied'?'❌ Refusées':'⏳ Non demandées');if(Notification.permission==='default')document.getElementById('notif-bar').style.display='flex';if(Notification.permission==='granted')scheduleNotifs();}
 
-function checkNotif(){
-  if(!('Notification' in window))return;
-  const p=Notification.permission;
-  notifGranted=p==='granted';
-  const ns=document.getElementById('notif-status');
-  if(ns)ns.textContent='Statut : '+(p==='granted'?'✅ Activées':p==='denied'?'❌ Refusées':'⏳ Non demandées');
-  if(p==='default')document.getElementById('notif-bar').style.display='flex';
-  if(p==='granted')scheduleNotifs();
-}
-
-// ── CHRONO ──
+// Chrono
 let cEl=0,cRun=false,cIv=null,cT0=null;
 function cStart(){if(cRun)return;cRun=true;cT0=Date.now()-cEl*1000;cIv=setInterval(updC,1000);}
 function cPause(){cRun=false;clearInterval(cIv);}
@@ -598,301 +781,270 @@ function updC(){
   if(cRun)cEl=Math.floor((Date.now()-cT0)/1000);
   const h=Math.floor(cEl/3600),m=Math.floor((cEl%3600)/60),s=cEl%60;
   document.getElementById('chrono-d').textContent=`${h}:${f2(m)}:${f2(s)}`;
-  const dow=(new Date().getDay()+6)%7;
-  const sport=D.getSport(),isWE=dow>=5,isSport=sport.has(dow);
-  const tgt=isWE?10800:isSport?3600:7200;
-  const lbl=isWE?'3h weekend':isSport?'1h (jour sport)':'2h';
+  const dow=(new Date().getDay()+6)%7,sp=D.getSport(),isWE=dow>=5,isSp=sp.has(dow);
+  const tgt=isWE?10800:isSp?3600:7200;
   const pct=Math.min(100,Math.round(cEl/tgt*100));
-  const bar=document.getElementById('chrono-b');
-  bar.style.width=pct+'%';bar.style.background=pct>=100?'var(--sport)':'var(--blue)';
-  document.getElementById('chrono-l').textContent=`Objectif ${lbl} · ${pct}%`;
-  if(pct>=100&&cRun){sendNotif('Formation terminée 🎉','Objectif du jour atteint ✅');cPause();}
+  const bar=document.getElementById('chrono-b');bar.style.width=pct+'%';bar.style.background=pct>=100?'var(--sport)':'var(--blue)';
+  document.getElementById('chrono-l').textContent=`Objectif ${isWE?'3h':isSp?'1h':'2h'} · ${pct}%`;
+  updateTodayProgress();
+  if(pct>=100&&cRun){sendNotif('Formation terminée 🎉','Objectif atteint ✅');cPause();}
 }
 
-// ── HOME ──
+// Pomodoro
+let pomoEl=0,pomoRun=false,pomoIv=null,pomoT0=null,pomoPhase='work',pomoSessions=0,pomoWorkSec=25*60,pomoBrkSec=5*60;
+function setTimerMode(m){
+  document.getElementById('chrono-zone').style.display=m==='chrono'?'block':'none';
+  document.getElementById('pomo-zone').style.display=m==='pomodoro'?'block':'none';
+  document.getElementById('btn-chrono').style.background=m==='chrono'?'var(--blue)':'#f3f4f6';
+  document.getElementById('btn-chrono').style.color=m==='chrono'?'#fff':'var(--txt)';
+  document.getElementById('btn-pomo').style.background=m==='pomodoro'?'var(--cours)':'#f3f4f6';
+  document.getElementById('btn-pomo').style.color=m==='pomodoro'?'#fff':'var(--txt)';
+}
+function pomoStart(){
+  if(pomoRun)return;
+  pomoRun=true;
+  pomoT0=Date.now()-pomoEl*1000;
+  pomoIv=setInterval(updPomo,1000);
+}
+function pomoReset(){
+  pomoRun=false;clearInterval(pomoIv);
+  pomoEl=0;pomoPhase='work';
+  updPomoUI();
+}
+function updPomo(){
+  if(pomoRun)pomoEl=Math.floor((Date.now()-pomoT0)/1000);
+  const tgt=pomoPhase==='work'?pomoWorkSec:pomoBrkSec;
+  const rem=tgt-pomoEl;
+  if(rem<=0){
+    pomoRun=false;clearInterval(pomoIv);
+    if(pomoPhase==='work'){pomoSessions++;pomoPhase='break';sendNotif('🍅 Pomodoro terminé !','5 min de pause — tu l\'as mérité !');toast('Pause 5 min ☕');}
+    else{pomoPhase='work';sendNotif('☕ Pause terminée !','Reprends la concentration — 25 min');toast('Reprends la formation 📚');}
+    pomoEl=0;pomoT0=null;
+  }
+  updPomoUI();
+}
+function updPomoUI(){
+  const tgt=pomoPhase==='work'?pomoWorkSec:pomoBrkSec;
+  const rem=Math.max(0,tgt-pomoEl);
+  const m=Math.floor(rem/60),s=rem%60;
+  document.getElementById('pomo-d').textContent=`${f2(m)}:${f2(s)}`;
+  document.getElementById('pomo-d').style.color=pomoPhase==='work'?'var(--cours)':'var(--sport)';
+  document.getElementById('pomo-phase').textContent=pomoPhase==='work'?`🎯 Travail — ${Math.round(pomoWorkSec/60)} min`:`☕ Pause — ${Math.round(pomoBrkSec/60)} min`;
+  const pct=Math.round(pomoEl/tgt*100);
+  const pb=document.getElementById('pomo-b');pb.style.width=(100-pct)+'%';pb.style.background=pomoPhase==='work'?'var(--cours)':'var(--sport)';
+  document.getElementById('pomo-count').textContent=`Session ${pomoSessions+1} · ${pomoSessions} complètes`;
+}
+
+// Progress rings
+function makeMiniRing(pct,color,label,sub){
+  const r=22,circ=2*Math.PI*r,offset=circ-(circ*Math.max(0,Math.min(100,pct))/100);
+  return`<div class="progress-item">
+    <div class="mini-ring-wrap">
+      <svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="${r}" fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="5"/><circle cx="29" cy="29" r="${r}" fill="none" stroke="${color}" stroke-width="5" stroke-linecap="round" stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"/></svg>
+      <div class="mini-ring-txt"><span style="font-size:12px;font-weight:700;color:${color}">${pct}%</span></div>
+    </div>
+    <div style="font-size:10px;font-weight:600;color:var(--txt);text-align:center;margin-top:2px">${label}</div>
+    <div style="font-size:9px;color:var(--mut);text-align:center">${sub}</div>
+  </div>`;
+}
+function updateTodayProgress(){
+  const now=new Date(),dow=(now.getDay()+6)%7;
+  const isWE=dow>=5,fast=D.getFast(),sport=D.getSport();
+  const isFast=fast.has(dow),isSport=sport.has(dow),dk=todayISO();
+  const fDone=D.getFS()[dk]?.done||false;
+  const fTarget=isWE?3:isSport?1:2;
+  const fPct=fDone?100:Math.min(99,Math.round(cEl/(fTarget*3600)*100));
+  const spDone=D.getSS()[dk]?.done||false;
+  const mg=maghreb(new Date(now.getFullYear(),now.getMonth(),now.getDate()));
+  const nowMin=now.getHours()*60+now.getMinutes();
+  const jDone=D.getJS()[dk]?.done||false;
+  const jPct=!isFast?0:jDone?100:Math.min(99,Math.round(nowMin/mg.tot*100));
+  const corSess=D.getCR()[dk];const corDone=corSess?.done||false;
+  const corAhzab=parseInt(corSess?.ahzab||0);
+  const corPct=corDone?100:Math.min(99,Math.round(corAhzab/3*100));
+  let rings='';
+  rings+=makeMiniRing(fPct,'var(--cours)','📚 Form.',fDone?'✅':fTarget+'h');
+  if(isSport)rings+=makeMiniRing(spDone?100:0,'var(--sport)','🏋️ Sport',spDone?'✅':'2h');
+  if(isFast)rings+=makeMiniRing(jPct,'var(--fast)','📿 Jeûne',jDone?'✅ Rompu':'→'+f2(mg.h)+'h'+f2(mg.m));
+  rings+=makeMiniRing(corPct,'var(--quran)','📖 Coran',corDone?'✅':'3 Ahzab');
+  if(dow===2){const wh=D.getWH(),lp=wh.find(w=>w.iso===dk);rings+=makeMiniRing(lp?100:0,'var(--wgt)','⚖️ Pesée',lp?lp.w+'kg':'À faire');}
+  const el=document.getElementById('today-rings');if(el)el.innerHTML=rings;
+}
+
+// Streak global
+function calcStreak(){
+  const now=new Date();
+  let streak=0;
+  for(let i=0;i<365;i++){
+    const d=new Date(now);d.setDate(now.getDate()-i);
+    const dk=isoD(d),dow=(d.getDay()+6)%7;
+    if(dk>todayISO())continue;
+    const fDone=D.getFS()[dk]?.done||false;
+    const corDone=D.getCR()[dk]?.done||false;
+    const fast=D.getFast();
+    const jDone=!fast.has(dow)||(D.getJS()[dk]?.done||false);
+    if(fDone&&corDone&&jDone)streak++;
+    else if(dk<todayISO())break;
+  }
+  return streak;
+}
+
+// HOME
 let editMode=false;
-function toggleEdit(){
-  editMode=!editMode;
-  document.getElementById('edit-btn').textContent=editMode?'✅ Fermer':'✏️ Modifier';
-  document.getElementById('add-zone').style.display=editMode?'block':'none';
-  updateHome();
-}
+function toggleEdit(){editMode=!editMode;document.getElementById('edit-btn').textContent=editMode?'✅ Fermer':'✏️ Modifier';document.getElementById('add-zone').style.display=editMode?'block':'none';updateHome();}
 
-function getDaySchedule(dow,mg,isFast,isSport,isRec,modeEte){
-  const mS=`${f2(mg.h)}h${f2(mg.m)}`;
-  const r30=mg.m+30>=60?`${f2(mg.h+1)}h${f2(mg.m+30-60)}`:`${f2(mg.h)}h${f2(mg.m+30)}`;
-  let s=[];
-  const isWE=dow>=5;
-
+function getDaySched(dow,mg,isFast,isSport,isRec,modeEte){
+  const mS=`${f2(mg.h)}h${f2(mg.m)}`,r30=mg.m+30>=60?`${f2(mg.h+1)}h${f2(mg.m+30-60)}`:`${f2(mg.h)}h${f2(mg.m+30)}`;
+  let s=[];const isWE=dow>=5;
   if(!isWE){
-    if(isFast){
-      s=[
-        {t:'08:30',e:'⏰',l:'Réveil — SANS eau ni nourriture',c:'var(--fast)'},
-        {t:'09:30',e:'💼',l:'Renault — à jeun SANS eau',c:'var(--work)'},
-        {t:'17:30',e:'🏠',l:'Retour maison',c:'var(--fam)'},
-        {t:mS,    e:'🕌',l:`Adhan Maghreb ${mS} — RUPTURE`,c:'var(--fast)'},
-        {t:r30,   e:'🍽️',l:'Eau · Datte · Prière · Dîner',c:'var(--fam)'},
-      ];
-      if(modeEte){
-        s.push({t:'21:00',e:'📚',l:'Formation à jeun (21h)',c:'var(--cours)'});
-        s.push({t:mS,e:'🕌',l:`${mS} rupture → pause repas 30min`,c:'var(--fast)'});
-        s.push({t:r30,e:'📚',l:'Reprend formation (2h total)',c:'var(--cours)'});
-      } else {
-        s.push({t:'21:00',e:'📚',l:'Formation 2h (21h→23h)',c:'var(--cours)'});
-      }
-    } else if(isRec){
-      s=[
-        {t:'08:00',e:'⏰',l:'Réveil — BOIRE dès maintenant 💧',c:'var(--rec)'},
-        {t:'08:30',e:'🥤',l:'Petit-déjeuner + hydratation (récup jeûne)',c:'var(--rec)'},
-        {t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},
-        {t:'17:30',e:'🏠',l:'Retour maison',c:'var(--fam)'},
-      ];
-      if(isSport){
-        s.push({t:'18:00',e:'🚶',l:'Marche 1h — sport soir',c:'var(--sport)'});
-        s.push({t:'19:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'});
-        s.push({t:'20:00',e:'🚿',l:'Douche + récupération',c:'var(--slp)'});
-        s.push({t:'21:00',e:'📚',l:'Formation 1h (jour sport)',c:'var(--cours)'});
-      } else {
-        s.push({t:'21:00',e:'📚',l:'Formation 2h (21h→23h)',c:'var(--cours)'});
-      }
-    } else if(isSport){
-      s=[
-        {t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},
-        {t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},
-        {t:'17:30',e:'🏠',l:'Retour maison',c:'var(--fam)'},
-        {t:'18:00',e:'🚶',l:'Marche 1h — sport soir',c:'var(--sport)'},
-        {t:'19:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},
-        {t:'20:00',e:'🚿',l:'Douche + récupération',c:'var(--slp)'},
-        {t:'21:00',e:'📚',l:'Formation 1h (jour sport)',c:'var(--cours)'},
-      ];
-    } else {
-      s=[
-        {t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},
-        {t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},
-        {t:'17:30',e:'🏠',l:'Retour + repos',c:'var(--fam)'},
-        {t:'21:00',e:'📚',l:'Formation 2h (21h→23h)',c:'var(--cours)'},
-      ];
-    }
+    if(isFast)s=[{t:'08:30',e:'⏰',l:'Réveil SANS eau — jeûne',c:'var(--fast)'},{t:'09:30',e:'💼',l:'Renault — à jeun SANS eau',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour',c:'var(--fam)'},{t:mS,e:'🕌',l:`Adhan ${mS} — RUPTURE`,c:'var(--fast)'},{t:r30,e:'🍽️',l:'Eau · Datte · Prière · Dîner',c:'var(--fam)'}];
+    else if(isRec&&isSport)s=[{t:'08:00',e:'⏰',l:'Réveil — BOIRE dès maintenant 💧',c:'var(--rec)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour',c:'var(--fam)'},{t:'18:00',e:'🚶',l:'Marche 1h',c:'var(--sport)'},{t:'19:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},{t:'20:00',e:'🚿',l:'Douche',c:'var(--slp)'}];
+    else if(isRec)s=[{t:'08:00',e:'⏰',l:'Réveil — BOIRE dès maintenant',c:'var(--rec)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour',c:'var(--fam)'}];
+    else if(isSport)s=[{t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour',c:'var(--fam)'},{t:'18:00',e:'🚶',l:'Marche 1h',c:'var(--sport)'},{t:'19:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},{t:'20:00',e:'🚿',l:'Douche',c:'var(--slp)'}];
+    else s=[{t:'08:30',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},{t:'09:30',e:'💼',l:'Renault',c:'var(--work)'},{t:'17:30',e:'🏠',l:'Retour + repos',c:'var(--fam)'}];
+    if(isFast&&modeEte){s.push({t:'21:00',e:'📚',l:'Formation à jeun',c:'var(--cours)'});s.push({t:mS,e:'🕌',l:`${mS} → pause repas 30min`,c:'var(--fast)'});s.push({t:r30,e:'📚',l:'Reprend formation (2h total)',c:'var(--cours)'});}
+    else s.push({t:'21:00',e:'📚',l:`Formation ${isSport?'1h':'2h'}`,c:'var(--cours)'});
     s.push({t:'23:30',e:'🌙',l:'Coucher',c:'var(--slp)'});
   } else {
-    if(isSport){
-      s=[
-        {t:'09:00',e:'🚶',l:'Marche 1h — sport matin',c:'var(--sport)'},
-        {t:'10:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},
-        {t:'11:00',e:'🚿',l:'Douche + petit-déjeuner',c:'var(--slp)'},
-        {t:'12:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},
-        {t:'15:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},
-        {t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},
-        {t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'},
-      ];
-    } else {
-      s=[
-        {t:'09:00',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},
-        {t:'10:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},
-        {t:'13:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},
-        {t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},
-        {t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'},
-      ];
-    }
+    const st=dow===5?'09:00':'09:00';
+    if(isSport)s=[{t:st,e:'🚶',l:'Marche 1h',c:'var(--sport)'},{t:'10:00',e:'🏋️',l:'Musculation 1h',c:'var(--sport)'},{t:'11:00',e:'🚿',l:'Douche',c:'var(--slp)'},{t:'12:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},{t:'15:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},{t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},{t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'}];
+    else s=[{t:'09:00',e:'⏰',l:'Réveil + petit-déjeuner',c:'var(--slp)'},{t:'10:00',e:'📚',l:'Formation 3h',c:'var(--cours)'},{t:'13:00',e:'🍽️',l:'Déjeuner + repos',c:'var(--fam)'},{t:'18:00',e:'🕌',l:'Prière',c:'var(--fam)'},{t:'19:00',e:'📞',l:'Appel parents',c:'var(--fam)'}];
     s.push({t:'23:30',e:'🌙',l:'Coucher',c:'var(--slp)'});
   }
   return s;
 }
 
 function updateHome(){
+  checkDark();
   const now=new Date(),today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
   const mg=maghreb(today);
   document.getElementById('magh-t').textContent=`${f2(mg.h)}h${f2(mg.m)}`;
   const nowMin=now.getHours()*60+now.getMinutes(),diff=mg.tot-nowMin;
   document.getElementById('magh-cd').textContent=diff>0?`${f2(Math.floor(diff/60))}:${f2(diff%60)}`:'Passé';
-  const dow=(today.getDay()+6)%7;
-  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  const dow=(today.getDay()+6)%7,fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
   const isFast=fast.has(dow),isSport=sport.has(dow),isRec=rec.has(dow),modeEte=mg.tot>=21*60+30;
-  const mc=document.getElementById('mcard');
-  mc.style.background=isFast?'var(--fast)':isRec?'var(--rec)':'var(--navy)';
-  document.getElementById('magh-s').textContent=
-    isFast?'📿 Jeûne SANS eau ni nourriture → Maghreb':
-    isRec ?'💧 Récupération — boire dès le matin':
-    isSport?'🏋️ Sport ce soir 18h00':'Journée normale';
-
+  document.getElementById('mcard').style.background=isFast?'var(--fast)':isRec?'var(--rec)':'var(--navy)';
+  document.getElementById('magh-s').textContent=isFast?'📿 Jeûne SANS eau → Maghreb':isRec?'💧 Récupération — boire dès le matin':isSport?'🏋️ Sport ce soir 18h00':'Journée normale';
+  // 5 prières
+  const prayers=allPrayers(today);
+  document.getElementById('prayers-row').innerHTML=prayers.map(p=>`<div style="text-align:center"><div style="font-size:9px;color:rgba(255,255,255,.6)">${p.name}</div><div style="font-size:12px;font-weight:600;color:#fff">${p.t}</div></div>`).join('');
+  // Labels
   const days=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'],months=['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'];
   document.getElementById('today-lb').textContent=`${days[now.getDay()]} ${now.getDate()} ${months[now.getMonth()]} · Sem ${wkNum(now)}`;
-
+  // Cours ce soir
+  const wn=wkNum(now);
+  const{tool,content}=getFormContent(wn,dow);
+  const dur=dow>=5?'3h':isSport?'1h':'2h';
+  document.getElementById('cours-tonight').textContent=`${tool} — ${dur}`;
+  document.getElementById('cours-detail').textContent=content;
+  // Stats
   document.getElementById('h-form').textContent=Object.values(D.getFS()).filter(s=>s.done).length;
-  const corDone=Object.values(window._CR||LS.g('coran_sessions',{})).filter(c=>c.done).length;
   document.getElementById('h-sport').textContent=Object.values(D.getSS()).filter(s=>s.done).length;
   const wh=D.getWH(),cfg=D.getWC();
-  if(wh.length>0){
-    const lw=wh[wh.length-1].w;
-    document.getElementById('h-poids').textContent=lw.toFixed(1);
-    document.getElementById('h-imc').textContent=cfg&&cfg.h?(lw/(cfg.h*cfg.h)).toFixed(1):'--';
-  }
-
-  const dk=todayISO();
-  const cd=D.getCD();
-  const defSched=getDaySchedule(dow,mg,isFast,isSport,isRec,modeEte);
+  if(wh.length>0){const lw=wh[wh.length-1].w;document.getElementById('h-poids').textContent=lw.toFixed(1);}
+  const st=calcStreak();document.getElementById('h-streak').textContent=st;
+  // Planning
+  const dk=todayISO(),cd=D.getCD();
+  const defSched=getDaySched(dow,mg,isFast,isSport,isRec,modeEte);
   const sched=cd[dk]||defSched;
-
   document.getElementById('today-sched').innerHTML=sched.map((item,i)=>{
     const [ih]=item.t.split(/[h:]/).map(Number),past=ih<now.getHours();
-    if(editMode){
-      return`<div class="tl">
-        <div class="tlt">${item.t}</div>
-        <div class="tld" style="background:${item.c}"></div>
-        <div style="flex:1">
-          <input value="${item.l.replace(/"/g,'&quot;')}"
-            onchange="editSlot('${dk}',${i},this.value)"
-            style="font-size:12px;width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:7px;font-family:inherit;background:var(--bg);color:var(--txt);outline:none">
-        </div>
-        <button onclick="deleteSlot('${dk}',${i})" style="background:none;border:none;color:var(--mut);font-size:16px;cursor:pointer;padding:2px 6px;flex-shrink:0">✕</button>
-      </div>`;
-    }
-    return`<div class="tl">
-      <div class="tlt">${item.t}</div>
-      <div class="tld" style="background:${past?'var(--brd)':item.c}"></div>
-      <div class="tll" style="${past?'color:var(--mut);text-decoration:line-through':''}">${item.e} ${item.l}</div>
-    </div>`;
+    if(editMode)return`<div class="tl"><div class="tlt">${item.t}</div><div class="tld" style="background:${item.c}"></div><div style="flex:1"><input value="${item.l.replace(/"/g,'&quot;')}" onchange="editSlot('${dk}',${i},this.value)" style="font-size:12px;width:100%;padding:4px 8px;border:1px solid var(--brd);border-radius:7px;font-family:inherit;background:var(--bg);color:var(--txt);outline:none"></div><button onclick="deleteSlot('${dk}',${i})" style="background:none;border:none;color:var(--mut);font-size:16px;cursor:pointer;padding:2px 6px">✕</button></div>`;
+    return`<div class="tl"><div class="tlt">${item.t}</div><div class="tld" style="background:${past?'var(--brd)':item.c}"></div><div class="tll" style="${past?'color:var(--mut);text-decoration:line-through':''}">${item.e} ${item.l}</div></div>`;
   }).join('');
+  updateTodayProgress();
 }
 
-function getOrInitSched(dk){
-  const cd=D.getCD();
-  if(cd[dk])return cd[dk];
-  const now=new Date(dk),dow=(now.getDay()+6)%7;
-  const mg=maghreb(now);
-  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
-  return getDaySchedule(dow,mg,fast.has(dow),sport.has(dow),rec.has(dow),mg.tot>=21*60+30);
-}
+function getOrInitSched(dk){const cd=D.getCD();if(cd[dk])return cd[dk];const d=new Date(dk),dow=(d.getDay()+6)%7,mg=maghreb(d),fast=D.getFast(),sport=D.getSport(),rec=getRecDays();return getDaySched(dow,mg,fast.has(dow),sport.has(dow),rec.has(dow),mg.tot>=21*60+30);}
+async function editSlot(dk,idx,val){const s=getOrInitSched(dk);s[idx].l=val;if(!window._CD)window._CD={};window._CD[dk]=s;if(window.fbSave)window.fbSave('custom_days',window._CD);}
+async function deleteSlot(dk,idx){const s=getOrInitSched(dk);s.splice(idx,1);if(!window._CD)window._CD={};window._CD[dk]=s;if(window.fbSave)window.fbSave('custom_days',window._CD);updateHome();}
+function addSlot(){const t=document.getElementById('new-t').value,l=document.getElementById('new-l').value.trim();if(!t||!l){toast('Heure et activité requis');return;}const dk=todayISO(),s=getOrInitSched(dk);s.push({t:t.replace(':','h'),e:'📌',l,c:'var(--blue)'});s.sort((a,b)=>a.t.localeCompare(b.t));if(!window._CD)window._CD={};window._CD[dk]=s;if(window.fbSave)window.fbSave('custom_days',window._CD);document.getElementById('new-t').value='';document.getElementById('new-l').value='';updateHome();toast('Ajouté ✅');}
 
-async function editSlot(dk,idx,val){
-  const s=getOrInitSched(dk);s[idx].l=val;
-  if(!window._CD)window._CD={};window._CD[dk]=s;
-  if(window.fbSave)window.fbSave('custom_days',window._CD);
-}
-
-async function deleteSlot(dk,idx){
-  const s=getOrInitSched(dk);s.splice(idx,1);
-  if(!window._CD)window._CD={};window._CD[dk]=s;
-  if(window.fbSave)window.fbSave('custom_days',window._CD);
-  updateHome();
-}
-
-function addSlot(){
-  const t=document.getElementById('new-t').value,l=document.getElementById('new-l').value.trim();
-  if(!t||!l){toast('Indique une heure et une activité');return;}
-  const dk=todayISO(),s=getOrInitSched(dk);
-  s.push({t:t.replace(':','h'),e:'📌',l,c:'var(--blue)'});
-  s.sort((a,b)=>a.t.localeCompare(b.t));
-  if(!window._CD)window._CD={};window._CD[dk]=s;
-  if(window.fbSave)window.fbSave('custom_days',window._CD);
-  document.getElementById('new-t').value='';document.getElementById('new-l').value='';
-  updateHome();toast('Activité ajoutée ✅');
-}
-
-// ── PLANNING ──
-
-// ── Week select helper ──
-function fillWeekSelect(selId, currentWk){
-  const sel=document.getElementById(selId);
-  if(!sel)return;
-  if(sel.options.length===0){for(let i=1;i<=72;i++){const o=document.createElement('option');o.value=i;o.textContent='Semaine '+i;sel.appendChild(o);}}
-  sel.value=currentWk;
-}
+// PLANNING
 let planWkN=wkNum(new Date());
-function planWk(d){planWkN=Math.max(1,Math.min(72,planWkN+d));renderPlan();}
 function planToday(){planWkN=wkNum(new Date());renderPlan();}
 function renderPlan(){
   fillWeekSelect('plan-wk-sel',planWkN);
-  const ws=wkStart(planWkN);
-  const pn=D.getPN();
-  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  const ws=wkStart(planWkN),pn=D.getPN(),fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  // Bilan semaine précédente
+  const prevWk=planWkN-1;
+  if(prevWk>=1){
+    const pwStart=wkStart(prevWk);
+    let fDoneWk=0,spDoneWk=0,jDoneWk=0,jTotalWk=0;
+    for(let d=0;d<7;d++){const date=new Date(pwStart);date.setDate(date.getDate()+d);const dk=isoD(date);if(D.getFS()[dk]?.done)fDoneWk++;if(sport.has(d)&&D.getSS()[dk]?.done)spDoneWk++;if(fast.has(d)){jTotalWk++;if(D.getJS()[dk]?.done)jDoneWk++;}}
+    const note=Math.round((fDoneWk/7+spDoneWk/3+jDoneWk/(jTotalWk||1))/3*10);
+    const bilan=document.getElementById('bilan-semaine');if(bilan){bilan.style.display='block';document.getElementById('bilan-content').innerHTML=`<div style="display:flex;gap:16px;align-items:center"><div style="font-size:36px;font-weight:700;color:${note>=8?'var(--sport)':note>=5?'var(--work)':'var(--fast)'}">${note}/10</div><div style="font-size:12px;color:var(--mut)">📚 ${fDoneWk}/7 séances<br>🏋️ ${spDoneWk}/3 sport<br>📿 ${jDoneWk}/${jTotalWk} jeûnes</div></div>`;}
+  }
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
     const dk=isoD(date),isToday=dk===todayISO();
     const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d);
     const mg=maghreb(date);
-    const fDone=D.getFS()[dk]?.done||false,spDone=D.getSS()[dk]?.done||false;
-    const jDone=isFast?(D.getJS()[dk]?.done||false):null;
+    const fDone=D.getFS()[dk]?.done||false,spDone=D.getSS()[dk]?.done||false,jDone=isFast?(D.getJS()[dk]?.done||false):null;
     const note=pn[dk]||'';
-    let typeLabel='📚 Formation',typeBg='var(--coul)',typeC='var(--cours)';
-    if(isFast){typeLabel='📿 Jeûne';typeBg='var(--fatl)';typeC='var(--fast)';}
-    else if(isRec&&isSport){typeLabel='💧+🏋️ Récup+Sport';typeBg='var(--spl)';typeC='var(--sport)';}
-    else if(isRec){typeLabel='💧 Récupération';typeBg='var(--recl)';typeC='var(--rec)';}
-    else if(isSport){typeLabel='🏋️ Sport soir';typeBg='var(--spl)';typeC='var(--sport)';}
-
-    const formDur=d>=5?'3h':isSport?'1h':'2h';
-
+    const dur=d>=5?'3h':isSport?'1h':'2h';
+    let tL='📚 Formation',tBg='var(--coul)',tC='var(--cours)';
+    if(isFast){tL='📿 Jeûne';tBg='var(--fatl)';tC='var(--fast)';}
+    else if(isRec&&isSport){tL='💧+🏋️ Récup+Sport';tBg='var(--spl)';tC='var(--sport)';}
+    else if(isRec){tL='💧 Récupération';tBg='var(--recl)';tC='var(--rec)';}
+    else if(isSport){tL='🏋️ Sport soir';tBg='var(--spl)';tC='var(--sport)';}
     html+=`<div class="card" style="border:${isToday?'2px solid var(--blue)':'none'}">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-        <div>
-          <div style="font-size:15px;font-weight:700${isToday?';color:var(--blue)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ← Aujourd\'hui':''}</div>
-          <span class="pill" style="background:${typeBg};color:${typeC};margin-top:4px">${typeLabel}</span>
-          ${isFast?`<div style="font-size:11px;color:var(--fast);font-weight:600;margin-top:3px">🕌 Maghreb : ${f2(mg.h)}h${f2(mg.m)}</div>`:''}
-          <div style="font-size:11px;color:var(--cours);margin-top:2px">📚 Formation ${formDur}</div>
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:6px">
+        <div><div style="font-size:15px;font-weight:700${isToday?';color:var(--blue)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
+          <span class="pill" style="background:${tBg};color:${tC};margin-top:4px">${tL}</span>
+          ${isFast?`<div style="font-size:11px;color:var(--fast);font-weight:600;margin-top:2px">🕌 Maghreb : ${f2(mg.h)}h${f2(mg.m)}</div>`:''}
+          <div style="font-size:11px;color:var(--cours);margin-top:1px">📚 Formation ${dur}</div>
         </div>
-        <div style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:90px">
-          ${isFast?`<span class="badge" style="background:${jDone?'var(--fast)':'var(--fatl)'};color:${jDone?'#fff':'var(--fast)'}">📿${jDone?'✓':'?'}</span>`:''}
-          ${isSport?`<span class="badge" style="background:${spDone?'var(--sport)':'var(--spl)'};color:${spDone?'#fff':'var(--sport)'}">🏋️${spDone?'✓':'?'}</span>`:''}
-          <span class="badge" style="background:${fDone?'var(--cours)':'var(--coul)'};color:${fDone?'#fff':'var(--cours)'}">📚${fDone?'✓':'?'}</span>
+        <div style="display:flex;gap:3px;flex-wrap:wrap;max-width:80px;justify-content:flex-end">
+          ${isFast?`<span class="badge" style="background:${jDone?'var(--fast)':'var(--fatl)'};color:${jDone?'#fff':'var(--fast)'};display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700">📿${jDone?'✓':'?'}</span>`:''}
+          ${isSport?`<span class="badge" style="background:${spDone?'var(--sport)':'var(--spl)'};color:${spDone?'#fff':'var(--sport)'};display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700">🏋️${spDone?'✓':'?'}</span>`:''}
+          <span class="badge" style="background:${fDone?'var(--cours)':'var(--coul)'};color:${fDone?'#fff':'var(--cours)'};display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700">📚${fDone?'✓':'?'}</span>
         </div>
       </div>
-      <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Note / Imprévu</div>
-      <textarea class="tx" style="min-height:44px;font-size:12px" placeholder="Imprévu, rendez-vous, changement..." onchange="savePlanNote('${dk}',this.value)">${note}</textarea>
+      <textarea class="tx" style="min-height:40px;font-size:12px" placeholder="Note imprévu, changement de plan..." onchange="savePlanNote('${dk}',this.value)">${note}</textarea>
     </div>`;
   }
   document.getElementById('plan-days').innerHTML=html;
 }
-async function savePlanNote(dk,v){
-  if(!window._PN)window._PN={};window._PN[dk]=v;
-  if(window.fbSave)window.fbSave('plan_notes',window._PN);
-}
+async function savePlanNote(dk,v){if(!window._PN)window._PN={};window._PN[dk]=v;if(window.fbSave)window.fbSave('plan_notes',window._PN);}
 
-// ── SPORT ──
+// SPORT
 let spWkN=wkNum(new Date());
-function spWk(d){spWkN=Math.max(1,Math.min(72,spWkN+d));renderSport();}
 function spToday(){spWkN=wkNum(new Date());renderSport();}
 function renderSport(){
   fillWeekSelect('sp-wk-sel',spWkN);
-  const allS=D.getSS();
-  const total=Object.values(allS).filter(s=>s.done).length;
-  const now=new Date();
-  const mo=Object.entries(allS).filter(([k,v])=>{const d=new Date(k);return v.done&&d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}).length;
+  const allS=D.getSS(),total=Object.values(allS).filter(s=>s.done).length;
+  const now=new Date(),mo=Object.entries(allS).filter(([k,v])=>{const d=new Date(k);return v.done&&d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}).length;
   const pct=Math.round(total/216*100);
   document.getElementById('sp-tot').textContent=total;document.getElementById('sp-mo').textContent=mo;
   document.getElementById('sp-bar').style.width=pct+'%';document.getElementById('sp-pct').textContent=`${total}/216 · ${pct}%`;
-
+  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  const sportNames=([...sport]).map(d=>JOURS_SHORT[d]).join('+');
+  const fastNames=([...fast]).map(d=>JOURS_SHORT[d]).join('+');
+  document.getElementById('sport-rule').innerHTML=`<strong>Règle :</strong> 🏋️ <strong>${sportNames}</strong> = sport soir 18h · 📿 <strong>${fastNames}</strong> = jeûne · ❌ Pas de jeûne après sport`;
+  document.getElementById('sport-hdr-p').textContent=`${sportNames} · 1h marche + 1h muscu · soir`;
   const ws=wkStart(spWkN);
-  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays(),bl=getSportBlocked();
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
     const dk=isoD(date),isToday=dk===todayISO();
-    const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d),isBlocked=bl.has(d)&&!sport.has(d);
-    const sess=allS[dk]||{done:false,note:''};
-    const canSport=isSport;
-
+    const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d),sess=allS[dk]||{done:false,note:''};
     let badge,bBg,bC;
     if(isFast){badge='📿 Jeûne';bBg='var(--fatl)';bC='var(--fast)';}
     else if(isSport){badge='🏋️ Sport soir';bBg='var(--spl)';bC='var(--sport)';}
     else if(isRec){badge='💧 Récupération';bBg='var(--recl)';bC='var(--rec)';}
-    else if(isBlocked){badge='⚠️ Veille jeûne';bBg='var(--fatl)';bC='var(--fast)';}
     else{badge='Repos';bBg='#f3f4f6';bC='var(--mut)';}
-
-    html+=`<div class="card" style="opacity:${!canSport?.5:1};border:${isToday?'2px solid var(--blue)':'none'}">
+    html+=`<div class="card" style="opacity:${!isSport?.5:1};border:${isToday?'2px solid var(--blue)':'none'}">
       <div style="display:flex;gap:10px;align-items:flex-start">
-        ${canSport?`<div class="chk${sess.done?' on':''}" onclick="toggleSport('${dk}')">
-          ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
-        </div>`:`<div style="width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px">${isFast?'📿':isRec?'💧':'—'}</div>`}
+        ${isSport?`<div class="chk${sess.done?' on':''}" onclick="toggleSport('${dk}')">${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}</div>`:`<div style="width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;margin-top:1px">${isFast?'📿':isRec?'💧':'—'}</div>`}
         <div style="flex:1">
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div style="font-size:14px;font-weight:700;${sess.done?'text-decoration:line-through;color:var(--mut)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
             <span class="pill" style="background:${bBg};color:${bC};font-size:10px">${badge}</span>
           </div>
-          ${canSport?`
-          <div style="font-size:11px;color:var(--mut);margin-top:2px">18h00 → 1h marche + 1h muscu = 2h</div>
-          <textarea class="tx" style="margin-top:6px;font-size:12px;min-height:52px" placeholder="Exercices, ressenti, poids utilisés..." onchange="spNote('${dk}',this.value)">${sess.note||''}</textarea>`
-          :`<div style="font-size:11px;color:${bC};margin-top:2px">${isFast?'Jeûne SANS eau — pas de sport':isRec?'Récupération · Sport possible le soir si c\'est ton jour':isBlocked?'Veille de jeûne — repos':'Jour de repos'}</div>`}
+          ${isSport?`<div style="font-size:11px;color:var(--mut);margin-top:2px">18h → 1h marche + 1h muscu = 2h</div>
+          <textarea class="tx" style="margin-top:6px;font-size:12px;min-height:52px" placeholder="Exercices, poids, ressenti..." onchange="spNote('${dk}',this.value)">${sess.note||''}</textarea>`:`<div style="font-size:11px;color:${bC};margin-top:2px">${isFast?'Pas de sport — jeûne':isRec?'Récupération — sport possible si c\'est ton jour':'Pas de sport aujourd\'hui'}</div>`}
         </div>
       </div>
     </div>`;
@@ -900,135 +1052,168 @@ function renderSport(){
   document.getElementById('sport-sess').innerHTML=html;
   if(!document.getElementById('sp-date').value)document.getElementById('sp-date').value=todayISO();
 }
-async function toggleSport(dk){
-  if(!window._SS)window._SS={};
-  if(!window._SS[dk])window._SS[dk]={done:false,note:''};
-  window._SS[dk].done=!window._SS[dk].done;
-  if(window.fbSave)window.fbSave('sport_sessions',window._SS);
-  renderSport();updateHome();
-  toast(window._SS[dk].done?'Séance sport ✅':'Décochée');
-}
-async function spNote(dk,v){
-  if(!window._SS)window._SS={};
-  if(!window._SS[dk])window._SS[dk]={done:false,note:''};
-  window._SS[dk].note=v;
-  if(window.fbSave)window.fbSave('sport_sessions',window._SS);
-}
-async function addSportM(){
-  const date=document.getElementById('sp-date').value,dur=document.getElementById('sp-dur').value,note=document.getElementById('sp-note').value.trim();
-  if(!date){toast('Choisis une date');return;}
-  if(!window._SS)window._SS={};
-  window._SS[date]={done:true,note:`${dur}${note?' · '+note:''}`,manual:true};
-  if(window.fbSave)window.fbSave('sport_sessions',window._SS);
-  document.getElementById('sp-note').value='';
-  renderSport();updateHome();toast('Séance ajoutée ✅');
-}
+async function toggleSport(dk){if(!window._SS)window._SS={};if(!window._SS[dk])window._SS[dk]={done:false,note:''};window._SS[dk].done=!window._SS[dk].done;if(window.fbSave)window.fbSave('sport_sessions',window._SS);renderSport();updateHome();toast(window._SS[dk].done?'Séance sport ✅':'Décochée');}
+async function spNote(dk,v){if(!window._SS)window._SS={};if(!window._SS[dk])window._SS[dk]={done:false,note:''};window._SS[dk].note=v;if(window.fbSave)window.fbSave('sport_sessions',window._SS);}
+async function addSportM(){const date=document.getElementById('sp-date').value,dur=document.getElementById('sp-dur').value,note=document.getElementById('sp-note').value.trim();if(!date){toast('Choisis une date');return;}if(!window._SS)window._SS={};window._SS[date]={done:true,note:`${dur}${note?' · '+note:''}`,manual:true};if(window.fbSave)window.fbSave('sport_sessions',window._SS);document.getElementById('sp-note').value='';renderSport();updateHome();toast('Séance ajoutée ✅');}
 
-// ── JEÛNE ──
+// JEÛNE
 let jWkN=wkNum(new Date());
-function jWk(d){jWkN=Math.max(1,Math.min(72,jWkN+d));renderJeune();}
 function jToday(){jWkN=wkNum(new Date());renderJeune();}
 function renderJeune(){
   fillWeekSelect('j-wk-sel',jWkN);
   const allJ=D.getJS(),fast=D.getFast(),rec=getRecDays();
   const total=Object.values(allJ).filter(j=>j.done).length;
   let streak=0;const now=new Date();
-  for(let i=0;i<300;i++){
-    const d=new Date(now);d.setDate(now.getDate()-i);
-    const dow=(d.getDay()+6)%7;if(!fast.has(dow))continue;
-    const dk2=isoD(d);if(dk2>todayISO())continue;
-    if(allJ[dk2]?.done)streak++;else break;
-  }
+  for(let i=0;i<300;i++){const d=new Date(now);d.setDate(now.getDate()-i);const dow=(d.getDay()+6)%7;if(!fast.has(dow))continue;const dk2=isoD(d);if(dk2>todayISO())continue;if(allJ[dk2]?.done)streak++;else break;}
   const tp=72*fast.size,pct=Math.round(total/tp*100);
   document.getElementById('j-tot').textContent=total;document.getElementById('j-str').textContent=streak;
   document.getElementById('j-bar').style.width=pct+'%';document.getElementById('j-pct').textContent=`${total}/${tp} · ${pct}%`;
-
-  const ws=wkStart(jWkN);
-  let html='';
+  document.getElementById('fast-hdr-p').textContent=`${[...fast].map(d=>JOURS_SHORT[d]).join('+')} · SANS eau · Fajr → Maghreb`;
+  const ws=wkStart(jWkN);let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
-    const dk=isoD(date),isToday=dk===todayISO();
-    const isFast=fast.has(d),isRec=rec.has(d);
+    const dk=isoD(date),isToday=dk===todayISO(),isFast=fast.has(d),isRec=rec.has(d);
     const mg=maghreb(date),mStr=`${f2(mg.h)}h${f2(mg.m)}`,modeEte=mg.tot>=21*60+30;
     const sess=allJ[dk]||{done:false,note:'',rupture:'',duree:''};
-
-    if(!isFast&&!isRec){
-      html+=`<div class="card" style="opacity:.35">
-        <div style="font-size:13px;font-weight:600">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}</div>
-        <div style="font-size:11px;color:var(--mut)">Pas de jeûne ce jour</div>
-      </div>`;
-      continue;
-    }
-    if(isRec){
-      html+=`<div class="card" style="background:var(--recl);border:${isToday?'2px solid var(--rec)':'none'}">
-        <div style="font-size:14px;font-weight:700;color:var(--rec)">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1} 💧 Récupération</div>
-        <div style="font-size:12px;color:var(--rec);margin-top:5px;line-height:1.7">
-          ✅ Boire dès le réveil<br>✅ Petit-déjeuner complet<br>✅ Manger normalement toute la journée<br>🏋️ Sport possible le soir
-        </div>
-        <textarea class="tx" style="margin-top:8px;font-size:12px;min-height:40px;background:#fff" placeholder="Notes récupération..." onchange="saveJnote('${dk}',this.value)">${sess.note||''}</textarea>
-      </div>`;
-      continue;
-    }
+    if(!isFast&&!isRec){html+=`<div class="card" style="opacity:.35"><div style="font-size:13px;font-weight:600">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}</div><div style="font-size:11px;color:var(--mut)">Pas de jeûne</div></div>`;continue;}
+    if(isRec){html+=`<div class="card" style="background:var(--recl);border:${isToday?'2px solid var(--rec)':'none'}"><div style="font-size:14px;font-weight:700;color:var(--rec)">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1} 💧 Récupération</div><div style="font-size:12px;color:var(--rec);margin-top:4px;line-height:1.7">✅ Boire dès le réveil · ✅ Manger normalement · 🏋️ Sport possible le soir</div><textarea class="tx" style="margin-top:6px;font-size:12px;min-height:40px;background:#fff" placeholder="Notes..." onchange="saveJnote('${dk}',this.value)">${sess.note||''}</textarea></div>`;continue;}
     html+=`<div class="card" style="border:${isToday?'2px solid var(--fast)':'none'}">
       <div style="display:flex;gap:10px;align-items:flex-start">
-        <div class="chk${sess.done?' fast-on':''}" onclick="toggleJeune('${dk}')">
-          ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
-        </div>
+        <div class="chk${sess.done?' fast-on':''}" onclick="toggleJeune('${dk}')">${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}</div>
         <div style="flex:1">
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div style="font-size:14px;font-weight:700${isToday?';color:var(--fast)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
             <span class="pill" style="background:var(--fatl);color:var(--fast)">📿 Jeûne</span>
           </div>
-          <div style="font-size:12px;color:var(--fast);font-weight:600;margin-top:4px">🕌 Maghreb : ${mStr} ${modeEte?'☀️ été':'🌙 hiver'}</div>
-          <div style="font-size:11px;color:var(--mut);margin-top:1px">SANS eau · SANS nourriture · de Fajr → Adhan</div>
-          <div style="font-size:11px;color:var(--cours);margin-top:4px;background:var(--coul);padding:5px 8px;border-radius:7px">
-            ${modeEte?`📚 Formation 21h (à jeun) → ${mStr} rupture → pause 30min → reprise`:`📚 Formation après rupture : 21h → 23h`}
-          </div>
+          <div style="font-size:12px;color:var(--fast);font-weight:600;margin-top:4px">🕌 Maghreb : ${mStr} ${modeEte?'☀️':'🌙'}</div>
+          <div style="font-size:11px;color:var(--mut);margin-top:1px">SANS eau · SANS nourriture · Fajr → Adhan</div>
+          <div style="font-size:11px;color:var(--cours);background:var(--coul);padding:5px 8px;border-radius:7px;margin-top:4px">${modeEte?`📚 21h (jeun) → ${mStr} rupture → pause → reprise`:`📚 Formation après rupture : 21h → 23h`}</div>
           <div style="display:flex;gap:8px;margin-top:10px">
-            <div style="flex:1">
-              <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Heure rupture réelle</div>
-              <input class="inp" type="time" value="${sess.rupture||''}" onchange="saveJrupture('${dk}',this.value)" style="font-size:13px;padding:7px 10px">
-            </div>
-            <div style="flex:1">
-              <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Durée totale</div>
-              <input class="inp" value="${sess.duree||''}" placeholder="ex: 14h30" onchange="saveJduree('${dk}',this.value)" style="font-size:13px;padding:7px 10px">
-            </div>
+            <div style="flex:1"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Rupture réelle</div><input class="inp" type="time" value="${sess.rupture||''}" onchange="saveJrupture('${dk}',this.value)" style="font-size:13px;padding:7px 10px"></div>
+            <div style="flex:1"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Durée totale</div><input class="inp" value="${sess.duree||''}" placeholder="ex: 14h30" onchange="saveJduree('${dk}',this.value)" style="font-size:13px;padding:7px 10px"></div>
           </div>
-          <textarea class="tx" style="margin-top:7px;font-size:12px;min-height:44px" placeholder="Ressenti, difficulté, énergie..." onchange="saveJnote('${dk}',this.value)">${sess.note||''}</textarea>
+          <textarea class="tx" style="margin-top:7px;font-size:12px;min-height:44px" placeholder="Ressenti, énergie..." onchange="saveJnote('${dk}',this.value)">${sess.note||''}</textarea>
         </div>
       </div>
     </div>`;
   }
   document.getElementById('jeune-sess').innerHTML=html;
 }
-async function toggleJeune(dk){
-  if(!window._JS)window._JS={};
-  if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};
-  window._JS[dk].done=!window._JS[dk].done;
-  if(window.fbSave)window.fbSave('jeune_sessions',window._JS);
-  renderJeune();toast(window._JS[dk].done?'Jeûne accompli ✅':'Décoché');
-}
+async function toggleJeune(dk){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].done=!window._JS[dk].done;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);renderJeune();toast(window._JS[dk].done?'Jeûne accompli ✅':'Décoché');}
 async function saveJnote(dk,v){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].note=v;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);}
 async function saveJrupture(dk,v){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].rupture=v;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);}
 async function saveJduree(dk,v){if(!window._JS)window._JS={};if(!window._JS[dk])window._JS[dk]={done:false,note:'',rupture:'',duree:''};window._JS[dk].duree=v;if(window.fbSave)window.fbSave('jeune_sessions',window._JS);}
 
-// ── POIDS ──
-function renderPoids(){
-  const cfg=D.getWC()||{h:1.75,goal:null};
-  const hist=D.getWH();
-  document.getElementById('w-h').value=cfg.h||'';
-  document.getElementById('w-g').value=cfg.goal||'';
-  if(!document.getElementById('w-date').value)document.getElementById('w-date').value=todayISO();
+// CORAN — 114 sourates avec noms arabes
+const SOURATES=[[1,"الفاتحة","Al-Fatiha","L'Ouverture",7,1,1],[2,"البقرة","Al-Baqara","La Vache",286,1,2],[3,"آل عمران","Al-Imran","La Famille d'Imran",200,6,50],[4,"النساء","An-Nisa","Les Femmes",176,9,77],[5,"المائدة","Al-Maida","La Table Servie",120,13,106],[6,"الأنعام","Al-Anam","Les Bestiaux",165,16,128],[7,"الأعراف","Al-Araf","Les Hauteurs",206,19,151],[8,"الأنفال","Al-Anfal","Le Butin",75,22,177],[9,"التوبة","At-Tawba","Le Repentir",129,23,187],[10,"يونس","Yunus","Jonas",109,26,208],[11,"هود","Hud","Hud",123,27,221],[12,"يوسف","Yusuf","Joseph",111,28,235],[13,"الرعد","Ar-Rad","Le Tonnerre",43,30,249],[14,"إبراهيم","Ibrahim","Abraham",52,30,255],[15,"الحجر","Al-Hijr","Al-Hijr",99,31,262],[16,"النحل","An-Nahl","Les Abeilles",128,31,267],[17,"الإسراء","Al-Isra","Le Voyage Nocturne",111,33,282],[18,"الكهف","Al-Kahf","La Caverne",110,34,293],[19,"مريم","Maryam","Marie",98,35,305],[20,"طه","Taha","Taha",135,36,312],[21,"الأنبياء","Al-Anbiya","Les Prophètes",112,37,322],[22,"الحج","Al-Hajj","Le Pèlerinage",78,38,332],[23,"المؤمنون","Al-Muminun","Les Croyants",118,39,342],[24,"النور","An-Nur","La Lumière",64,40,350],[25,"الفرقان","Al-Furqan","Le Discernement",77,41,359],[26,"الشعراء","Ash-Shuara","Les Poètes",227,41,367],[27,"النمل","An-Naml","Les Fourmis",93,42,377],[28,"القصص","Al-Qasas","Le Récit",88,43,385],[29,"العنكبوت","Al-Ankabut","L'Araignée",69,44,396],[30,"الروم","Ar-Rum","Les Romains",60,44,404],[31,"لقمان","Luqman","Luqman",34,45,411],[32,"السجدة","As-Sajda","La Prosternation",30,45,415],[33,"الأحزاب","Al-Ahzab","Les Coalisés",73,45,418],[34,"سبأ","Saba","Saba",54,46,428],[35,"فاطر","Fatir","Le Créateur",45,47,434],[36,"يس","Ya-Sin","Ya-Sin",83,47,440],[37,"الصافات","As-Saffat","Ceux en Rangs",182,48,446],[38,"ص","Sad","Sad",88,48,453],[39,"الزمر","Az-Zumar","Les Groupes",75,49,458],[40,"غافر","Ghafir","Le Pardonneur",85,50,467],[41,"فصلت","Fussilat","Détaillée",54,51,477],[42,"الشورى","Ash-Shura","La Consultation",53,51,483],[43,"الزخرف","Az-Zukhruf","L'Ornement",89,52,489],[44,"الدخان","Ad-Dukhan","La Fumée",59,52,496],[45,"الجاثية","Al-Jathiya","L'Agenouillée",37,53,499],[46,"الأحقاف","Al-Ahqaf","Les Dunes",35,53,502],[47,"محمد","Muhammad","Muhammad",38,53,507],[48,"الفتح","Al-Fath","La Victoire",29,54,511],[49,"الحجرات","Al-Hujurat","Les Appartements",18,54,515],[50,"ق","Qaf","Qaf",45,54,518],[51,"الذاريات","Adh-Dhariyat","Les Vents",60,55,522],[52,"الطور","At-Tur","La Montagne",49,55,526],[53,"النجم","An-Najm","L'Étoile",62,55,528],[54,"القمر","Al-Qamar","La Lune",55,56,531],[55,"الرحمن","Ar-Rahman","Le Tout Miséricordieux",78,56,534],[56,"الواقعة","Al-Waqia","L'Événement",96,56,537],[57,"الحديد","Al-Hadid","Le Fer",29,57,541],[58,"المجادلة","Al-Mujadala","La Discussion",22,57,543],[59,"الحشر","Al-Hashr","Le Rassemblement",24,57,545],[60,"الممتحنة","Al-Mumtahana","L'Éprouvée",13,58,549],[61,"الصف","As-Saff","Le Rang",14,58,551],[62,"الجمعة","Al-Jumua","Le Vendredi",11,58,553],[63,"المنافقون","Al-Munafiqun","Les Hypocrites",11,58,554],[64,"التغابن","At-Taghabun","Manifestation des Pertes",18,58,556],[65,"الطلاق","At-Talaq","Le Divorce",12,58,558],[66,"التحريم","At-Tahrim","L'Interdiction",12,59,560],[67,"الملك","Al-Mulk","La Royauté",30,59,562],[68,"القلم","Al-Qalam","La Plume",52,59,564],[69,"الحاقة","Al-Haqqa","La Vérité",52,59,566],[70,"المعارج","Al-Maarij","Les Degrés",44,59,568],[71,"نوح","Nuh","Noé",28,60,570],[72,"الجن","Al-Jinn","Les Djinns",28,60,572],[73,"المزمل","Al-Muzzammil","L'Enveloppé",20,60,574],[74,"المدثر","Al-Muddaththir","Celui qui se Couvre",56,60,575],[75,"القيامة","Al-Qiyama","La Résurrection",40,60,577],[76,"الإنسان","Al-Insan","L'Homme",31,60,578],[77,"المرسلات","Al-Mursalat","Les Envoyés",50,60,580],[78,"النبأ","An-Naba","La Nouvelle",40,60,582],[79,"النازعات","An-Naziat","Ceux qui Arrachent",46,60,583],[80,"عبس","Abasa","Il S'est Renfrogné",42,60,585],[81,"التكوير","At-Takwir","L'Enroulement",29,60,586],[82,"الانفطار","Al-Infitar","La Fissuration",19,60,587],[83,"المطففين","Al-Mutaffifin","Les Fraudeurs",36,60,587],[84,"الانشقاق","Al-Inshiqaq","La Déchirure",25,60,589],[85,"البروج","Al-Buruj","Les Constellations",22,60,590],[86,"الطارق","At-Tariq","L'Astre Nocturne",17,60,591],[87,"الأعلى","Al-Ala","Le Très Haut",19,60,591],[88,"الغاشية","Al-Ghashiya","L'Enveloppant",26,60,592],[89,"الفجر","Al-Fajr","L'Aube",30,60,593],[90,"البلد","Al-Balad","La Cité",20,60,594],[91,"الشمس","Ash-Shams","Le Soleil",15,60,595],[92,"الليل","Al-Layl","La Nuit",21,60,595],[93,"الضحى","Ad-Duha","La Matinée",11,60,596],[94,"الشرح","Al-Inshirah","L'Expansion",8,60,596],[95,"التين","At-Tin","Le Figuier",8,60,597],[96,"العلق","Al-Alaq","L'Adhérence",19,60,597],[97,"القدر","Al-Qadr","La Destinée",5,60,598],[98,"البينة","Al-Bayyina","La Preuve",8,60,598],[99,"الزلزلة","Az-Zalzala","Le Séisme",8,60,599],[100,"العاديات","Al-Adiyat","Ceux qui Galopent",11,60,599],[101,"القارعة","Al-Qaria","Le Fracas",11,60,600],[102,"التكاثر","At-Takathur","La Rivalité",8,60,600],[103,"العصر","Al-Asr","Le Temps",3,60,601],[104,"الهمزة","Al-Humaza","Le Calomniateur",9,60,601],[105,"الفيل","Al-Fil","L'Éléphant",5,60,601],[106,"قريش","Quraysh","Quraysh",4,60,602],[107,"الماعون","Al-Maun","L'Ustensile",7,60,602],[108,"الكوثر","Al-Kawthar","L'Abondance",3,60,602],[109,"الكافرون","Al-Kafirun","Les Mécréants",6,60,603],[110,"النصر","An-Nasr","Le Secours",3,60,603],[111,"المسد","Al-Masad","Les Fibres",5,60,603],[112,"الإخلاص","Al-Ikhlas","La Pureté",4,60,604],[113,"الفلق","Al-Falaq","L'Aube Naissante",5,60,604],[114,"الناس","An-Nas","Les Hommes",6,60,604]];
 
-  const gEl=document.getElementById('w-goal-disp');
-  if(cfg.goal&&hist.length>0){
-    const last=hist[hist.length-1],diff=last.w-cfg.goal;
-    gEl.innerHTML=`<div class="card" style="background:${diff<=0?'var(--spl)':'var(--fatl)'}">
-      <div style="font-size:13px;font-weight:700;color:${diff<=0?'var(--sport)':'var(--fast)'}">${diff<=0?'🎯 Objectif atteint !':'🎯 Objectif : '+cfg.goal+' kg'}</div>
-      <div style="font-size:12px;color:var(--mut);margin-top:2px">${diff<=0?'Bravo !':'Encore '+Math.abs(diff).toFixed(1)+' kg à perdre'}</div>
+function buildSourateOptions(sel){return SOURATES.map(s=>`<option value="${s[0]}" ${s[0]===sel?'selected':''}>${s[0]}. ${s[1]} — ${s[2]} (${s[4]}v)</option>`).join('');}
+function calcHizb(snum,verset){
+  const s=SOURATES.find(x=>x[0]===snum);if(!s)return{hizb:0,page:0,pct:0};
+  const prog=Math.min(1,(verset-1)/s[4]);
+  const next=SOURATES.find(x=>x[0]===snum+1);
+  const pageFin=next?next[6]-1:604;
+  const page=Math.round(s[6]+prog*(pageFin-s[6]+1));
+  const hizb=Math.min(60,Math.ceil(page/(604/60)));
+  return{hizb,page,pct:Math.round(page/604*100)};
+}
+function getHizbInfo(snum,verset){
+  const s=SOURATES.find(x=>x[0]===snum);if(!s)return'';
+  const{hizb,page,pct}=calcHizb(snum,verset||1);
+  return`${s[1]} · آية ${verset||1} · Page ~${page}/604 · Hizb ${hizb}/60 · ${pct}% du Coran`;
+}
+
+let corWkN=wkNum(new Date());
+function corToday(){corWkN=wkNum(new Date());renderCoran();}
+function renderCoran(){
+  fillWeekSelect('cor-wk-sel',corWkN);
+  const allC=D.getCR(),total=Object.values(allC).filter(c=>c.done).length;
+  let streak=0;const now=new Date();
+  for(let i=0;i<365;i++){const d=new Date(now);d.setDate(now.getDate()-i);const dk2=isoD(d);if(dk2>todayISO())continue;if(allC[dk2]?.done)streak++;else break;}
+  document.getElementById('cor-tot').textContent=total;document.getElementById('cor-str').textContent=streak;
+  document.getElementById('cor-bar').style.width=Math.min(100,Math.round(total/504*100))+'%';
+  document.getElementById('cor-pct').textContent=`${total} jours · streak ${streak}`;
+  const ws=wkStart(corWkN);let html='';
+  for(let d=0;d<7;d++){
+    const date=new Date(ws);date.setDate(date.getDate()+d);
+    const dk=isoD(date),isToday=dk===todayISO();
+    const sess=allC[dk]||{done:false,ahzab:0,sourate_num:0,verset:1,note:''};
+    const hizbInfo=sess.sourate_num?getHizbInfo(sess.sourate_num,sess.verset):'';
+    html+=`<div class="card" style="border:${isToday?'2px solid var(--quran)':'none'}">
+      <div style="display:flex;gap:10px;align-items:flex-start">
+        <div class="chk${sess.done?' quran-on':''}" onclick="toggleCoran('${dk}')">${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}</div>
+        <div style="flex:1">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="font-size:14px;font-weight:700${isToday?';color:var(--quran)':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
+            <span class="pill" style="background:var(--quranl);color:var(--quran)">📖 3 Ahzab</span>
+          </div>
+          <div style="margin-top:8px"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Ahzab lus aujourd'hui</div>
+            <select onchange="saveCoranField('${dk}','ahzab',parseInt(this.value))" style="width:100%;padding:8px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:14px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none">
+              <option value="0" ${!sess.ahzab?'selected':''}>Combien d'Ahzab ?</option>
+              ${[1,2,3,4,5,6,7,8].map(n=>`<option value="${n}" ${sess.ahzab==n?'selected':''}>${n} Hizb = ${n*2} Ahzab (~${n*4} pages)</option>`).join('')}
+            </select>
+          </div>
+          <div style="margin-top:8px"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Sourate où tu t'es arrêté</div>
+            <select onchange="saveCoranSourate('${dk}',parseInt(this.value))" style="width:100%;padding:8px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:13px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none;direction:rtl">
+              <option value="0">اختر السورة...</option>
+              ${buildSourateOptions(sess.sourate_num||0)}
+            </select>
+          </div>
+          <div style="margin-top:6px"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Numéro du verset</div>
+            <input class="inp" type="number" min="1" value="${sess.verset||''}" placeholder="ex: 142" onchange="saveCoranVerset('${dk}',parseInt(this.value)||1)" style="font-size:14px;padding:9px 12px">
+          </div>
+          ${hizbInfo?`<div style="margin-top:6px;background:var(--quranl);border-radius:10px;padding:9px 12px;font-size:12px;font-weight:600;color:var(--quran)">📍 ${hizbInfo}</div>`:''}
+          <div style="margin-top:8px"><div style="font-size:11px;color:var(--mut);margin-bottom:4px">Commentaire / Verset marquant</div>
+            <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Note un verset qui t'a touché, une réflexion..." onchange="saveCoranField('${dk}','note',this.value)">${sess.note||''}</textarea>
+          </div>
+        </div>
+      </div>
     </div>`;
-  } else gEl.innerHTML='';
+  }
+  document.getElementById('coran-sess').innerHTML=html;
+}
+async function toggleCoran(dk){if(!window._CR)window._CR={};if(!window._CR[dk])window._CR[dk]={done:false,ahzab:0,sourate_num:0,verset:1,note:''};window._CR[dk].done=!window._CR[dk].done;if(window.fbSave)window.fbSave('coran_sessions',window._CR);renderCoran();toast(window._CR[dk].done?'3 Ahzab lus ✅ الحمد لله':'Décoché');}
+async function saveCoranField(dk,f,v){if(!window._CR)window._CR={};if(!window._CR[dk])window._CR[dk]={done:false,ahzab:0,sourate_num:0,verset:1,note:''};window._CR[dk][f]=v;if(window.fbSave)window.fbSave('coran_sessions',window._CR);}
+async function saveCoranSourate(dk,num){if(!window._CR)window._CR={};if(!window._CR[dk])window._CR[dk]={done:false,ahzab:0,sourate_num:0,verset:1,note:''};window._CR[dk].sourate_num=num;const s=SOURATES.find(x=>x[0]===num);window._CR[dk].sourate=s?s[1]:'';if(window.fbSave)window.fbSave('coran_sessions',window._CR);renderCoran();}
+async function saveCoranVerset(dk,v){if(!window._CR)window._CR={};if(!window._CR[dk])window._CR[dk]={done:false,ahzab:0,sourate_num:0,verset:1,note:''};window._CR[dk].verset=v;if(window._CR[dk].sourate_num){const info=calcHizb(window._CR[dk].sourate_num,v);window._CR[dk].hizb=info.hizb;window._CR[dk].page=info.page;}if(window.fbSave)window.fbSave('coran_sessions',window._CR);renderCoran();}
 
+// TASBIH
+const TASBIH_LABELS=[{ar:'سبحان الله',fr:'SubhanAllah'},{ar:'الحمد لله',fr:'Alhamdulillah'},{ar:'الله أكبر',fr:'AllahuAkbar'}];
+let tasbihCount=0,tasbihCycle=0;
+function tasbihTap(){
+  tasbihCount++;
+  const cycle=Math.floor(tasbihCount/33)%3;
+  const pos=tasbihCount%33||(tasbihCount&&33);
+  document.getElementById('tasbih-count')&&(document.getElementById('tasbih-count').textContent=pos);
+  document.getElementById('tasbih-main-count')&&(document.getElementById('tasbih-main-count').textContent=pos);
+  const lbl=TASBIH_LABELS[cycle];
+  document.getElementById('tasbih-label')&&(document.getElementById('tasbih-label').textContent=lbl.ar);
+  document.getElementById('tasbih-cycle')&&(document.getElementById('tasbih-cycle').textContent=`Cycle ${cycle+1}/3 — ${pos}/33`);
+  document.getElementById('tasbih-main-cycle')&&(document.getElementById('tasbih-main-cycle').textContent=`${pos} / 33 · Cycle ${cycle+1}`);
+  document.getElementById('tasbih-main-total')&&(document.getElementById('tasbih-main-total').textContent=`Total : ${tasbihCount}`);
+  document.getElementById('tasbih-main-label')&&(document.getElementById('tasbih-main-label').textContent=lbl.ar);
+  document.getElementById('tasbih-main-fr')&&(document.getElementById('tasbih-main-fr').textContent=lbl.fr);
+  if(tasbihCount%33===0){
+    const doneN=Math.floor(tasbihCount/33);
+    ['cycle1-done','cycle2-done','cycle3-done'].forEach((id,i)=>{const el=document.getElementById(id);if(el)el.textContent=Math.floor(doneN/3)+((doneN%3)>i?1:0);});
+    if(tasbihCount%99===0){toast('99 tasbih accomplis 🤲 الحمد لله');}
+    else toast(`${['سبحان الله','الحمد لله','الله أكبر'][cycle]} — 33 ✅`);
+  }
+  const btn=document.getElementById('tasbih-main-btn');if(btn){btn.classList.add('pop');setTimeout(()=>btn.classList.remove('pop'),200);}
+  LS.s('tasbih',{count:tasbihCount});
+}
+function tasbihReset(){tasbihCount=0;['cycle1-done','cycle2-done','cycle3-done'].forEach(id=>{const el=document.getElementById(id);if(el)el.textContent='0';});tasbihTap();tasbihCount=0;const el=document.getElementById('tasbih-main-count');if(el)el.textContent='0';const el2=document.getElementById('tasbih-count');if(el2)el2.textContent='0';toast('Remis à zéro');}
+function tasbihSkip(){tasbihCount=Math.floor(tasbihCount/33)*33+33;tasbihTap();}
+function renderTasbih(){const saved=LS.g('tasbih',{count:0});tasbihCount=saved.count;if(tasbihCount>0)tasbihTap();}
+
+// POIDS
+function renderPoids(){
+  const cfg=D.getWC()||{h:1.75,goal:null},hist=D.getWH();
+  document.getElementById('w-h').value=cfg.h||'';document.getElementById('w-g').value=cfg.goal||'';
+  if(!document.getElementById('w-date').value)document.getElementById('w-date').value=todayISO();
+  const gEl=document.getElementById('w-goal-disp');
+  if(cfg.goal&&hist.length>0){const last=hist[hist.length-1],diff=last.w-cfg.goal;gEl.innerHTML=`<div class="card" style="background:${diff<=0?'var(--spl)':'var(--fatl)'}"><div style="font-size:13px;font-weight:700;color:${diff<=0?'var(--sport)':'var(--fast)'}">${diff<=0?'🎯 Objectif atteint !':'🎯 Objectif : '+cfg.goal+' kg'}</div><div style="font-size:12px;color:var(--mut);margin-top:2px">${diff<=0?'Bravo !':'Encore '+Math.abs(diff).toFixed(1)+' kg'}</div></div>`;}
+  else gEl.innerHTML='';
   if(hist.length>0){
     const last=hist[hist.length-1],first=hist[0];
     const imc=cfg.h?(last.w/(cfg.h*cfg.h)).toFixed(1):'--';
@@ -1040,23 +1225,10 @@ function renderPoids(){
     if(ld!==null){const le=document.getElementById('w-ld');le.textContent=(ld>=0?'+':'')+ld.toFixed(1)+' kg';le.style.color=ld<0?'var(--sport)':'var(--fast)';}
     if(hist.length>=2)drawChart(hist,cfg.goal);
   }
-
   document.getElementById('w-hist').innerHTML=hist.length===0
-    ?'<div class="card"><div style="padding:14px;text-align:center;color:var(--mut);font-size:13px">Aucune pesée — entre ta taille d\'abord<br>puis ajoute ta première pesée ci-dessus 👆<br><br>📅 Pesée chaque mercredi 06h00, à jeun, avant sport</div></div>'
-    :`<div class="card"><div class="stitle">Historique (${hist.length} pesées)</div>`
-    +[...hist].reverse().slice(0,30).map(e=>{
-      const c=D.getWC()||{h:1.75};
-      const imc2=c.h?(e.w/(c.h*c.h)).toFixed(1):'—';
-      return`<div class="row">
-        <div>
-          <div style="font-size:15px;font-weight:700">${e.w.toFixed(1)} kg</div>
-          <div style="font-size:11px;color:var(--mut)">${e.date} · IMC ${imc2}${e.comment?' · '+e.comment:''}</div>
-        </div>
-        <button onclick="delW('${e.id}')" style="background:none;border:none;color:var(--mut);font-size:17px;cursor:pointer;padding:4px 8px">✕</button>
-      </div>`;
-    }).join('')+'</div>';
+    ?'<div class="card"><div style="padding:14px;text-align:center;color:var(--mut);font-size:13px">Aucune pesée<br>Entre ta taille en haut puis ajoute ta première pesée 👆<br><br>📅 Chaque mercredi 06h00 à jeun</div></div>'
+    :`<div class="card"><div class="stitle">Historique (${hist.length})</div>`+[...hist].reverse().slice(0,30).map(e=>{const c2=D.getWC()||{h:1.75};const im=c2.h?(e.w/(c2.h*c2.h)).toFixed(1):'—';return`<div class="row"><div><div style="font-size:15px;font-weight:700">${e.w.toFixed(1)} kg</div><div style="font-size:11px;color:var(--mut)">${e.date} · IMC ${im}${e.comment?' · '+e.comment:''}</div></div><button onclick="delW('${e.id}')" style="background:none;border:none;color:var(--mut);font-size:17px;cursor:pointer;padding:4px 8px">✕</button></div>`;}).join('')+'</div>';
 }
-
 function drawChart(hist,goal){
   const canvas=document.getElementById('w-chart');canvas.style.display='block';
   const W=canvas.offsetWidth||360;canvas.width=W;canvas.height=140;
@@ -1067,100 +1239,62 @@ function drawChart(hist,goal){
   const xS=(W-pad.l-pad.r)/(data.length-1||1),yS=(H-pad.t-pad.b)/(maxV-minV||1);
   const px=i=>pad.l+i*xS,py=v=>H-pad.b-(v-minV)*yS;
   ctx.clearRect(0,0,W,H);
-  ctx.strokeStyle='rgba(0,0,0,0.05)';ctx.lineWidth=.5;
-  for(let v=Math.floor(minV);v<=maxV;v+=.5){ctx.beginPath();ctx.moveTo(pad.l,py(v));ctx.lineTo(W-pad.r,py(v));ctx.stroke();}
+  ctx.strokeStyle='rgba(0,0,0,0.05)';ctx.lineWidth=.5;for(let v=Math.floor(minV);v<=maxV;v+=.5){ctx.beginPath();ctx.moveTo(pad.l,py(v));ctx.lineTo(W-pad.r,py(v));ctx.stroke();}
   if(goal){ctx.strokeStyle='rgba(74,35,90,.35)';ctx.setLineDash([4,4]);ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pad.l,py(goal));ctx.lineTo(W-pad.r,py(goal));ctx.stroke();ctx.setLineDash([]);}
-  ctx.strokeStyle='#2E75B6';ctx.lineWidth=2;ctx.beginPath();
-  data.forEach((d,i)=>{i===0?ctx.moveTo(px(i),py(d.w)):ctx.lineTo(px(i),py(d.w));});ctx.stroke();
+  ctx.strokeStyle='#2E75B6';ctx.lineWidth=2;ctx.beginPath();data.forEach((d,i)=>{i===0?ctx.moveTo(px(i),py(d.w)):ctx.lineTo(px(i),py(d.w));});ctx.stroke();
   data.forEach((d,i)=>{ctx.fillStyle='#2E75B6';ctx.beginPath();ctx.arc(px(i),py(d.w),3.5,0,Math.PI*2);ctx.fill();});
   ctx.fillStyle='rgba(107,114,128,1)';ctx.font='10px -apple-system';ctx.textAlign='right';
   for(let v=Math.ceil(minV);v<=maxV;v++){ctx.fillText(v,pad.l-3,py(v)+3);}
 }
-
-function saveCfg(){
-  const h=parseFloat(document.getElementById('w-h').value);
-  const g=parseFloat(document.getElementById('w-g').value);
-  if(!h||h<1.4||h>2.2){toast('Taille invalide (ex: 1.78)');return;}
-  const cfg={h,goal:g||null};
-  window._WC=cfg;LS.s('weight_cfg',cfg);
-  if(window.fbSave)window.fbSave('weight_cfg',cfg);
-  toast('Configuration sauvegardée ✅');renderPoids();updateHome();
-}
+function saveCfg(){const h=parseFloat(document.getElementById('w-h').value),g=parseFloat(document.getElementById('w-g').value);if(!h||h<1.4||h>2.2){toast('Taille invalide');return;}const cfg={h,goal:g||null};window._WC=cfg;LS.s('weight_cfg',cfg);if(window.fbSave)window.fbSave('weight_cfg',cfg);toast('Sauvegardé ✅');renderPoids();updateHome();}
 function saveW(){
-  const date=document.getElementById('w-date').value;
-  const w=parseFloat(document.getElementById('w-val').value);
-  const com=document.getElementById('w-com').value.trim();
-  if(!w||w<30||w>300){toast('Poids invalide');return;}
-  if(!date){toast('Choisis une date');return;}
-  const hist=[...D.getWH()];
-  const[y,m,d]=date.split('-');
+  const date=document.getElementById('w-date').value,w=parseFloat(document.getElementById('w-val').value),com=document.getElementById('w-com').value.trim();
+  if(!w||w<30||w>300){toast('Poids invalide');return;}if(!date){toast('Date requise');return;}
+  const hist=[...D.getWH()];const[y,m,d]=date.split('-');
   hist.push({id:Date.now().toString(),date:`${d}/${m}/${y}`,iso:date,w,comment:com});
   hist.sort((a,b)=>(a.iso||'').localeCompare(b.iso||''));
-  window._WH=hist;LS.s('weight_history',hist);
-  if(window.fbSave)window.fbSave('weight_history',hist);
+  window._WH=hist;LS.s('weight_history',hist);if(window.fbSave)window.fbSave('weight_history',hist);
   document.getElementById('w-val').value='';document.getElementById('w-com').value='';
   toast('Pesée enregistrée ✅');renderPoids();updateHome();
 }
-function delW(id){
-  const hist=D.getWH().filter(e=>e.id!==id);
-  window._WH=hist;LS.s('weight_history',hist);
-  if(window.fbSave)window.fbSave('weight_history',hist);
-  renderPoids();
-}
+function delW(id){const h=D.getWH().filter(e=>e.id!==id);window._WH=h;LS.s('weight_history',h);if(window.fbSave)window.fbSave('weight_history',h);renderPoids();}
 
-// ── FORMATION ──
+// FORMATION
 let fWkN=wkNum(new Date());
-function fWk(d){fWkN=Math.max(1,Math.min(72,fWkN+d));renderForm();}
 function fToday(){fWkN=wkNum(new Date());renderForm();}
 const PH={1:'Phase 1 — Python & SQL',2:'Phase 2 — BI & Certifications',3:'Phase 3 — Diplôme',4:'Phase 4 — SC Data'};
 function getFormContent(wn,dow){
   const ph=wn<=12?1:wn<=24?2:wn<=60?3:4;
-  if(ph===1){
-    const t=['Python','Python','Pandas','Pandas','SQL','SQL','SQL','SQL','Stats','Stats','Stats','Révision'][Math.min(wn-1,11)];
-    const r={
-      0:['Variables types conditions','DataFrames Series','Filtres groupby','NumPy arrays','SELECT FROM WHERE','INNER JOIN','Window ROW_NUMBER','BigQuery cloud','sqlite3 SQLAlchemy','Corrélation Pearson','Tests stat','Révision Python'],
-      1:['Boucles for/while','Nettoyage fillna dropna','merge join concat','Dates resample','COUNT SUM AVG','LEFT RIGHT JOIN','Window LAG LEAD','BigQuery avancé','pd.read_sql','Régression linéaire','Outliers IQR Z-score','HackerRank Python'],
-      2:['Fonctions def return','Matplotlib Seaborn','pivot apply lambda','EDA exploratoire','GROUP BY HAVING','CTEs WITH...AS','CASE WHEN','Kaggle SQL avancé','Stats descriptives','Régression multiple','Séries temporelles','HackerRank SQL'],
-      3:['Listes dictionnaires','Kaggle Data Cleaning','Projet EDA SC','Notebook GitHub','Sous-requêtes','Optimisation INDEX','Mock SQL','Mock 20 requêtes','Histogrammes','Régression logistique','Encodage variables','Portfolio GitHub'],
-      4:['Mini-projet KPI logistique','Projet Supply Chain','Révision Pandas','Bilan Pandas+NumPy','Exercices SQLZoo','HackerRank SQL','Révision SQL','Bilan SQL','Train/Test split','Projet stats auto','Prévision délais','LinkedIn+CV'],
-      5:['GitHub README','Notebook EDA','Seaborn avancé','Projet EDA complet','Olist Brazil','Projet Olist','Flying Doctor SQL','Pipeline SQL','EDA complet','EDA+Stats','Portfolio final','Bilan Phase 1'],
-      6:['Révision bases','Révision groupby','NumPy vectoriel','Bilan Pandas','Révision SQL basics','Révision JOIN','Révision window','Bilan SQL complet','Notebook GitHub','Projet prédictif','Documenter README','S\'inscrire Coursera']
-    };
-    return{tool:t,content:(r[dow]||[])[Math.min(wn-1,11)]||'—'};
-  }
-  if(ph===2){const rw=wn-12;return{tool:rw<=4?'Power BI':rw<=6?'Excel/VBA':'Google DA',content:'Cours vidéo + exercices pratiques'};}
-  const mods={3:['Stats ML','NLP','Cloud','Viz avancée','SQL avancé','ML avancé','Stage terrain','Stage avancé','Stage emploi'],4:['Forecasting stocks','Diagnostic auto','Emploi réseau','Certif PL-300']};
+  if(ph===1){const t=['Python','Python','Pandas','Pandas','SQL','SQL','SQL','SQL','Stats','Stats','Stats','Révision'][Math.min(wn-1,11)];const r={0:['Variables types conditions','DataFrames Series','Filtres groupby','NumPy','SELECT FROM WHERE','INNER JOIN','Window ROW_NUMBER','BigQuery','sqlite3','Corrélation','Tests stat','Révision Python'],1:['Boucles for/while','Nettoyage fillna','merge join','Dates resample','COUNT SUM AVG','LEFT RIGHT JOIN','Window LAG LEAD','BigQuery avancé','pd.read_sql','Régression lin.','Outliers IQR','HackerRank Python'],2:['Fonctions def','Matplotlib Seaborn','pivot apply','EDA','GROUP BY HAVING','CTEs WITH...AS','CASE WHEN','Kaggle SQL','Stats descriptives','Régression multiple','Séries tempo.','HackerRank SQL'],3:['Listes dicts','Data Cleaning','Projet EDA SC','Notebook GitHub','Sous-requêtes','Optimisation','Mock SQL','Mock 20 req.','Histogrammes','Régression log.','Encodage','Portfolio'],4:['Mini-projet KPI','Projet SC','Révision Pandas','Bilan Pandas','SQLZoo','HackerRank SQL','Révision SQL','Bilan SQL','Train/Test','Projet stats','Prévision','LinkedIn'],5:['GitHub README','EDA notebook','Seaborn avancé','Projet EDA','Olist Brazil','Projet Olist','Flying Doctor','Pipeline SQL','EDA complet','EDA+Stats','Portfolio final','Bilan Phase 1'],6:['Révision','Révision groupby','NumPy','Bilan Pandas','Révision SQL','Révision JOIN','Révision window','Bilan SQL','Notebook','Projet prédictif','README','Coursera']};return{tool:t,content:(r[dow]||[])[Math.min(wn-1,11)]||'—'};}
+  if(ph===2){const rw=wn-12;return{tool:rw<=4?'Power BI':rw<=6?'Excel/VBA':'Google DA',content:'Cours vidéo + exercices'};}
+  const mods={3:['Stats ML','NLP','Cloud','Viz avancée','SQL avancé','ML avancé','Stage terrain','Stage avancé','Stage emploi'],4:['Forecasting','Diagnostic auto','Emploi réseau','Certif PL-300']};
   const arr=mods[ph]||[];const idx=ph===3?Math.floor((wn-25)/4):Math.floor((wn-61)/3);
-  return{tool:arr[Math.min(idx,arr.length-1)]||'Formation',content:'Cours + exercices pratiques'};
+  return{tool:arr[Math.min(idx,arr.length-1)]||'Formation',content:'Cours + exercices'};
 }
 function renderForm(){
-  const ph=fWkN<=12?1:fWkN<=24?2:fWkN<=60?3:4;
   fillWeekSelect('f-wk-sel',fWkN);
+  const ph=fWkN<=12?1:fWkN<=24?2:fWkN<=60?3:4;
   document.getElementById('form-ph').textContent=PH[ph];
-  const allS=D.getFS();
-  const done=Object.values(allS).filter(s=>s.done).length,pct=Math.round(done/504*100);
+  const allS=D.getFS(),done=Object.values(allS).filter(s=>s.done).length,pct=Math.round(done/504*100);
   document.getElementById('f-stats').textContent=`${done}/504`;document.getElementById('f-pct').textContent=pct+'%';
   document.getElementById('ring-f').style.strokeDashoffset=188.5-(188.5*pct/100);
-
-  const ws=wkStart(fWkN);
-  const fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
+  // Notes
+  renderNotesList();
+  const ws=wkStart(fWkN),fast=D.getFast(),sport=D.getSport(),rec=getRecDays();
   let html='';
   for(let d=0;d<7;d++){
     const date=new Date(ws);date.setDate(date.getDate()+d);
     const dk=isoD(date),isToday=dk===todayISO();
     const isFast=fast.has(d),isSport=sport.has(d),isRec=rec.has(d);
-    const isWE=d>=5;
     const sess=allS[dk]||{done:false,comment:'',difficulty:''};
     const{tool,content}=getFormContent(fWkN,d);
-    const duree=isWE?'3h':isSport?'1h':'2h';
+    const duree=d>=5?'3h':isSport?'1h':'2h';
     const suf=isSport?' 🏋️':isFast?' 📿':isRec?' 💧':'';
     const pBg=isSport?'var(--spl)':isFast?'var(--fatl)':isRec?'var(--recl)':'var(--coul)';
     const pC=isSport?'var(--sport)':isFast?'var(--fast)':isRec?'var(--rec)':'var(--cours)';
     html+=`<div class="card" style="opacity:${sess.done?.65:1};border:${isToday?'2px solid var(--blue)':'none'}">
       <div style="display:flex;gap:10px;align-items:flex-start">
-        <div class="chk${sess.done?' on':''}" onclick="toggleForm('${dk}')">
-          ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
-        </div>
+        <div class="chk${sess.done?' on':''}" onclick="toggleForm('${dk}')">${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}</div>
         <div style="flex:1;min-width:0">
           <div style="display:flex;align-items:center;justify-content:space-between;gap:6px">
             <div style="font-size:14px;font-weight:700;${sess.done?'text-decoration:line-through;color:var(--mut)':''}">${JOURS[d]}${suf}${isToday?' ←':''}</div>
@@ -1168,215 +1302,179 @@ function renderForm(){
           </div>
           <div style="font-size:12px;font-weight:600;color:var(--cours);margin-top:2px">${tool}</div>
           <div style="font-size:11px;color:var(--mut);margin-top:1px">${content}</div>
-          <div style="margin-top:8px">
-            <div style="font-size:11px;color:var(--mut);margin-bottom:3px">Ce que j'ai appris / retenu</div>
-            <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Résumé de la séance..." onchange="saveFC('${dk}','comment',this.value)">${sess.comment||''}</textarea>
-          </div>
-          <div style="margin-top:6px">
-            <div style="font-size:11px;color:var(--mut);margin-bottom:3px">Difficulté / Question à revoir</div>
-            <textarea class="tx" style="font-size:12px;min-height:36px" placeholder="Blocage, notion à retravailler..." onchange="saveFC('${dk}','difficulty',this.value)">${sess.difficulty||''}</textarea>
-          </div>
+          <div style="margin-top:8px"><div style="font-size:11px;color:var(--mut);margin-bottom:3px">Ce que j'ai appris</div>
+            <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Résumé..." onchange="saveFC('${dk}','comment',this.value)">${sess.comment||''}</textarea></div>
+          <div style="margin-top:6px"><div style="font-size:11px;color:var(--mut);margin-bottom:3px">Difficulté / Question</div>
+            <textarea class="tx" style="font-size:12px;min-height:36px" placeholder="Blocage, notion à retravailler..." onchange="saveFC('${dk}','difficulty',this.value)">${sess.difficulty||''}</textarea></div>
         </div>
       </div>
     </div>`;
   }
   document.getElementById('form-sess').innerHTML=html;
 }
-async function toggleForm(dk){
-  if(!window._FS)window._FS={};
-  if(!window._FS[dk])window._FS[dk]={done:false,comment:'',difficulty:''};
-  window._FS[dk].done=!window._FS[dk].done;
-  if(window.fbSave)window.fbSave('form_sessions',window._FS);
-  renderForm();updateHome();toast(window._FS[dk].done?'Séance formation ✅':'Décochée');
+async function toggleForm(dk){if(!window._FS)window._FS={};if(!window._FS[dk])window._FS[dk]={done:false,comment:'',difficulty:''};window._FS[dk].done=!window._FS[dk].done;if(window.fbSave)window.fbSave('form_sessions',window._FS);renderForm();updateHome();toast(window._FS[dk].done?'Séance ✅':'Décochée');}
+async function saveFC(dk,f,v){if(!window._FS)window._FS={};if(!window._FS[dk])window._FS[dk]={done:false,comment:'',difficulty:''};window._FS[dk][f]=v;if(window.fbSave)window.fbSave('form_sessions',window._FS);}
+
+// Notes de cours
+function saveNote(){const subj=document.getElementById('note-subject').value,txt=document.getElementById('course-note').value.trim();if(!txt)return;const notes=[...D.getNotes()];notes.unshift({id:Date.now().toString(),subj,txt,date:todayISO()});if(notes.length>50)notes.pop();window._NOTES=notes;if(window.fbSave)window.fbSave('course_notes',notes);document.getElementById('course-note').value='';renderNotesList();toast('Note sauvegardée ✅');}
+function renderNotesList(){const notes=D.getNotes().slice(0,5);document.getElementById('notes-list').innerHTML=notes.map(n=>`<div style="display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-bottom:.5px solid var(--brd)"><div style="flex:1"><div style="font-size:11px;font-weight:700;color:var(--cours)">${n.subj} · ${n.date}</div><div style="font-size:12px;margin-top:2px">${n.txt}</div></div><button onclick="delNote('${n.id}')" style="background:none;border:none;color:var(--mut);font-size:14px;cursor:pointer">✕</button></div>`).join('');}
+function delNote(id){const notes=D.getNotes().filter(n=>n.id!==id);window._NOTES=notes;if(window.fbSave)window.fbSave('course_notes',notes);renderNotesList();}
+
+// FLASHCARDS
+let flashIdx=0,flashFlipped=false,flashFilter='Tous';
+function renderFlash(){
+  const cards=D.getFL();
+  const subjects=['Tous','Python','SQL','Power BI','Stats','ML'];
+  document.getElementById('flash-filters').innerHTML=subjects.map(s=>`<button onclick="flashFilter='${s}';flashIdx=0;flashFlipped=false;renderFlash()" class="pill" style="background:${flashFilter===s?'var(--cours)':'var(--coul)'};color:${flashFilter===s?'#fff':'var(--cours)'};cursor:pointer">${s}</button>`).join('');
+  const filtered=flashFilter==='Tous'?cards:cards.filter(c=>c.subj===flashFilter);
+  const ok=cards.filter(c=>c.ok).length,ko=cards.filter(c=>c.ko).length;
+  document.getElementById('fl-ok').textContent=ok;document.getElementById('fl-ko').textContent=ko;
+  const zone=document.getElementById('flash-card-zone');
+  if(filtered.length===0){zone.innerHTML='<div class="card" style="text-align:center;padding:20px;color:var(--mut)">Aucune carte pour cette matière.<br>Ajoute-en une ci-dessous 👇</div>';return;}
+  if(flashIdx>=filtered.length)flashIdx=0;
+  const card=filtered[flashIdx];
+  zone.innerHTML=`<div style="text-align:center;font-size:11px;color:var(--mut);margin-bottom:6px">${flashIdx+1}/${filtered.length} · ${card.subj}</div>
+  <div class="flash-card" onclick="flashFlipped=!flashFlipped;renderFlash()" style="background:${flashFlipped?'var(--coul)':'var(--card)'};box-shadow:0 2px 12px rgba(0,0,0,.1)">
+    <div style="font-size:11px;font-weight:700;color:var(--mut);margin-bottom:8px">${flashFlipped?'✅ RÉPONSE':'❓ QUESTION — appuie pour voir'}</div>
+    <div style="font-size:15px;font-weight:600;text-align:center;color:${flashFlipped?'var(--cours)':'var(--txt)'}">${flashFlipped?card.answer:card.question}</div>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:6px">
+    <button class="btn" style="flex:1;background:var(--spl);color:var(--sport)" onclick="rateCard('${card.id}','ok')">✅ Je savais</button>
+    <button class="btn" style="flex:1;background:var(--fatl);color:var(--fast)" onclick="rateCard('${card.id}','ko')">❌ À revoir</button>
+    <button class="btn" style="background:#f3f4f6;color:var(--txt);padding:11px 14px" onclick="flashIdx++;flashFlipped=false;renderFlash()">→</button>
+  </div>`;
 }
-async function saveFC(dk,field,v){
-  if(!window._FS)window._FS={};
-  if(!window._FS[dk])window._FS[dk]={done:false,comment:'',difficulty:''};
-  window._FS[dk][field]=v;
-  if(window.fbSave)window.fbSave('form_sessions',window._FS);
+function rateCard(id,rating){const cards=[...D.getFL()];const c=cards.find(x=>x.id===id);if(c){c[rating]=(c[rating]||0)+1;}window._FL=cards;if(window.fbSave)window.fbSave('flashcards',cards);flashIdx++;flashFlipped=false;renderFlash();}
+function addFlashcard(){const subj=document.getElementById('fl-subj').value,q=document.getElementById('fl-q').value.trim(),a=document.getElementById('fl-a').value.trim();if(!q||!a){toast('Question et réponse requises');return;}const cards=[...D.getFL()];cards.push({id:Date.now().toString(),subj,question:q,answer:a,ok:0,ko:0});window._FL=cards;if(window.fbSave)window.fbSave('flashcards',cards);document.getElementById('fl-q').value='';document.getElementById('fl-a').value='';toast('Carte ajoutée ✅');renderFlash();}
+
+// CANDIDATURES
+function renderJobs(){
+  const jobs=D.getJobs();
+  const total=jobs.length,entretien=jobs.filter(j=>j.status==='entretien').length,refus=jobs.filter(j=>j.status==='refus').length;
+  document.getElementById('job-total').textContent=total;document.getElementById('job-entretien').textContent=entretien;document.getElementById('job-refus').textContent=refus;
+  if(!document.getElementById('job-date').value)document.getElementById('job-date').value=todayISO();
+  const statusColor={envoyé:'var(--blue)',entretien:'var(--sport)',offre:'var(--quran)',refus:'var(--fast)',attente:'var(--mut)'};
+  const statusBg={envoyé:'var(--blu)',entretien:'var(--spl)',offre:'var(--quranl)',refus:'var(--fatl)',attente:'#f3f4f6'};
+  const statusIcon={envoyé:'📤',entretien:'🎤',offre:'🎉',refus:'❌',attente:'⏳'};
+  document.getElementById('jobs-list').innerHTML=jobs.length===0
+    ?'<div class="card" style="text-align:center;padding:20px;color:var(--mut)">Aucune candidature pour l\'instant.<br>Ça viendra en Phase 3 💪</div>'
+    :jobs.map((j,i)=>`<div class="card">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div style="flex:1">
+          <div style="font-size:14px;font-weight:700">${j.company}</div>
+          <div style="font-size:12px;color:var(--mut)">${j.title} · ${j.date}</div>
+          ${j.notes?`<div style="font-size:12px;color:var(--mut);margin-top:4px">${j.notes}</div>`:''}
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+          <span class="kandidat-badge" style="background:${statusBg[j.status]};color:${statusColor[j.status]}">${statusIcon[j.status]} ${j.status}</span>
+          <select onchange="updateJobStatus(${i},this.value)" style="font-size:11px;padding:3px 8px;border-radius:8px;border:1px solid var(--brd);width:auto;background:var(--bg);color:var(--txt)">
+            ${['envoyé','entretien','offre','refus','attente'].map(s=>`<option value="${s}" ${j.status===s?'selected':''}>${s}</option>`).join('')}
+          </select>
+          <button onclick="delJob(${i})" style="background:none;border:none;color:var(--mut);font-size:14px;cursor:pointer">✕</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+function addJob(){const company=document.getElementById('job-company').value.trim(),title=document.getElementById('job-title').value.trim(),date=document.getElementById('job-date').value,status=document.getElementById('job-status').value,notes=document.getElementById('job-notes').value.trim();if(!company){toast('Entreprise requise');return;}const jobs=[...D.getJobs()];jobs.unshift({company,title,date,status,notes});window._JOBS=jobs;if(window.fbSave)window.fbSave('jobs',jobs);document.getElementById('job-company').value='';document.getElementById('job-title').value='';document.getElementById('job-notes').value='';toast('Candidature ajoutée ✅');renderJobs();}
+function updateJobStatus(i,status){const jobs=[...D.getJobs()];jobs[i].status=status;window._JOBS=jobs;if(window.fbSave)window.fbSave('jobs',jobs);renderJobs();}
+function delJob(i){const jobs=[...D.getJobs()];jobs.splice(i,1);window._JOBS=jobs;if(window.fbSave)window.fbSave('jobs',jobs);renderJobs();}
+
+// BADGES
+const BADGES_DEF=[
+  {id:'first_fast',icon:'🌙',name:'Premier jeûne',desc:'Compléter ton 1er jeûne',check:()=>Object.values(D.getJS()).some(j=>j.done)},
+  {id:'first_sport',icon:'👟',name:'Premier pas',desc:'1ère séance de sport',check:()=>Object.values(D.getSS()).some(s=>s.done)},
+  {id:'first_form',icon:'📝',name:'Premier cours',desc:'1ère séance de formation',check:()=>Object.values(D.getFS()).some(s=>s.done)},
+  {id:'first_quran',icon:'📖',name:'Bismillah',desc:'1er jour de lecture',check:()=>Object.values(D.getCR()).some(c=>c.done)},
+  {id:'sport_10',icon:'🏃',name:'10 séances',desc:'10 séances de sport',check:()=>Object.values(D.getSS()).filter(s=>s.done).length>=10},
+  {id:'sport_50',icon:'💪',name:'50 séances',desc:'50 séances de sport',check:()=>Object.values(D.getSS()).filter(s=>s.done).length>=50},
+  {id:'fast_10',icon:'⭐',name:'10 jeûnes',desc:'10 jeûnes accomplis',check:()=>Object.values(D.getJS()).filter(j=>j.done).length>=10},
+  {id:'fast_50',icon:'🌟',name:'50 jeûnes',desc:'50 jeûnes accomplis',check:()=>Object.values(D.getJS()).filter(j=>j.done).length>=50},
+  {id:'form_30',icon:'🎓',name:'1 mois formation',desc:'30 séances terminées',check:()=>Object.values(D.getFS()).filter(s=>s.done).length>=30},
+  {id:'form_100',icon:'🏆',name:'100 séances',desc:'100 séances terminées',check:()=>Object.values(D.getFS()).filter(s=>s.done).length>=100},
+  {id:'form_ph1',icon:'🐍',name:'Python validé',desc:'Phase 1 terminée (84 séances)',check:()=>Object.values(D.getFS()).filter(s=>s.done).length>=84},
+  {id:'quran_30',icon:'📚',name:'1 mois Coran',desc:'30 jours de lecture',check:()=>Object.values(D.getCR()).filter(c=>c.done).length>=30},
+  {id:'streak_7',icon:'🔥',name:'Semaine parfaite',desc:'7 jours parfaits de suite',check:()=>calcStreak()>=7},
+  {id:'streak_30',icon:'💎',name:'Mois parfait',desc:'30 jours parfaits de suite',check:()=>calcStreak()>=30},
+  {id:'poids_1',icon:'⚖️',name:'Première pesée',desc:'Enregistrer 1 pesée',check:()=>D.getWH().length>=1},
+  {id:'job_1',icon:'💼',name:'Premier CV',desc:'1ère candidature envoyée',check:()=>D.getJobs().length>=1},
+  {id:'flash_10',icon:'🃏',name:'10 flashcards',desc:'Créer 10 flashcards',check:()=>D.getFL().length>=10},
+  {id:'tasbih_99',icon:'🤲',name:'99 Tasbih',desc:'Compléter 99 tasbih',check:()=>LS.g('tasbih',{count:0}).count>=99},
+];
+function renderBadges(){
+  const streak=calcStreak();
+  document.getElementById('streak-global-big').textContent=streak;
+  let html='<div style="display:flex;flex-wrap:wrap;gap:8px">';
+  BADGES_DEF.forEach(b=>{
+    const unlocked=b.check();
+    html+=`<div class="badge-item${unlocked?'':' badge-locked'}" style="background:${unlocked?'#FFF8E1':'var(--bg)'}">
+      <div class="badge-icon">${b.icon}</div>
+      <div class="badge-name" style="color:${unlocked?'#E67E22':'var(--mut)'}">${b.name}</div>
+      <div style="font-size:9px;color:var(--mut);text-align:center">${b.desc}</div>
+      ${unlocked?'<div style="font-size:10px;color:var(--sport);font-weight:700">✅ Débloqué</div>':''}
+    </div>`;
+  });
+  html+='</div>';
+  document.getElementById('badges-grid').innerHTML=html;
+  // Check new badges
+  const prev=LS.g('badges_unlocked',[]);
+  BADGES_DEF.forEach(b=>{if(b.check()&&!prev.includes(b.id)){prev.push(b.id);LS.s('badges_unlocked',prev);sendNotif('🏆 Badge débloqué !',`${b.icon} ${b.name} — ${b.desc}`);}});
 }
 
-// ── PARAMÈTRES ──
+// PARAMÈTRES
 let tmpFast=new Set(),tmpSport=new Set();
 function renderSettings(){
   checkNotif();
-  const set=D.getSet();
-  tmpFast=new Set(set.fast||[0,3]);
-  tmpSport=new Set(set.sport||[1,4,5]);
-  renderDayToggles();
-  renderWeekSummary();
+  const set=D.getSet();tmpFast=new Set(set.fast||[0,3]);tmpSport=new Set(set.sport||[1,4,5]);
+  renderDayToggles();renderWeekSummary();
+  const ad=LS.g('auto_dark',true);const cb=document.getElementById('auto-dark');if(cb)cb.checked=ad;
 }
-
 function renderDayToggles(){
   const ft=document.getElementById('fast-toggle'),st=document.getElementById('sport-toggle');
+  if(!ft||!st)return;
   ft.innerHTML='';st.innerHTML='';
   JOURS_SHORT.forEach((j,i)=>{
-    const fb=document.createElement('button');
-    fb.className='day-btn'+(tmpFast.has(i)?' sel-fast':'');
-    fb.textContent=j;
-    fb.onclick=()=>toggleFastDay(i);
-    ft.appendChild(fb);
-    const sb=document.createElement('button');
-    sb.className='day-btn'+(tmpSport.has(i)?' sel-sport':'');
-    sb.textContent=j;
-    sb.onclick=()=>toggleSportDay(i);
-    st.appendChild(sb);
+    const fb=document.createElement('button');fb.className='day-btn'+(tmpFast.has(i)?' sel-fast':'');fb.textContent=j;fb.onclick=()=>{if(tmpFast.has(i))tmpFast.delete(i);else tmpFast.add(i);renderDayToggles();renderWeekSummary();};ft.appendChild(fb);
+    const sb=document.createElement('button');sb.className='day-btn'+(tmpSport.has(i)?' sel-sport':'');sb.textContent=j;sb.onclick=()=>{if(tmpSport.has(i))tmpSport.delete(i);else tmpSport.add(i);renderDayToggles();renderWeekSummary();};st.appendChild(sb);
   });
-  checkConflicts();
+  const conflicts=[];tmpSport.forEach(sd=>{const nd=(sd+1)%7;if(tmpFast.has(nd))conflicts.push(`${JOURS_SHORT[sd]}→${JOURS_SHORT[nd]}`);});
+  const sc=document.getElementById('sport-conflict');if(sc)sc.textContent=conflicts.length>0?`⚠️ Conflit : ${conflicts.join(', ')} — sport suivi d'un jeûne`:'✅ Aucun conflit';
 }
-
-function toggleFastDay(i){
-  if(tmpFast.has(i))tmpFast.delete(i);else tmpFast.add(i);
-  renderDayToggles();renderWeekSummary();
-}
-function toggleSportDay(i){
-  if(tmpSport.has(i))tmpSport.delete(i);else tmpSport.add(i);
-  renderDayToggles();renderWeekSummary();
-}
-
-function checkConflicts(){
-  const fc=document.getElementById('fast-conflict'),sc=document.getElementById('sport-conflict');
-  // Sport le jour précédant un jeûne = conflit
-  const conflicts=[];
-  tmpSport.forEach(sd=>{const nextDay=(sd+1)%7;if(tmpFast.has(nextDay))conflicts.push(`${JOURS_SHORT[sd]}→${JOURS_SHORT[nextDay]}`);});
-  if(conflicts.length>0){
-    sc.textContent=`⚠️ Conflit : sport le ${conflicts.join(', ')} (lendemain = jeûne). Modifie l'un ou l'autre.`;
-    sc.style.color='var(--fast)';
-  } else sc.textContent='✅ Aucun conflit détecté';
-  fc.textContent='';
-}
-
 function renderWeekSummary(){
-  const el=document.getElementById('week-summary');
+  const el=document.getElementById('week-summary');if(!el)return;
   const rec=new Set();tmpFast.forEach(d=>rec.add((d+1)%7));
-  const bl=new Set();tmpFast.forEach(d=>bl.add((d+6)%7));
   el.innerHTML=JOURS.map((j,i)=>{
     let type,bg,c;
-    if(tmpFast.has(i)){type='📿 Jeûne SANS eau';bg='var(--fatl)';c='var(--fast)';}
-    else if(tmpSport.has(i)){type='🏋️ Sport + Formation '+(i>=5?'3h':'1h');bg='var(--spl)';c='var(--sport)';}
-    else if(rec.has(i)){type='💧 Récupération · Formation '+(i>=5?'3h':'2h');bg='var(--recl)';c='var(--rec)';}
+    if(tmpFast.has(i)){type='📿 Jeûne';bg='var(--fatl)';c='var(--fast)';}
+    else if(tmpSport.has(i)){type='🏋️ Sport + Form '+(i>=5?'3h':'1h');bg='var(--spl)';c='var(--sport)';}
+    else if(rec.has(i)){type='💧 Récup + Form '+(i>=5?'3h':'2h');bg='var(--recl)';c='var(--rec)';}
     else{type='📚 Formation '+(i>=5?'3h':'2h');bg='var(--coul)';c='var(--cours)';}
-    return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:.5px solid var(--brd)">
-      <div style="width:28px;font-size:12px;font-weight:700;color:var(--mut)">${JOURS_SHORT[i]}</div>
-      <span class="pill" style="background:${bg};color:${c};font-size:11px">${type}</span>
-    </div>`;
+    return`<div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:.5px solid var(--brd)"><div style="width:28px;font-size:12px;font-weight:700;color:var(--mut)">${JOURS_SHORT[i]}</div><span class="pill" style="background:${bg};color:${c};font-size:11px">${type}</span></div>`;
   }).join('');
 }
-
 async function saveSettings(){
-  // Vérifier conflits sport→jeûne
-  const conflicts=[];
-  tmpSport.forEach(sd=>{const nd=(sd+1)%7;if(tmpFast.has(nd))conflicts.push(`${JOURS_SHORT[sd]}→${JOURS_SHORT[nd]}`);});
-  if(conflicts.length>0){
-    toast(`⚠️ Résous d'abord les conflits : ${conflicts.join(', ')}`);return;
-  }
+  const conflicts=[];tmpSport.forEach(sd=>{const nd=(sd+1)%7;if(tmpFast.has(nd))conflicts.push(JOURS_SHORT[sd]);});
+  if(conflicts.length>0){toast(`⚠️ Résous d'abord les conflits`);return;}
   const set={fast:[...tmpFast].sort(),sport:[...tmpSport].sort()};
-  window._SET=set;LS.s('settings',set);
-  if(window.fbSave)window.fbSave('settings',set);
-  applySettings();
-  toast('Paramètres sauvegardés ✅');
-  renderWeekSummary();
-  updateHome();
+  window._SET=set;LS.s('settings',set);if(window.fbSave)window.fbSave('settings',set);
+  applySettings();toast('Paramètres sauvegardés ✅');
 }
-
-function clearAll(){
-  localStorage.clear();
-  window._FS={};window._SS={};window._JS={};window._WH=[];window._WC={h:1.75,goal:null};
-  window._PN={};window._SET={fast:[0,3],sport:[1,4,5]};window._CD={};
-  if(window.fbSave){
-    window.fbSave('form_sessions',{});window.fbSave('sport_sessions',{});
-    window.fbSave('jeune_sessions',{});window.fbSave('weight_history',[]);
-    window.fbSave('plan_notes',{});window.fbSave('custom_days',{});
-  }
-  toast('Données effacées');updateHome();
+function applySettings(){
+  const set=D.getSet();
+  const fastN=set.fast.map(d=>JOURS_SHORT[d]).join('+');
+  const sportN=set.sport.map(d=>JOURS_SHORT[d]).join('+');
+  const fEl=document.getElementById('fast-hdr-p');if(fEl)fEl.textContent=`${fastN} · SANS eau · Fajr → Maghreb`;
+  const sEl=document.getElementById('sport-hdr-p');if(sEl)sEl.textContent=`${sportN} · 1h marche + 1h muscu`;
+  const rEl=document.getElementById('sport-rule');if(rEl)rEl.innerHTML=`<strong>Règle :</strong> 🏋️ <strong>${sportN}</strong> = sport 18h · 📿 <strong>${fastN}</strong> = jeûne · ❌ Jamais de jeûne après sport`;
 }
+function clearAll(){localStorage.clear();['_FS','_SS','_JS','_WH','_WC','_PN','_SET','_CD','_CR','_FL','_JOBS','_NOTES'].forEach(k=>window[k]=undefined);if(window.fbSave){['form_sessions','sport_sessions','jeune_sessions','weight_history','plan_notes','custom_days','coran_sessions','flashcards','jobs','course_notes'].forEach(k=>window.fbSave(k,{}));}toast('Données effacées');updateHome();}
 
-
-// ── CORAN ──
-let corWkN = wkNum(new Date());
-function corToday(){corWkN=wkNum(new Date());renderCoran();}
-
-function renderCoran(){
-  fillWeekSelect('cor-wk-sel', corWkN);
-  const allC = window._CR || LS.g('coran_sessions',{});
-  const total = Object.values(allC).filter(c=>c.done).length;
-  // Streak
-  let streak=0;
-  const now=new Date();
-  for(let i=0;i<500;i++){
-    const d=new Date(now);d.setDate(now.getDate()-i);
-    const dk2=isoD(d);if(dk2>todayISO())continue;
-    if(allC[dk2]?.done)streak++;else break;
-  }
-  document.getElementById('cor-tot').textContent=total;
-  document.getElementById('cor-str').textContent=streak;
-  const pct=Math.min(100,Math.round(total/72*7/5*100));
-  document.getElementById('cor-bar').style.width=Math.min(100,Math.round(total/504*100))+'%';
-  document.getElementById('cor-pct').textContent=total+' jours · streak '+streak;
-
-  const ws=wkStart(corWkN);
-  let html='';
-  for(let d=0;d<7;d++){
-    const date=new Date(ws);date.setDate(date.getDate()+d);
-    const dk=isoD(date),isToday=dk===todayISO();
-    const sess=allC[dk]||{done:false,ahzab:'',sourate:'',note:''};
-    html+=`<div class="card" style="border:${isToday?'2px solid #0D5C3A':'none'};opacity:${!sess.done&&dk<todayISO()?.7:1}">
-      <div style="display:flex;gap:10px;align-items:flex-start">
-        <div class="chk${sess.done?' on':''}" style="${sess.done?'background:#0D5C3A;border-color:#0D5C3A':''}" onclick="toggleCoran('${dk}')">
-          ${sess.done?'<span style="color:#fff;font-size:11px;font-weight:700">✓</span>':''}
-        </div>
-        <div style="flex:1">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <div style="font-size:14px;font-weight:700${isToday?';color:#0D5C3A':''}">${JOURS[d]} ${date.getDate()}/${date.getMonth()+1}${isToday?' ←':''}</div>
-            <span class="pill" style="background:#E8F5E9;color:#1B5E20">📖 3 Ahzab</span>
-          </div>
-          <div style="margin-top:8px">
-            <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Nombre d'Ahzab lus</div>
-            <select onchange="saveCoranField('${dk}','ahzab',this.value)" style="width:100%;padding:8px 12px;border:1.5px solid var(--brd);border-radius:10px;font-size:14px;font-family:inherit;color:var(--txt);background:var(--bg);outline:none">
-              <option value="" ${!sess.ahzab?'selected':''}>Sélectionne...</option>
-              ${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${sess.ahzab==n?'selected':''}>${n} Hizb${n>1?'s':''} (${n*2} pages)</option>`).join('')}
-            </select>
-          </div>
-          <div style="margin-top:8px">
-            <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Sourate / Verset où tu t'es arrêté</div>
-            <input class="inp" value="${sess.sourate||''}" placeholder="ex: Al-Baqara v. 142, Sourate 2..." onchange="saveCoranField('${dk}','sourate',this.value)" style="font-size:13px;padding:9px 12px">
-          </div>
-          <div style="margin-top:8px">
-            <div style="font-size:11px;color:var(--mut);margin-bottom:4px">Commentaire / Ayat marquant</div>
-            <textarea class="tx" style="font-size:12px;min-height:48px" placeholder="Note un verset qui t'a touché, une réflexion..." onchange="saveCoranField('${dk}','note',this.value)">${sess.note||''}</textarea>
-          </div>
-        </div>
-      </div>
-    </div>`;
-  }
-  document.getElementById('coran-sess').innerHTML=html;
-}
-
-async function toggleCoran(dk){
-  if(!window._CR)window._CR={};
-  if(!window._CR[dk])window._CR[dk]={done:false,ahzab:'',sourate:'',note:''};
-  window._CR[dk].done=!window._CR[dk].done;
-  LS.s('coran_sessions',window._CR);
-  if(window.fbSave)window.fbSave('coran_sessions',window._CR);
-  renderCoran();
-  toast(window._CR[dk].done?'3 Ahzab lus ✅ الحمد لله':'Décoché');
-}
-
-async function saveCoranField(dk,field,v){
-  if(!window._CR)window._CR={};
-  if(!window._CR[dk])window._CR[dk]={done:false,ahzab:'',sourate:'',note:''};
-  window._CR[dk][field]=v;
-  LS.s('coran_sessions',window._CR);
-  if(window.fbSave)window.fbSave('coran_sessions',window._CR);
-}
-
-// ── INIT ──
+// INIT
 function init(){
-  checkNotif();
-  updateHome();
-  applySettings();
+  checkDark();checkNotif();updateHome();applySettings();loadMeteo();
+  renderTasbih();
   setInterval(updateHome,60000);
   setInterval(()=>{if(notifGranted)scheduleNotifs();},3600000);
+  setInterval(checkDark,60000);
 }
 init();
 </script>
