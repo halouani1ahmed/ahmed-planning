@@ -501,97 +501,6 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   </div>
 </div>
 
-
-<!-- ══ NUTRITION ══ -->
-<div class="page" id="pg-nutri">
-  <div class="hdr" style="background:#B7410E"><h1>🍽️ Nutrition</h1><p>Kcal · Protéines · Glucides · Lipides</p></div>
-  <div class="content">
-    <div id="nutri-summary"></div>
-    <div class="card">
-      <div class="stitle">Objectifs caloriques</div>
-      <div id="nutri-goal-display"></div>
-    </div>
-    <div class="card">
-      <div class="stitle">Ajouter un aliment</div>
-      <div class="fl"><div class="fl-lb">Date</div><input class="inp" type="date" id="nutri-date"></div>
-      <div class="fl"><div class="fl-lb">Repas</div>
-        <select id="nutri-meal">
-          <option value="Sahour">🌙 Sahour (avant Fajr)</option>
-          <option value="Iftar">🕌 Iftar (rupture jeûne)</option>
-          <option value="Petit-déjeuner">☀️ Petit-déjeuner</option>
-          <option value="Déjeuner">🍽️ Déjeuner</option>
-          <option value="Dîner">🌙 Dîner</option>
-          <option value="Collation">🍎 Collation</option>
-          <option value="Post-sport">🏋️ Post-sport</option>
-        </select>
-      </div>
-      <div class="fl"><div class="fl-lb">Recherche aliment</div>
-        <input class="inp" type="text" id="nutri-search" placeholder="ex: poulet, riz, pain, dattes..." oninput="searchFood(this.value)" autocomplete="off">
-        <div id="nutri-results" style="margin-top:6px"></div>
-      </div>
-      <div id="nutri-selected-zone" style="display:none">
-        <div style="background:var(--spl);border-radius:10px;padding:10px 12px;margin-bottom:10px">
-          <div style="font-size:13px;font-weight:700;color:var(--sport)" id="nutri-sel-name">—</div>
-          <div style="font-size:11px;color:var(--mut);margin-top:2px" id="nutri-sel-info">—</div>
-        </div>
-        <div class="fl"><div class="fl-lb">Quantité (grammes)</div>
-          <input class="inp" type="number" id="nutri-qty" placeholder="100" min="1" max="5000" oninput="updateNutriPreview()">
-          <div id="nutri-preview" style="margin-top:6px;font-size:12px;color:var(--cours);font-weight:600"></div>
-        </div>
-        <button class="btn bfull" style="background:#B7410E;color:#fff" onclick="addFoodEntry()">Ajouter à mon repas</button>
-      </div>
-      <!-- Aliment personnalisé -->
-      <div style="border-top:.5px solid var(--brd);margin-top:10px;padding-top:10px">
-        <div style="font-size:12px;font-weight:600;color:var(--mut);margin-bottom:8px">Ou ajouter manuellement</div>
-        <div class="fl"><div class="fl-lb">Nom de l'aliment</div><input class="inp" id="nutri-custom-name" placeholder="ex: Chourba maison..."></div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-          <div><div class="fl-lb">Kcal / 100g</div><input class="inp" type="number" id="nutri-custom-kcal" placeholder="250"></div>
-          <div><div class="fl-lb">Quantité (g)</div><input class="inp" type="number" id="nutri-custom-qty" placeholder="300"></div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
-          <div><div class="fl-lb">Prot. (g/100g)</div><input class="inp" type="number" id="nutri-custom-p" placeholder="20"></div>
-          <div><div class="fl-lb">Gluc. (g/100g)</div><input class="inp" type="number" id="nutri-custom-g" placeholder="30"></div>
-          <div><div class="fl-lb">Lip. (g/100g)</div><input class="inp" type="number" id="nutri-custom-l" placeholder="10"></div>
-        </div>
-        <button class="btn bfull" style="background:var(--navy);color:#fff" onclick="addCustomFood()">Ajouter aliment personnalisé</button>
-      </div>
-    </div>
-    <!-- Journal du jour -->
-    <div id="nutri-journal"></div>
-    <!-- Config objectifs -->
-    <div class="card">
-      <div class="stitle">⚙️ Objectifs nutritionnels</div>
-      <div style="background:var(--coul);border-radius:10px;padding:10px 12px;margin-bottom:10px;font-size:12px;color:var(--cours)">
-        Déficit calorique = perdre du poids · Surplus = prendre du muscle<br>
-        Calculé automatiquement selon ton poids, taille et objectif.
-      </div>
-      <div class="fl"><div class="fl-lb">Objectif corporel</div>
-        <select id="nutri-goal-type" onchange="saveNutriConfig()">
-          <option value="deficit">🔥 Perte de poids (déficit -500 kcal)</option>
-          <option value="maintain">⚖️ Maintien du poids</option>
-          <option value="muscle">💪 Prise de muscle (surplus +300 kcal)</option>
-        </select>
-      </div>
-      <div class="fl"><div class="fl-lb">Niveau d'activité</div>
-        <select id="nutri-activity" onchange="saveNutriConfig()">
-          <option value="1.375">🚶 Légèrement actif (boulot + 1-2 sport/sem)</option>
-          <option value="1.55">🏃 Modérément actif (3 sport/sem)</option>
-          <option value="1.725">💪 Très actif (5+ sport/sem)</option>
-        </select>
-      </div>
-      <div style="background:var(--spl);border-radius:10px;padding:10px 12px;margin-top:4px">
-        <div style="font-size:13px;font-weight:700;color:var(--sport)" id="nutri-tdee-display">Calcul en cours...</div>
-        <div style="font-size:11px;color:var(--mut);margin-top:2px" id="nutri-macro-display">Entre ton poids et ta taille dans Poids ⚖️</div>
-      </div>
-    </div>
-    <!-- Historique 7 jours -->
-    <div class="card">
-      <div class="stitle">Historique 7 derniers jours</div>
-      <div id="nutri-history"></div>
-    </div>
-  </div>
-</div>
-
 <!-- ══ PARAMÈTRES ══ -->
 <div class="page" id="pg-settings">
   <div class="hdr" style="background:#444"><h1>Paramètres</h1><p>Configure ton planning</p></div>
@@ -642,7 +551,6 @@ select{width:100%;padding:10px 12px;border:1.5px solid var(--brd);border-radius:
   <button class="tab" id="tab-flash"    onclick="showTab('flash')"><div class="tab-ic">🃏</div><span class="tab-lb">Flashcards</span></button>
   <button class="tab" id="tab-jobs"     onclick="showTab('jobs')"><div class="tab-ic">💼</div><span class="tab-lb">Jobs</span></button>
   <button class="tab" id="tab-badges"   onclick="showTab('badges')"><div class="tab-ic">🏆</div><span class="tab-lb">Badges</span></button>
-  <button class="tab" id="tab-nutri"     onclick="showTab('nutri')"><div class="tab-ic">🍽️</div><span class="tab-lb">Nutri</span></button>
   <button class="tab" id="tab-settings" onclick="showTab('settings')"><div class="tab-ic">⚙️</div><span class="tab-lb">Config</span></button>
 </nav>
 <div class="toast" id="toast"></div>
@@ -679,8 +587,6 @@ window.FB.listen('data',(data)=>{
   });
   if(data.weight_cfg){window._WC=data.weight_cfg;LS.s('weight_cfg',data.weight_cfg);}
   if(data.settings){window._SET=data.settings;LS.s('settings',data.settings);applySettings();}
-  if(data.nutrition)window._NUTRI=data.nutrition;
-  if(data.nutri_cfg){window._NUTRI_CFG=data.nutri_cfg;LS.s('nutri_cfg',data.nutri_cfg);}
   setSyncUI('ok');updateHome();
 });
 (async()=>{
@@ -697,8 +603,6 @@ window.FB.listen('data',(data)=>{
   window._FL=data.flashcards||[];
   window._JOBS=data.jobs||[];
   window._NOTES=data.course_notes||[];
-  window._NUTRI=data.nutrition||{};
-  window._NUTRI_CFG=data.nutri_cfg||LS.g('nutri_cfg',{goal:'deficit',activity:'1.375'});
   LS.s('weight_cfg',window._WC);LS.s('settings',window._SET);
   if(!window._FS['2026-04-20']){window._FS['2026-04-20']={done:true,comment:'2h de formation ✅ — premier jour !',difficulty:''};await window.FB.save('data/form_sessions',window._FS);}
   if(!window._FS['2026-04-21']){window._FS['2026-04-21']={done:true,comment:'2h de formation ✅',difficulty:''};await window.FB.save('data/form_sessions',window._FS);}
@@ -728,8 +632,6 @@ const D={
   getFL:()=>window._FL||[],
   getJobs:()=>window._JOBS||[],
   getNotes:()=>window._NOTES||[],
-  getNutri:()=>window._NUTRI||{},
-  getNutriCfg:()=>window._NUTRI_CFG||LS.g('nutri_cfg',{goal:'deficit',activity:'1.375'}),
   getFast:()=>new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).fast||[0,3]),
   getSport:()=>new Set((window._SET||LS.g('settings',{fast:[0,3],sport:[1,4,5]})).sport||[1,4,5]),
 };
@@ -828,7 +730,7 @@ function showTab(id){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById('pg-'+id).classList.add('active');
   document.getElementById('tab-'+id).classList.add('active');
-  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings,coran:renderCoran,flash:renderFlash,jobs:renderJobs,badges:renderBadges,tasbih:renderTasbih,nutri:renderNutri};
+  const fn={plan:renderPlan,sport:renderSport,jeune:renderJeune,poids:renderPoids,form:renderForm,settings:renderSettings,coran:renderCoran,flash:renderFlash,jobs:renderJobs,badges:renderBadges,tasbih:renderTasbih};
   if(fn[id])fn[id]();
   if(id==='home')updateHome();
 }
@@ -1564,302 +1466,12 @@ function applySettings(){
   const sEl=document.getElementById('sport-hdr-p');if(sEl)sEl.textContent=`${sportN} · 1h marche + 1h muscu`;
   const rEl=document.getElementById('sport-rule');if(rEl)rEl.innerHTML=`<strong>Règle :</strong> 🏋️ <strong>${sportN}</strong> = sport 18h · 📿 <strong>${fastN}</strong> = jeûne · ❌ Jamais de jeûne après sport`;
 }
-function clearAll(){localStorage.clear();['_FS','_SS','_JS','_WH','_WC','_PN','_SET','_CD','_CR','_FL','_JOBS','_NOTES'].forEach(k=>window[k]=undefined);if(window.fbSave){['form_sessions','sport_sessions','jeune_sessions','weight_history','plan_notes','custom_days','coran_sessions','flashcards','jobs','course_notes','nutrition','nutri_cfg'].forEach(k=>window.fbSave(k,{}));}toast('Données effacées');updateHome();}
-
-
-// ════════════════════════════════════════════════════════
-// NUTRITION TRACKER
-// ════════════════════════════════════════════════════════
-const FOODS_DB = [
-  ["Poulet blanc grillé",165,31,0,3.6,"🍗"],
-  ["Poulet cuisse grillée",209,26,0,11,"🍗"],
-  ["Boeuf haché 5% MG",137,21,0,5.5,"🥩"],
-  ["Boeuf haché 20% MG",254,17,0,20,"🥩"],
-  ["Merguez boeuf/agneau",290,16,2,24,"🥩"],
-  ["Agneau côtelette",250,18,0,19,"🥩"],
-  ["Dinde escalope",104,24,0,1.2,"🍗"],
-  ["Kefta boeuf grillée",210,20,3,13,"🥩"],
-  ["Poulet rôti avec peau",239,27,0,14,"🍗"],
-  ["Thon boîte au naturel",116,26,0,1,"🐟"],
-  ["Saumon grillé",208,20,0,13,"🐟"],
-  ["Sardine en boîte",208,25,0,11,"🐟"],
-  ["Cabillaud grillé",82,18,0,0.7,"🐟"],
-  ["Crevettes cuites",99,21,0,1.1,"🐟"],
-  ["Riz blanc cuit",130,2.7,28,0.3,"🍚"],
-  ["Riz complet cuit",110,2.6,23,0.9,"🍚"],
-  ["Pâtes cuites",157,5.8,31,0.9,"🍝"],
-  ["Couscous cuit",112,3.8,23,0.2,"🫙"],
-  ["Pain blanc",265,9,50,3.2,"🍞"],
-  ["Pain complet",247,9,45,3.4,"🍞"],
-  ["Khobz pain maison",250,8,48,2,"🍞"],
-  ["Pomme de terre bouillie",87,1.8,20,0.1,"🥔"],
-  ["Frites",274,3.5,36,14,"🍟"],
-  ["Lentilles cuites",116,9,20,0.4,"🫘"],
-  ["Pois chiches cuits",164,9,27,2.6,"🫘"],
-  ["Haricots blancs cuits",127,8.7,22,0.5,"🫘"],
-  ["Flocons d'avoine",389,17,66,7,"🌾"],
-  ["Semoule cuite",65,2.4,13,0.1,"🫙"],
-  ["Tomate",18,0.9,3.5,0.2,"🍅"],
-  ["Concombre",16,0.7,3,0.1,"🥒"],
-  ["Carotte cuite",35,0.8,8,0.2,"🥕"],
-  ["Épinards cuits",23,2.9,3.6,0.4,"🥬"],
-  ["Courgette cuite",16,1.2,3,0.2,"🥬"],
-  ["Oignon",40,1.1,9,0.1,"🧅"],
-  ["Poivron rouge",31,1,6,0.3,"🫑"],
-  ["Salade verte",15,1.4,2.2,0.2,"🥗"],
-  ["Brocoli cuit",35,2.4,7,0.4,"🥦"],
-  ["Aubergine cuite",25,0.8,5.7,0.2,"🍆"],
-  ["Banane",89,1.1,23,0.3,"🍌"],
-  ["Pomme",52,0.3,14,0.2,"🍎"],
-  ["Orange",47,0.9,12,0.1,"🍊"],
-  ["Dattes fraîches",282,2.5,75,0.4,"🌴"],
-  ["Dattes séchées",282,2.5,75,0.4,"🌴"],
-  ["Raisin",69,0.7,18,0.2,"🍇"],
-  ["Fraise",32,0.7,7.7,0.3,"🍓"],
-  ["Pastèque",30,0.6,7.5,0.2,"🍉"],
-  ["Avocat",160,2,9,15,"🥑"],
-  ["Lait entier",61,3.2,4.7,3.3,"🥛"],
-  ["Lait demi-écrémé",46,3.2,4.7,1.5,"🥛"],
-  ["Yaourt nature",59,3.9,4.5,1.5,"🥛"],
-  ["Fromage blanc 0%",45,8,4,0.2,"🥛"],
-  ["Fromage blanc 20%",83,8,4,4,"🥛"],
-  ["Emmental",379,28,2,29,"🧀"],
-  ["Beurre",717,0.6,0.6,81,"🧈"],
-  ["Huile d'olive",884,0,0,100,"🫒"],
-  ["Huile tournesol",884,0,0,100,"🫒"],
-  ["Oeuf entier",155,13,1.1,11,"🥚"],
-  ["Blanc d'oeuf",52,11,0.7,0.2,"🥚"],
-  ["Omelette nature",149,11,0.7,11,"🥚"],
-  ["Amandes",579,21,22,50,"🥜"],
-  ["Noix",654,15,14,65,"🥜"],
-  ["Miel",304,0.3,82,0,"🍯"],
-  ["Sucre blanc",400,0,100,0,"🍬"],
-  ["Chocolat noir 70%",598,8,46,43,"🍫"],
-  ["Chorba soupe",85,6,10,2,"🍲"],
-  ["Tajine poulet légumes",140,14,8,5,"🍲"],
-  ["Msemen crêpe",310,8,50,9,"🥞"],
-  ["Rfiss dattes beurre",390,5,55,18,"🍲"],
-  ["Whey protéine poudre",400,80,8,8,"💪"],
-  ["Barre protéinée",350,30,35,8,"💪"],
-  ["Jus orange 100%",45,0.7,10,0.2,"🥤"],
-];
-// [nom, kcal/100g, prot/100g, gluc/100g, lip/100g, emoji]
-
-let nutriSelFood=null;
-
-function getNutriData(){return window._NUTRI||LS.g('nutrition',{});}
-function getNutriCfg(){return window._NUTRI_CFG||LS.g('nutri_cfg',{goal:'deficit',activity:'1.375'});}
-
-function calcTDEE(){
-  const wCfg=D.getWC()||{h:1.75,goal:null};
-  const wh=D.getWH();
-  const nCfg=getNutriCfg();
-  const weight=wh.length>0?wh[wh.length-1].w:75;
-  const heightCm=wCfg.h?Math.round(wCfg.h*100):178;
-  const age=30;
-  const bmr=Math.round(88.36+13.4*weight+4.8*heightCm-5.7*age);
-  const act=parseFloat(nCfg.activity||1.375);
-  const tdee=Math.round(bmr*act);
-  let target=tdee,goalLabel='';
-  if(nCfg.goal==='deficit'){target=tdee-500;goalLabel='Déficit -500 kcal → perte ~0.5kg/semaine';}
-  else if(nCfg.goal==='muscle'){target=tdee+300;goalLabel='Surplus +300 kcal → prise de muscle';}
-  else goalLabel='Maintien du poids';
-  const protG=Math.round(weight*2);
-  const lipG=Math.round(target*0.25/9);
-  const glucG=Math.round((target-protG*4-lipG*9)/4);
-  return{bmr,tdee,target,goalLabel,protG,lipG,glucG,weight,heightCm};
-}
-
-function searchFood(q){
-  const zone=document.getElementById('nutri-results');if(!zone)return;
-  if(!q||q.length<2){zone.innerHTML='';return;}
-  const res=FOODS_DB.filter(f=>f[0].toLowerCase().includes(q.toLowerCase())).slice(0,8);
-  if(res.length===0){zone.innerHTML='<div style="font-size:12px;color:var(--mut);padding:6px 0">Aucun résultat — utilise l'ajout manuel ci-dessous</div>';return;}
-  zone.innerHTML=res.map((f,i)=>`
-    <div onclick="selectFood(${FOODS_DB.indexOf(f)})" style="padding:9px 11px;border-radius:9px;margin-bottom:4px;background:var(--bg);cursor:pointer;border:1.5px solid var(--brd)" onmouseover="this.style.borderColor='var(--blue)'" onmouseout="this.style.borderColor='var(--brd)'">
-      <div style="display:flex;align-items:center;justify-content:space-between">
-        <div style="font-size:13px;font-weight:600">${f[5]} ${f[0]}</div>
-        <span style="font-size:12px;font-weight:700;color:#B45309">${f[1]} kcal</span>
-      </div>
-      <div style="font-size:11px;color:var(--mut);margin-top:1px">P:${f[2]}g · G:${f[3]}g · L:${f[4]}g (pour 100g)</div>
-    </div>`).join('');
-}
-
-function selectFood(idx){
-  nutriSelFood=FOODS_DB[idx];
-  const sEl=document.getElementById('nutri-search');if(sEl)sEl.value=nutriSelFood[0];
-  const rEl=document.getElementById('nutri-results');if(rEl)rEl.innerHTML='';
-  const zone=document.getElementById('nutri-selected-zone');if(zone)zone.style.display='block';
-  const nm=document.getElementById('nutri-sel-name');if(nm)nm.textContent=nutriSelFood[5]+' '+nutriSelFood[0];
-  const inf=document.getElementById('nutri-sel-info');if(inf)inf.textContent=nutriSelFood[1]+' kcal · P:'+nutriSelFood[2]+'g · G:'+nutriSelFood[3]+'g · L:'+nutriSelFood[4]+'g (pour 100g)';
-  const qEl=document.getElementById('nutri-qty');if(qEl){qEl.value='100';updateNutriPreview();}
-}
-
-function updateNutriPreview(){
-  if(!nutriSelFood)return;
-  const qty=parseFloat(document.getElementById('nutri-qty')?.value)||0;
-  const kcal=Math.round(nutriSelFood[1]*qty/100);
-  const p=Math.round(nutriSelFood[2]*qty/10)/10;
-  const g=Math.round(nutriSelFood[3]*qty/10)/10;
-  const l=Math.round(nutriSelFood[4]*qty/10)/10;
-  const el=document.getElementById('nutri-preview');
-  if(el)el.innerHTML='Pour <strong>'+qty+'g</strong> : <strong style="color:#B45309">'+kcal+' kcal</strong> · Prot:'+p+'g · Gluc:'+g+'g · Lip:'+l+'g';
-}
-
-function addFoodEntry(){
-  if(!nutriSelFood){toast('Sélectionne un aliment');return;}
-  const qty=parseFloat(document.getElementById('nutri-qty')?.value)||0;
-  if(qty<=0){toast('Quantité invalide');return;}
-  const date=document.getElementById('nutri-date')?.value||todayISO();
-  const meal=document.getElementById('nutri-meal')?.value||'Déjeuner';
-  const entry={id:Date.now().toString(),name:nutriSelFood[0],cat:nutriSelFood[5],qty,
-    kcal:Math.round(nutriSelFood[1]*qty/100),
-    prot:Math.round(nutriSelFood[2]*qty/10)/10,
-    gluc:Math.round(nutriSelFood[3]*qty/10)/10,
-    lip:Math.round(nutriSelFood[4]*qty/10)/10,meal};
-  const nutri=getNutriData();if(!nutri[date])nutri[date]=[];
-  nutri[date].push(entry);window._NUTRI=nutri;LS.s('nutrition',nutri);
-  if(window.fbSave)window.fbSave('nutrition',nutri);
-  nutriSelFood=null;
-  ['nutri-search','nutri-qty'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  const z=document.getElementById('nutri-selected-zone');if(z)z.style.display='none';
-  const r=document.getElementById('nutri-results');if(r)r.innerHTML='';
-  toast(entry.name+' — '+entry.kcal+' kcal ajouté ✅');
-  renderNutri();
-}
-
-function addCustomFood(){
-  const name=document.getElementById('nutri-custom-name')?.value.trim();
-  const kcalPer=parseFloat(document.getElementById('nutri-custom-kcal')?.value)||0;
-  const qty=parseFloat(document.getElementById('nutri-custom-qty')?.value)||0;
-  const prot=parseFloat(document.getElementById('nutri-custom-p')?.value)||0;
-  const gluc=parseFloat(document.getElementById('nutri-custom-g')?.value)||0;
-  const lip=parseFloat(document.getElementById('nutri-custom-l')?.value)||0;
-  if(!name||kcalPer<=0||qty<=0){toast('Nom, kcal/100g et quantité requis');return;}
-  const date=document.getElementById('nutri-date')?.value||todayISO();
-  const meal=document.getElementById('nutri-meal')?.value||'Déjeuner';
-  const entry={id:Date.now().toString(),name,cat:'🍲',qty,
-    kcal:Math.round(kcalPer*qty/100),
-    prot:Math.round(prot*qty/10)/10,
-    gluc:Math.round(gluc*qty/10)/10,
-    lip:Math.round(lip*qty/10)/10,meal};
-  const nutri=getNutriData();if(!nutri[date])nutri[date]=[];
-  nutri[date].push(entry);window._NUTRI=nutri;LS.s('nutrition',nutri);
-  if(window.fbSave)window.fbSave('nutrition',nutri);
-  ['nutri-custom-name','nutri-custom-kcal','nutri-custom-qty','nutri-custom-p','nutri-custom-g','nutri-custom-l'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  toast(entry.name+' — '+entry.kcal+' kcal ajouté ✅');
-  renderNutri();
-}
-
-function deleteFoodEntry(date,id){
-  const nutri=getNutriData();
-  if(nutri[date])nutri[date]=nutri[date].filter(e=>e.id!==id);
-  window._NUTRI=nutri;LS.s('nutrition',nutri);
-  if(window.fbSave)window.fbSave('nutrition',nutri);
-  renderNutri();
-}
-
-function saveNutriConfig(){
-  const goal=document.getElementById('nutri-goal-type')?.value||'deficit';
-  const activity=document.getElementById('nutri-activity')?.value||'1.375';
-  const cfg={goal,activity};
-  window._NUTRI_CFG=cfg;LS.s('nutri_cfg',cfg);
-  if(window.fbSave)window.fbSave('nutri_cfg',cfg);
-  renderNutri();
-}
-
-function makeMacroBar(label,current,target,color,unit){
-  unit=unit||'g';
-  const pct=Math.min(100,Math.round(current/target*100));
-  const over=current>target;
-  return'<div style="margin-bottom:8px"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3px"><div style="font-size:12px;font-weight:600">'+label+'</div><div style="font-size:12px;color:var(--mut)"><strong style="color:'+(over?'var(--fast)':'var(--txt)')+'">'+current+unit+'</strong> / '+target+unit+(over?' <span style="color:var(--fast);font-size:10px">+'+Math.round(current-target)+' ⚠️</span>':'')+'</div></div><div style="height:7px;background:var(--brd);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+(over?'var(--fast)':color)+';border-radius:4px"></div></div></div>';
-}
-
-function renderNutri(){
-  const nutri=getNutriData();
-  const nCfg=getNutriCfg();
-  const tdee=calcTDEE();
-  const dateEl=document.getElementById('nutri-date');if(dateEl&&!dateEl.value)dateEl.value=todayISO();
-  const goalEl=document.getElementById('nutri-goal-type');if(goalEl)goalEl.value=nCfg.goal||'deficit';
-  const actEl=document.getElementById('nutri-activity');if(actEl)actEl.value=nCfg.activity||'1.375';
-  const tdeeEl=document.getElementById('nutri-tdee-display');if(tdeeEl)tdeeEl.textContent='TDEE : '+tdee.tdee+' kcal · Objectif : '+tdee.target+' kcal/jour';
-  const macroEl=document.getElementById('nutri-macro-display');if(macroEl)macroEl.textContent='Prot: '+tdee.protG+'g · Gluc: '+tdee.glucG+'g · Lip: '+tdee.lipG+'g · '+tdee.goalLabel;
-
-  const todayE=nutri[todayISO()]||[];
-  const totKcal=todayE.reduce((s,e)=>s+e.kcal,0);
-  const totProt=Math.round(todayE.reduce((s,e)=>s+e.prot,0)*10)/10;
-  const totGluc=Math.round(todayE.reduce((s,e)=>s+e.gluc,0)*10)/10;
-  const totLip=Math.round(todayE.reduce((s,e)=>s+e.lip,0)*10)/10;
-  const remain=tdee.target-totKcal;
-  const pct=Math.min(100,Math.round(totKcal/tdee.target*100));
-  const over=totKcal>tdee.target;
-
-  const sumEl=document.getElementById('nutri-summary');
-  if(sumEl)sumEl.innerHTML='<div style="background:'+(over?'var(--fatl)':pct>80?'var(--spl)':'var(--coul)')+';border-radius:14px;padding:16px;margin-bottom:10px">'
-    +'<div style="display:flex;align-items:flex-start;justify-content:space-between">'
-    +'<div><div style="font-size:10px;color:var(--mut);margin-bottom:2px">Aujourd'hui</div>'
-    +'<div style="font-size:38px;font-weight:700;color:'+(over?'var(--fast)':'var(--navy)')+';letter-spacing:-1px">'+totKcal+'</div>'
-    +'<div style="font-size:12px;color:var(--mut)">kcal consommés</div></div>'
-    +'<div style="text-align:right">'
-    +'<div style="font-size:22px;font-weight:700;color:'+(over?'var(--fast)':remain>0?'var(--sport)':'var(--fast)')+'">'+Math.abs(remain)+'</div>'
-    +'<div style="font-size:11px;color:var(--mut)">'+(over?'kcal en trop':'kcal restants')+'</div>'
-    +'<div style="font-size:11px;color:var(--mut)">obj. '+tdee.target+' kcal</div></div></div>'
-    +'<div style="margin-top:10px"><div style="height:8px;background:rgba(0,0,0,.1);border-radius:4px;overflow:hidden"><div style="height:100%;width:'+pct+'%;background:'+(over?'var(--fast)':pct>80?'var(--work)':'var(--sport)')+';border-radius:4px"></div></div></div>'
-    +'<div style="display:flex;gap:8px;margin-top:10px">'
-    +['Prot '+totProt+'g','Gluc '+totGluc+'g','Lip '+totLip+'g',todayE.length+' alim'].map(t=>'<div style="flex:1;text-align:center;background:rgba(255,255,255,.5);border-radius:8px;padding:6px 4px"><div style="font-size:13px;font-weight:700">'+t.split(' ')[1]+'</div><div style="font-size:10px;color:var(--mut)">'+t.split(' ')[0]+'</div></div>').join('')
-    +'</div></div>';
-
-  const gdEl=document.getElementById('nutri-goal-display');
-  if(gdEl)gdEl.innerHTML=
-    makeMacroBar('🔥 Calories',totKcal,tdee.target,'var(--work)','kcal')+
-    makeMacroBar('💪 Protéines',totProt,tdee.protG,'#C2410C')+
-    makeMacroBar('🍚 Glucides',totGluc,tdee.glucG,'var(--blue)')+
-    makeMacroBar('🫒 Lipides',totLip,tdee.lipG,'var(--fam)');
-
-  const journalEl=document.getElementById('nutri-journal');
-  if(journalEl){
-    if(todayE.length===0){
-      journalEl.innerHTML='<div class="card" style="text-align:center;padding:16px;color:var(--mut);font-size:13px">Aucun aliment aujourd'hui.<br>Recherche un aliment ci-dessus 👆</div>';
-    } else {
-      const meals={};todayE.forEach(e=>{if(!meals[e.meal])meals[e.meal]=[];meals[e.meal].push(e);});
-      journalEl.innerHTML='<div class="card"><div class="stitle">Journal du '+todayISO()+'</div>'
-        +Object.entries(meals).map(([meal,entries])=>{
-          const mKcal=entries.reduce((s,e)=>s+e.kcal,0);
-          return'<div style="margin-bottom:12px"><div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1.5px solid var(--brd)"><div style="font-size:13px;font-weight:700">'+meal+'</div><span style="font-size:12px;font-weight:700;color:#B45309">'+mKcal+' kcal</span></div>'
-            +entries.map(e=>'<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:.5px solid var(--brd)"><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:500">'+e.cat+' '+e.name+'</div><div style="font-size:11px;color:var(--mut)">'+e.qty+'g · P:'+e.prot+'g · G:'+e.gluc+'g · L:'+e.lip+'g</div></div><span style="font-size:13px;font-weight:700;color:#B45309;flex-shrink:0">'+e.kcal+' kcal</span><button onclick="deleteFoodEntry(''+todayISO()+'',''+e.id+'')" style="background:none;border:none;color:var(--mut);font-size:16px;cursor:pointer;flex-shrink:0">✕</button></div>').join('')
-            +'</div>';
-        }).join('')+'</div>';
-    }
-  }
-
-  const histEl=document.getElementById('nutri-history');
-  if(histEl){
-    const rows=[];
-    for(let i=6;i>=0;i--){
-      const d=new Date();d.setDate(d.getDate()-i);
-      const dk=isoD(d);
-      const entries=nutri[dk]||[];
-      const kcal=entries.reduce((s,e)=>s+e.kcal,0);
-      const days=['Dim','Lun','Mar','Mer','Jeu','Ven','Sam'];
-      const dayName=days[d.getDay()];
-      const isToday=dk===todayISO();
-      const p=Math.min(100,Math.round(kcal/tdee.target*100));
-      const col=kcal===0?'var(--brd)':kcal>tdee.target?'var(--fast)':kcal>tdee.target*0.8?'var(--sport)':'var(--blue)';
-      rows.push('<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:.5px solid var(--brd)">'
-        +'<div style="width:28px;font-size:12px;font-weight:'+(isToday?700:400)+';color:'+(isToday?'var(--blue)':'var(--mut)')+'">'+dayName+'</div>'
-        +'<div style="flex:1;height:6px;background:var(--brd);border-radius:3px;overflow:hidden"><div style="height:100%;width:'+p+'%;background:'+col+';border-radius:3px"></div></div>'
-        +'<div style="width:80px;text-align:right;font-size:12px;font-weight:'+(isToday?700:400)+';color:'+(kcal===0?'var(--brd)':kcal>tdee.target?'var(--fast)':'var(--txt)')+'">'+( kcal===0?'—':kcal+' kcal')+'</div>'
-        +'</div>');
-    }
-    histEl.innerHTML=rows.join('');
-  }
-}
+function clearAll(){localStorage.clear();['_FS','_SS','_JS','_WH','_WC','_PN','_SET','_CD','_CR','_FL','_JOBS','_NOTES'].forEach(k=>window[k]=undefined);if(window.fbSave){['form_sessions','sport_sessions','jeune_sessions','weight_history','plan_notes','custom_days','coran_sessions','flashcards','jobs','course_notes'].forEach(k=>window.fbSave(k,{}));}toast('Données effacées');updateHome();}
 
 // INIT
 function init(){
   checkDark();checkNotif();updateHome();applySettings();loadMeteo();
   renderTasbih();
-  if(document.getElementById('pg-nutri'))renderNutri();
   setInterval(updateHome,60000);
   setInterval(()=>{if(notifGranted)scheduleNotifs();},3600000);
   setInterval(checkDark,60000);
